@@ -1,0 +1,48 @@
+//******************************************************************************
+// YAYA　ゴーストテンプレート
+// インプット周り
+//******************************************************************************
+
+
+//******************************************************************************
+//インプットした時
+//******************************************************************************
+
+OnUserInput
+{
+	_escapedInput = SHIORI3FW.EscapeAllTags(reference[1])
+
+	if ISFUNC(reference[0])
+	{
+		EVAL(reference[0] + "('" + _escapedInput + "')")
+	}
+	else
+	{
+		"\0インプットID「%(reference[0])」は存在しないよ。/
+		\1あら、設定ミスかしら。\e"
+	}
+}
+
+OnUserInputCancel
+{
+	/*
+	"\0Ref[0]の中身は%(reference[0])だよ。/
+	\1Ref[1]には%(reference[1])が入ってるね。\e"
+	*/
+	if ISFUNC(reference[0])
+	{
+		if reference[1] == "timeout"
+		{
+			EVAL(reference[0] + "(" + INPUT_TIMEOUT +")")
+		}
+		elseif reference[1] == "close"
+		{
+			EVAL(reference[0] + "(" + INPUT_CLOSE + ")")
+		}
+	}
+	else
+	{
+		"\0インプットID「%(reference[0])」は存在しないよ。/
+		\1あら、設定ミスかしら。\e"
+	}
+}
