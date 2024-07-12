@@ -1,0 +1,558 @@
+//******************************************************************************
+// YAYA　ゴーストテンプレート
+// メニュー処理辞書
+//******************************************************************************
+
+//******************************************************************************
+//メインメニューの展開
+//
+//AYATEMPLATE.MenuItemの使い方
+//1つめの文字列＝選択肢に表示する文字列
+//2つめの文字列＝選んだときに実行される関数名
+//3つめの文字列＝改行する量　50%刻み　省略すると100%（＝\n）
+//******************************************************************************
+
+//------------------------------------------------------------------------------
+//メインメニュー展開
+//------------------------------------------------------------------------------
+OpenYuriMenu
+{
+	Init
+	--
+	if dicMode != MODE_SUZU {
+		'\0\s[5]はい、なんでしょうか？\n\n'
+		"\0\s[5]%(username)、なんですか？\n\n"
+		'\0\s[0]ん……どうしたの？\n\n'
+	}
+	--
+	YuriMenuList
+}
+
+YuriMenuList
+{
+	if dicMode != MODE_SUZU
+		AYATEMPLATE.MenuItem('ランダムトーク', 'Menu_AITALK', 0)
+	--
+	if (STRLEN(AYATEMPLATE.LastTalk) > 0 && dicMode != MODE_SUZU) {
+		AYATEMPLATE.MenuItem('さっきの話は？', 'Menu_LASTTALK')
+	}
+	--
+	AYATEMPLATE.MenuItem('ミニゲーム【リバーポーカー】', 'PokerMenu')
+	--
+	AYATEMPLATE.MenuItem('トーク設定', 'Menu_TALKSETTING')
+	--
+	AYATEMPLATE.MenuItem('ユーザ情報', 'Menu_USERSETTING')
+	--
+	if dicMode != MODE_SUZU
+		AYATEMPLATE.MenuItem('他のゴーストと話す', 'Menu_GHOSTCOMSTART')
+	--
+	if dicMode != MODE_SUZU
+		AYATEMPLATE.MenuItem('悠梨に話しかける', 'Menu_COMMUNICATE')
+	--
+	AYATEMPLATE.MenuItem("初起動トークを再生","Menu_FIRSTBOOT")
+	--
+	//スタンプ帳チェック
+	if AYATEMPLATE.IsPluginExist('379E0DA0-131C-11DD-E1AC-90009E101CFE') {
+		AYATEMPLATE.MenuItem('スタンプを押す', 'Menu_STAMP')
+	}
+	--
+	case dicMode {
+		when MODE_NORMAL
+			AYATEMPLATE.MenuItem('悠梨と二人で話す', 'Menu_ChangeYuriMode', 150)
+		when MODE_YURI {
+			AYATEMPLATE.MenuItem('三人モードに戻る', 'Menu_ChangeNormalMode', 150) + /
+				AYATEMPLATE.MenuItem('鈴と二人で話す', 'Menu_ChangeSuzuMode')
+		}
+	}
+	--
+	AYATEMPLATE.MenuItem('なんでもない', 'YuriMenu_CANCEL', 150)
+}
+
+OpenSuzuMenu
+{
+	Init
+	--
+	if dicMode != MODE_YURI {
+		'\1\s[1000]はい、なんでしょうか？\n\n'
+		"\1\s[1000]%(username)、なんですか？\n\n"
+		'\1\s[1000]ん……どうしたの？\n\n'
+	}
+	--
+	SuzuMenuList
+}
+
+SuzuMenuList
+{
+	'\1\b[2]'
+	--
+	if dicMode != MODE_YURI
+		AYATEMPLATE.MenuItem('ランダムトーク', 'Menu_AITALK', 0)
+	--
+	if (STRLEN(AYATEMPLATE.LastTalk) > 0) {
+		AYATEMPLATE.MenuItem('さっきの話は？', 'Menu_LASTTALK')
+	}
+	--
+	AYATEMPLATE.MenuItem('鈴に話しかける', 'Menu_COMMUNICATE')
+	--
+	// AYATEMPLATE.MenuItem('【デバッグ】トランプテスト', 'Debug_RandomCardTest')
+	--
+	case dicMode {
+		when MODE_NORMAL
+			AYATEMPLATE.MenuItem('鈴と二人で話す', 'Menu_ChangeSuzuMode', 150)
+		when MODE_SUZU {
+			AYATEMPLATE.MenuItem('三人モードに戻る', 'Menu_ChangeNormalMode', 150) + /
+				AYATEMPLATE.MenuItem('悠梨と二人で話す', 'Menu_ChangeYuriMode')
+		}
+	}
+	--
+	AYATEMPLATE.MenuItem('なんでもない', 'SuzuMenu_CANCEL', 150)
+}
+
+//------------------------------------------------------------------------------
+//メニュー選択タイムアウト
+//------------------------------------------------------------------------------
+/*
+OnChoiceTimeout
+{
+'\0\s[7]ちゃんと選んでくださいっ！\e'
+'\0\s[4]ぷー。\w8\1落ち込むんじゃない。\e'
+'\0\s[4]一定時間が過ぎると。\w8\1キャンセルされるんだよな？\w8\0\n\n自爆します。\w8\1\s[1002]\n\nえ！？\w8\0\n\nマック朗が。\w8\1\n\nいや―――――――ッ！！\e'
+}
+*/
+
+//******************************************************************************
+//各項目の処理内容
+//******************************************************************************
+
+Menu_FIRSTBOOT
+{
+	OnFirstBoot
+}
+
+Debug_RandomCardTest
+{
+	Init
+	--
+	'\1カードをランダムで引くよ。\n何枚引く？\n\n[half]'
+	--
+	'\q[2枚,DrawRandomCard_2]\n'
+	--
+	'\q[5枚,DrawRandomCard_5]\n'
+	--
+	'\q[30枚,DrawRandomCard_30]\n\n[half]'
+	--
+	'\q[やっぱりやめる,SuzuMenuList]'
+}
+
+DrawRandomCard_2
+{
+	_cards = GetRandomCardArray(2)
+	_cardStrArray = CardIndexToString(_cards)
+	_cardsStr = StrArrayToString('',_cardStrArray)
+
+	Init
+	--
+	'\1カードを2枚引いたよ。\n\n[half]'
+	--
+	'カードは' + _cardsStr + '。\n'
+	--
+	'評価値は' + LookUpHandTier_Yuri(_cards) + 'ってところね。\n\n[half]'
+	--
+	'\q[もう一回,DrawRandomCard_2]\n'
+	--
+	'\q[メニューへ,SuzuMenuList]'
+}
+
+DrawRandomCard_5
+{
+	_cards = GetRandomCardArray(5)
+	_cardStrArray = CardIndexToString(_cards)
+	_cardsStr = StrArrayToString(' ',_cardStrArray)
+
+	Init
+	--
+	'\1カードを5枚引いたよ。\n\n[half]'
+	--
+	_cardsStr + '\e'
+}
+
+DrawRandomCard_30
+{
+	_cards = GetRandomCardArray(30)
+	_cardStrArray = CardIndexToString(_cards)
+	_cardStrArray_0 = _cardStrArray[0,7]
+	_cardStrArray_1 = _cardStrArray[8,15]
+	_cardStrArray_2 = _cardStrArray[16,23]
+	_cardStrArray_3 = _cardStrArray[24,29]
+	_cardsStr = StrArrayToString(' ',_cardStrArray_0) + '\n' + StrArrayToString(' ',_cardStrArray_1) + '\n' + /
+	StrArrayToString(' ',_cardStrArray_2) + '\n' + StrArrayToString(' ',_cardStrArray_3)
+
+	Init
+	--
+	'\1カードを30枚引いたよ。\n\n[half]'
+	--
+	_cardsStr + '\e'
+}
+
+//---- 何か話して
+Menu_AITALK
+{
+	//---- 明示的にAIトーク開始を指示
+	OnAiTalk
+}
+
+//---- さっきの話は
+Menu_LASTTALK
+{
+	AYATEMPLATE.LastTalk
+}
+
+//---- トーク頻度の調整
+Menu_TALKSETTING
+{
+	'\_q\0\s[0]-- ランダムトーク間隔 --\n'
+	--
+	"\q[%(Choice_TaikInterval(20)),SetTalkInterval_20] "
+	--
+	"\q[%(Choice_TaikInterval(120)),SetTalkInterval_120] "
+	--
+	"\q[%(Choice_TaikInterval(180)),SetTalkInterval_180] "
+	--
+	"\q[%(Choice_TaikInterval(300)),SetTalkInterval_300] "
+	--
+	"\q[%(Choice_TaikInterval(600)),SetTalkInterval_600] "
+	--
+	"\q[%(Choice_TaikInterval(0)),SetTalkInterval_None]"
+	--
+	AYATEMPLATE.MenuItem('戻る', 'YuriMenuList', 150)
+	--
+	'\_q'
+}
+
+Choice_TaikInterval
+{
+	if _argv[0] <= 0 {
+		if aitalkinterval <= 0
+			'●喋らない'
+		else
+			'○喋らない'
+	}
+	else {
+		if _argv[0] == aitalkinterval
+			"●%(_argv[0])s"
+		else
+			"○%(_argv[0])s"
+	}
+}
+
+SetTalkInterval_20
+{
+	aitalkinterval = 20
+	
+	Init
+	--
+	'\020秒に設定しました。\1それは篠突く雨のように。\e'
+}
+
+SetTalkInterval_120
+{
+	aitalkinterval = 120
+	
+	Init
+	--
+	'\0120秒に設定しました。\1話すことがなくなっても知らないよ？\e'
+}
+
+SetTalkInterval_180
+{
+	aitalkinterval = 180
+	
+	Init
+	--
+	'\0180秒に設定しました。\1いつもどおり、だね。\e'
+}
+
+SetTalkInterval_300
+{
+	aitalkinterval = 300
+	
+	Init
+	--
+	'\0300秒に設定しました。\1まったりゆっくり、ね。\e'
+}
+
+SetTalkInterval_600
+{
+	aitalkinterval = 600
+	
+	Init
+	--
+	'\0600秒に設定しました。\1……ちょっと退屈かも。\e'
+}
+
+SetTalkInterval_None
+{
+	aitalkinterval = 0
+	
+	Init
+	--
+	'\0じゃあこちらからは話しかけないでおくね。\1またお話聞きたくなったら言ってね。\e'
+}
+
+// ユーザ情報
+Menu_USERSETTING
+{
+	'\0'
+	--
+	AYATEMPLATE.MenuItem("ユーザ名称：%(username)", 'InputUserName', 0)
+	--
+	AYATEMPLATE.MenuItem("ユーザ性別：%(GetUserGender)", 'SelectUserGender', 100)
+	--
+	"\nユーザ誕生日：%(userBirthMonth)月%(userBirthDay)日"
+	--
+	AYATEMPLATE.MenuItem('戻る', 'YuriMenuList', 150)
+}
+
+InputUserName
+{
+	'\0なんてお呼びしましょうか？/
+	\![open,inputbox,SetUserName,-1]'
+}
+
+SetUserName
+{
+	if (_argv[0] == INPUT_CLOSE) || (_argv[0] == INPUT_TIMEOUT) || (_argv[0] == '') || (_argv[0] == username) {
+		CancelInputUserName
+		return
+	}
+
+	username = _argv[0]
+
+	Init
+	--
+	"\0それでは、これからは%(username)とお呼びしますね。\e"
+}
+
+CancelInputUserName
+{
+	Init
+	--
+	"\0では、これまで通り%(username)とお呼びしますね。\e"
+}
+
+GetUserGender
+{
+	case userGender {
+		when 0 {
+			'見たまんま'
+			'ひみつ'
+			'内緒'
+			'不定'
+			'不明'
+		}
+		when 1 {
+			'男性'
+			'男の子'
+		}
+		when 2 {
+			'女性'
+			'女の子'
+		}
+	}
+}
+
+SelectUserGender
+{
+	'\0どんな風に振る舞いたいのかな？\n\n/
+	\_q\q[男性,SetGenderMale]\n/
+	\q[女性,SetGenderFemale]\n/
+	\q[不定,SetGenderXXX]\_q'
+}
+
+SetGenderMale
+{
+	userGender = 1
+
+	'\0では、そのように。'
+}
+
+SetGenderFemale
+{
+	userGender = 2
+
+	'\0では、そのように。'
+}
+
+SetGenderXXX
+{
+	userGender = 0
+
+	'\0では、そのように。'
+}
+
+Menu_ChangeNormalMode
+{
+	dicMode = MODE_NORMAL
+	AYATEMPLATE.LastTalk = ''
+
+	Init
+	--
+	"\0\s[0]\1\s[1000]じゃあまた三人でお話しましょうか。/
+	\0よろしく、%(username)。\e"
+}
+
+Menu_ChangeYuriMode
+{
+	dicMode = MODE_YURI
+	AYATEMPLATE.LastTalk = ''
+
+	Init
+	--
+	"\1\s[1000]それじゃあわたしはキッチンの方に行ってくるね？\nいつでも呼んでいいからね、%(username)。\s[1999]/
+	\0\s[0]……さて、何を話せばいいのかな？\e"
+}
+
+Menu_ChangeSuzuMode
+{
+	dicMode = MODE_SUZU
+	AYATEMPLATE.LastTalk = ''
+
+	Init
+	--
+	"\0\s[0]オッケー。私は猫たちの世話でもしてこようかな。また後でね、%(username)。\s[999]/
+	\1\s[1000]……ふたりきり、だね。ね、%(username)？"
+}
+
+//---- 文について説明
+Menu_ABOUTAYA
+{
+	'\0\s[0]わたしたちは、汎用DLL「文」の進化版、「YAYA」で制作されてるんだよね？\w8\1聞くなよ。その通りだ。\w9\nＣ言語風の読みやすいスクリプトで、SHIORIやSAORIを作ることが出来るんだ。\w8\0\s[5]\n\n最初は訳分かんないかもしれないけど、噛めば噛むほど面白くなるよ。\w8\s[4]\n多分。\w8\1\n\nおい。\e'
+}
+
+//---- ややめに話しかける
+Menu_COMMUNICATE
+{
+	'\0んー？'
+	'\0なに？'
+	'\0？'
+	--
+	'\![open,communicatebox]\e'
+}
+
+//---- 他のゴーストと話す
+Menu_GHOSTCOMSTART
+{
+	StartCommunicate
+}
+
+//---- キャンセルされた
+YuriMenu_CANCEL
+{
+	Init
+	--
+	if dicMode != MODE_SUZU {
+		'\0……そう。\e'
+		'\0……？\e'
+		'\0ん。\e'
+	}
+}
+
+SuzuMenu_CANCEL
+{
+	Init
+	--
+	if dicMode != MODE_YURI {
+		'\1うん、わかった。\e'
+		'\1そう？\e'
+		'\1ん。\e'
+	}
+}
+
+//---- ヘッドライン
+Menu_HEADLINECANCEL
+{
+	Init
+	--
+	//---- キャンセルされた
+	'\0\s[5]はーい。\e'
+}
+
+//---- スタンプ帳
+Menu_STAMP
+{
+	//初期化
+	SHIORI3FW.RegisterTempVar('StampInfo_IsExist', 'StampInfo_IsNotify', 'StampInfo_CurrentStampFile', 'StampInfo_CurrentStampTitle')
+
+	StampInfo_IsExist = 0
+	StampInfo_IsNotify = 0
+
+	//スタンプ帳情報を取った後、raiseでOnStampMenuExecを発生させて下に処理を移す
+	'\![raiseplugin,379E0DA0-131C-11DD-E1AC-90009E101CFE,OnStampInfoCall]\![raise,OnStampMenuExec]'
+}
+
+OnStampInfo
+{
+	//スタンプあるかどうか？
+	StampInfo_IsExist = reference[1]
+	StampInfo_IsNotify = 1
+	StampInfo_CurrentStampFile = ''
+	StampInfo_CurrentStampTitle = ''
+
+	//押している場合は、どのスタンプを押しているか？
+	_stamparray = SPLIT(reference[3], CHR(2))
+
+	StampInfo_Data = _stamparray
+
+	_n = ARRAYSIZE(_stamparray)
+	for _i=0; _i<_n; _i++ {
+		_stamp = RE_SPLIT(_stamparray[_i], '[\x1,]') //バイト値1かカンマかでぶった切る：互換モード対策
+
+		//ほかで使う場合はここの名前を変えてね
+		if _stamp[0] == 'はろーYAYAわーるど' || _stamp[0] == '紺野ややめ' {
+			StampInfo_CurrentStampFile = _stamp[1]
+			StampInfo_CurrentStampTitle = _stamp[2]
+			break
+		}
+	}
+}
+
+OnStampMenuExec
+{
+	_stamp_type = ''
+
+	//あった
+	if StampInfo_IsExist {
+		if 'ややめ' _in_ StampInfo_CurrentStampTitle {
+			//マック朗におきかえ
+			'\u\s[1000]\h\s[2]もう押してあるのに、\w5まだほしいの？\w9\w9\u\s[1002]ならおれのスタンプに置き換えだ！\w9\nどうだうれしいだろ！\w9\w9\h\s[4]\n\nなにやってるの\w5…\w5…'
+
+			_stamp_type = 'マック朗'
+		}
+		else {
+			//ややめに置き換え
+			'\h\s[0]\u\s[1000]もうおれのスタンプが押してあるぞ？\w9\w9\h\s[5]とりあえずわたしのに戻すねー。'
+
+			_stamp_type = 'ややめ'
+		}
+	}
+	//ない
+	else {
+		'\0\s[0]スタンプ？\w9\w9\n\s[5]はいどうぞ～。\w9\w9\1\s[1002]せっかくだから俺はこのスタンプを選ぶぜ！\w9\w9\0\s[4]えーっと。'
+
+		_stamp_type = 'ややめ'
+	}
+	--
+	if _stamp_type == 'ややめ' {
+		//2行目ファイル、3行目タイトル、4行目コメント
+		'\![raiseplugin,379E0DA0-131C-11DD-E1AC-90009E101CFE,OnStampAdd,/
+		ghost/master/stamp/stmp_yym.png,/
+		ややめスタンプ,/
+		紺野ややめが押したスタンプ。服のジッパーの取っ手とデザインが同じ。]'
+	}
+	else {
+		'\![raiseplugin,379E0DA0-131C-11DD-E1AC-90009E101CFE,OnStampAdd,/
+		ghost/master/stamp/stmp_mcr.png,/
+		マック朗スタンプ,/
+		マック朗が押したスタンプ。黒林檎。見た目に反して毒はない…と信じたい。]'
+	}
+}

@@ -1,0 +1,17 @@
+charset,UTF-8
+
+name,Adaptation
+type,ghost
+
+sakura.name,悠梨
+kero.name,鈴
+
+sstp.allowunspecifiedsend,1
+
+icon,icon.ico
+
+shiori,yaya.dll
+
+craftman,suminezu
+craftmanw,墨鼠
+craftmanurl,http://ms.shillest.net/yayame.xhtml

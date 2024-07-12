@@ -1,0 +1,73 @@
+//******************************************************************************
+//トランスレータ
+//******************************************************************************
+
+//------------------------------------------------------------------------------
+//OnTranslateイベント
+//------------------------------------------------------------------------------
+//もっとも単純な例。語尾変え（「。」→「にゅ。」）。
+//動かないようにコメントアウトしています。
+/*
+OnTranslate
+{
+	_text = reference[0]
+	_text = REPLACE(_text, "。", "にゅ。")
+	_text
+}
+*/
+
+//------------------------------------------------------------------------------
+//OnTranslateInternalイベント
+//------------------------------------------------------------------------------
+//OnTranslateがYAYA→本体→YAYAと、一度本体を経由するのに対して、
+//OnTranslateInternalはYAYA内部でのトランスレートです。
+//そのため、reference変数などが変更されない状態でこの関数に渡されます。
+//引数は、_argv[0]が、本体に渡す寸前のトークの内容です。
+//動かないようにコメントアウトしています。
+
+OnTranslateInternal
+{
+	_text = _argv[0]
+   	_text = REPLACE(_text, "。", "。\w9")
+   	_text = REPLACE(_text, "。\w9\n", "。\n")
+    _text = TextOnlyTranslator(_text,'TextOnlyTranslatorFunc')
+	_text
+}
+
+TextOnlyTranslator
+{
+	_string = RE_SPLIT(_argv[0],'\\(\\|q\[.*?\]\[.*?\]|[!&8cfijmpqsn]\[.*?\]|[-*+014567bcehntuvxz]|_[ablmsuvw]\[.*?\]|__(t|[qw]\[.*?\])|_[!?+nqsV]|[sipw][0-9])')
+	_n = ARRAYSIZE(_string)
+	_tag = RE_GETSTR()
+	_tr = ''
+	_qs = 0
+	
+	for _i = 0 ; _i < _n ; _i++ {
+		_tr += EVAL("%(_argv[1])(_string[_i],_qs)")
+		_tr += _tag[_i]
+		if '\_q' _in_ _tag[_i] {
+			_qs = ! _qs
+		}
+	}
+	
+	_tr
+}
+
+TextOnlyTranslatorFunc
+{
+	//_argv[0] = 置換対象テキスト
+	//_argv[1] = クイックセクション内か否か
+	
+	_text = _argv[0]
+	if ! _argv[1] {
+//    	_text = REPLACE(_text, "。", "。\w9")
+//    	_text = REPLACE(_text, "。\w9\n", "。\n")
+    	_text = REPLACE(_text, "、", "、\w6")
+    	_text = REPLACE(_text, "…", "…\w5")
+//    	_text = REPLACE(_text, "！", "！\w8")
+//	    _text = REPLACE(_text, "？", "？\w8")
+//	    _text = REPLACE(_text, "\w8？", "？")
+//	    _text = REPLACE(_text, "\w8！", "！")
+	}
+	_text
+}

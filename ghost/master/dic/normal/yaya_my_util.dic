@@ -1,0 +1,67 @@
+//******************************************************************************
+// 自作便利関数
+//******************************************************************************
+
+// サーフェス、バルーンの初期設定
+Init
+{
+	'\0'
+	--
+	if (dicMode == MODE_SUZU)
+		'\s[999]'
+	--
+	'\1\b[2]'
+	--
+	if (dicMode == MODE_YURI)
+		'\s[1999]\0'
+	--
+	'\c'
+}
+
+// 改行スクリプト
+// 引数0：改行の大きさ。(引数0)*50%の改行を行う。指定しない場合は1.5行分。
+// 引数1：待ち時間。(引数1)*50ミリ秒待つ。指定しない場合は改行1行につき600ミリ秒待つ。
+NewLine
+{
+    _lineCount = 3
+
+    if _argc > 0
+        _lineCount = _argv[0]
+    
+    _waitTime = _lineCount * 6
+
+    if _argc > 1
+        _waitTime = _argv[1]
+
+    // 引数0 × 50％の改行文字列を追加
+    _newLine = '\n[' + TOSTR(_lineCount * 50) + ']'
+
+    // 引数1 × 50msの時間のウェイトを追加
+    _newLine += '\_w[' + TOSTR(_waitTime * 50) + ']'
+
+    _newLine
+}
+
+// 実数を文字数にするスクリプト。指定した桁数以下を切り捨てる。
+// 引数0（実数）: 変換したい実数
+// 引数1（整数）: 小数点以下第何位まで表示するか。指定しない場合は2（小数点以下2桁）
+RealToStr
+{
+	_floorPoint = 2
+
+	if _argc > 1
+		_floorPoint = _argv[1]
+
+	_str = TOSTR(_argv[0])
+
+	_pointPos = STRSTR(_str,'.',0)
+
+	if _pointPos < 0{
+		_str = ''
+	}
+	else{
+		_str = ERASE(_str, _pointPos + _floorPoint + 1, STRLEN(_str) - _pointPos - _floorPoint - 1)
+	}
+
+	_str
+}

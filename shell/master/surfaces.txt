@@ -1,0 +1,1026 @@
+charset,UTF-8
+
+descript
+{
+version,1
+}
+
+surface0-99
+{
+element0,base,yuribase00.png,0,0
+}
+
+surface1000-1099
+{
+  element0,base,suzubase00.png,0,0
+}
+
+surface999
+{
+  element0,base,yuribase99.png,0,0
+}
+
+surface1999
+{
+  element0,base,suzubase99.png,0,0
+}
+
+surface.append0
+{
+  element1,overlay,yuri00.png,104,32
+}
+
+surface.append1
+{
+  element1,overlay,yuri01.png,104,32
+}
+
+surface.append2
+{
+  element1,overlay,yuri02.png,104,32
+}
+
+surface.append3
+{
+  element1,overlay,yuri03.png,104,32
+}
+
+surface.append4
+{
+  element1,overlay,yuri04.png,104,32
+}
+
+surface.append5
+{
+  element1,overlay,yuri05.png,104,32
+}
+
+surface.append6
+{
+  element1,overlay,yuri06.png,104,32
+}
+
+surface.append7
+{
+  element1,overlay,yuri07.png,104,32
+}
+
+surface.append8
+{
+  element1,overlay,yuri08.png,104,32
+}
+
+surface.append9
+{
+  element1,overlay,yuri09.png,104,32
+}
+
+surface.append10
+{
+  element1,overlay,yuri10.png,104,32
+}
+
+surface.append11
+{
+  element1,overlay,yuri11.png,104,32
+}
+
+surface.append12
+{
+  element1,overlay,yuri12.png,104,32
+}
+
+surface.append13
+{
+  element1,overlay,yuri13.png,104,32
+}
+
+surface.append14
+{
+  element1,overlay,yuri14.png,104,32
+}
+
+surface.append15
+{
+  element1,overlay,yuri15.png,104,32
+}
+
+surface.append16
+{
+  element1,overlay,yuri16.png,104,32
+}
+
+surface.append17
+{
+  element1,overlay,yuri17.png,104,32
+}
+
+surface.append18
+{
+  element1,overlay,yuri18.png,104,32
+}
+
+surface.append19
+{
+  element1,overlay,yuri19.png,104,32
+}
+
+surface.append20
+{
+  element1,overlay,yuri20.png,104,32
+}
+
+surface.append21
+{
+  element1,overlay,yuri21.png,104,32
+}
+
+surface.append22
+{
+  element1,overlay,yuri22.png,104,32
+}
+
+surface.append23
+{
+  element1,overlay,yuri23.png,104,32
+}
+
+surface.append24
+{
+  element1,overlay,yuri24.png,104,32
+}
+
+surface.append25
+{
+  element1,overlay,yuri25.png,104,32
+}
+
+surface.append26
+{
+  element1,overlay,yuri26.png,104,32
+}
+
+surface.append27
+{
+  element1,overlay,yuri27.png,104,32
+}
+
+surface.append28
+{
+  element1,overlay,yuri28.png,104,32
+}
+
+surface.append29
+{
+  element1,overlay,yuri29.png,104,32
+}
+
+surface.append30
+{
+  element1,overlay,yuri30.png,104,32
+}
+
+surface.append31
+{
+  element1,overlay,yuri31.png,104,32
+}
+
+surface.append32
+{
+  element1,overlay,yuri32.png,104,32
+}
+
+surface.append33
+{
+  element1,overlay,yuri33.png,104,32
+}
+
+surface.append34
+{
+  element1,overlay,yuri34.png,104,32
+}
+
+surface.append35
+{
+  element1,overlay,yuri35.png,104,32
+}
+
+surface.append36
+{
+  element1,overlay,yuri36.png,104,32
+}
+
+surface.append37
+{
+  element1,overlay,yuri37.png,104,32
+}
+
+surface.append38
+{
+  element1,overlay,yuri38.png,104,32
+}
+
+surface.append39
+{
+  element1,overlay,yuri39.png,104,32
+}
+
+surface.append40
+{
+  element1,overlay,yuri40.png,104,32
+}
+
+surface.append41
+{
+  element1,overlay,yuri41.png,104,32
+}
+
+surface.append42
+{
+  element1,overlay,yuri42.png,104,32
+}
+
+surface.append43
+{
+  element1,overlay,yuri43.png,104,32
+}
+
+surface.append44
+{
+  element1,overlay,yuri44.png,104,32
+}
+
+surface.append45
+{
+  element1,overlay,yuri45.png,104,32
+}
+
+surface.append46
+{
+  element1,overlay,yuri46.png,104,32
+}
+
+surface.append47
+{
+  element1,overlay,yuri47.png,104,32
+}
+
+surface.append48
+{
+  element1,overlay,yuri48.png,104,32
+}
+
+surface.append49
+{
+  element1,overlay,yuri49.png,104,32
+}
+
+surface.append50
+{
+  element1,overlay,yuri50.png,104,32
+}
+
+surface.append51
+{
+  element1,overlay,yuri51.png,104,32
+}
+
+surface.append52
+{
+  element1,overlay,yuri52.png,104,32
+}
+
+surface.append53
+{
+  element1,overlay,yuri53.png,104,32
+}
+
+surface.append54
+{
+  element1,overlay,yuri54.png,104,32
+}
+
+surface.append55
+{
+  element1,overlay,yuri55.png,104,32
+}
+
+surface.append56
+{
+  element1,overlay,yuri56.png,104,32
+}
+
+surface.append57
+{
+  element1,overlay,yuri57.png,104,32
+}
+
+surface.append58
+{
+  element1,overlay,yuri58.png,104,32
+}
+
+surface.append59
+{
+  element1,overlay,yuri59.png,104,32
+}
+
+surface.append60
+{
+  element1,overlay,yuri60.png,104,32
+}
+
+surface.append61
+{
+  element1,overlay,yuri61.png,104,32
+}
+
+surface.append62
+{
+  element1,overlay,yuri62.png,104,32
+}
+
+surface.append63
+{
+  element1,overlay,yuri63.png,104,32
+}
+
+surface.append64
+{
+  element1,overlay,yuri64.png,104,32
+}
+
+surface.append65
+{
+  element1,overlay,yuri65.png,104,32
+}
+
+surface.append66
+{
+  element1,overlay,yuri66.png,104,32
+}
+
+surface.append67
+{
+  element1,overlay,yuri67.png,104,32
+}
+
+surface.append68
+{
+  element1,overlay,yuri68.png,104,32
+}
+
+surface.append69
+{
+  element1,overlay,yuri69.png,104,32
+}
+
+surface.append70
+{
+  element1,overlay,yuri70.png,104,32
+}
+
+surface.append71
+{
+  element1,overlay,yuri71.png,104,32
+}
+
+surface.append72
+{
+  element1,overlay,yuri72.png,104,32
+}
+
+surface.append73
+{
+  element1,overlay,yuri73.png,104,32
+}
+
+surface.append74
+{
+  element1,overlay,yuri74.png,104,32
+}
+
+surface.append75
+{
+  element1,overlay,yuri75.png,104,32
+}
+
+surface.append76
+{
+  element1,overlay,yuri76.png,104,32
+}
+
+surface.append77
+{
+  element1,overlay,yuri77.png,104,32
+}
+
+surface.append78
+{
+  element1,overlay,yuri78.png,104,32
+}
+
+surface.append79
+{
+  element1,overlay,yuri79.png,104,32
+}
+
+surface.append80
+{
+  element1,overlay,yuri80.png,104,32
+}
+
+surface.append81
+{
+  element1,overlay,yuri81.png,104,32
+}
+
+surface.append82
+{
+  element1,overlay,yuri82.png,104,32
+}
+
+surface.append83
+{
+  element1,overlay,yuri83.png,104,32
+}
+
+surface.append84
+{
+  element1,overlay,yuri84.png,104,32
+}
+
+surface.append85
+{
+  element1,overlay,yuri85.png,104,32
+}
+
+surface.append86
+{
+  element1,overlay,yuri86.png,104,32
+}
+
+surface.append87
+{
+  element1,overlay,yuri87.png,104,32
+}
+
+surface.append88
+{
+  element1,overlay,yuri88.png,104,32
+}
+
+surface.append89
+{
+  element1,overlay,yuri89.png,104,32
+}
+
+surface.append90
+{
+  element1,overlay,yuri90.png,104,32
+}
+
+surface.append91
+{
+  element1,overlay,yuri91.png,104,32
+}
+
+surface.append92
+{
+  element1,overlay,yuri92.png,104,32
+}
+
+surface.append93
+{
+  element1,overlay,yuri93.png,104,32
+}
+
+surface.append94
+{
+  element1,overlay,yuri94.png,104,32
+}
+
+surface.append95
+{
+  element1,overlay,yuri95.png,104,32
+}
+
+surface.append96
+{
+  element1,overlay,yuri96.png,104,32
+}
+
+surface.append97
+{
+  element1,overlay,yuri97.png,104,32
+}
+
+surface.append98
+{
+  element1,overlay,yuri98.png,104,32
+}
+
+surface.append99
+{
+  element1,overlay,yuri99.png,104,32
+}
+
+surface.append1000
+{
+  element1,overlay,suzu00.png,92,63
+}
+
+surface.append1001
+{
+  element1,overlay,suzu01.png,92,63
+}
+
+surface.append1002
+{
+  element1,overlay,suzu02.png,92,63
+}
+
+surface.append1003
+{
+  element1,overlay,suzu03.png,92,63
+}
+
+surface.append1004
+{
+  element1,overlay,suzu04.png,92,63
+}
+
+surface.append1005
+{
+  element1,overlay,suzu05.png,92,63
+}
+
+surface.append1006
+{
+  element1,overlay,suzu06.png,92,63
+}
+
+surface.append1007
+{
+  element1,overlay,suzu07.png,92,63
+}
+
+surface.append1008
+{
+  element1,overlay,suzu08.png,92,63
+}
+
+surface.append1009
+{
+  element1,overlay,suzu09.png,92,63
+}
+
+surface.append1010
+{
+  element1,overlay,suzu10.png,92,63
+}
+
+surface.append1011
+{
+  element1,overlay,suzu11.png,92,63
+}
+
+surface.append1012
+{
+  element1,overlay,suzu12.png,92,63
+}
+
+surface.append1013
+{
+  element1,overlay,suzu13.png,92,63
+}
+
+surface.append1014
+{
+  element1,overlay,suzu14.png,92,63
+}
+
+surface.append1015
+{
+  element1,overlay,suzu15.png,92,63
+}
+
+surface.append1016
+{
+  element1,overlay,suzu16.png,92,63
+}
+
+surface.append1017
+{
+  element1,overlay,suzu17.png,92,63
+}
+
+surface.append1018
+{
+  element1,overlay,suzu18.png,92,63
+}
+
+surface.append1019
+{
+  element1,overlay,suzu19.png,92,63
+}
+
+surface.append1020
+{
+  element1,overlay,suzu20.png,92,63
+}
+
+surface.append1021
+{
+  element1,overlay,suzu21.png,92,63
+}
+
+surface.append1022
+{
+  element1,overlay,suzu22.png,92,63
+}
+
+surface.append1023
+{
+  element1,overlay,suzu23.png,92,63
+}
+
+surface.append1024
+{
+  element1,overlay,suzu24.png,92,63
+}
+
+surface.append1025
+{
+  element1,overlay,suzu25.png,92,63
+}
+
+surface.append1026
+{
+  element1,overlay,suzu26.png,92,63
+}
+
+surface.append1027
+{
+  element1,overlay,suzu27.png,92,63
+}
+
+surface.append1028
+{
+  element1,overlay,suzu28.png,92,63
+}
+
+surface.append1029
+{
+  element1,overlay,suzu29.png,92,63
+}
+
+surface.append1030
+{
+  element1,overlay,suzu30.png,92,63
+}
+
+surface.append1031
+{
+  element1,overlay,suzu31.png,92,63
+}
+
+surface.append1032
+{
+  element1,overlay,suzu32.png,92,63
+}
+
+surface.append1033
+{
+  element1,overlay,suzu33.png,92,63
+}
+
+surface.append1034
+{
+  element1,overlay,suzu34.png,92,63
+}
+
+surface.append1035
+{
+  element1,overlay,suzu35.png,92,63
+}
+
+surface.append1036
+{
+  element1,overlay,suzu36.png,92,63
+}
+
+surface.append1037
+{
+  element1,overlay,suzu37.png,92,63
+}
+
+surface.append1038
+{
+  element1,overlay,suzu38.png,92,63
+}
+
+surface.append1039
+{
+  element1,overlay,suzu39.png,92,63
+}
+
+surface.append1040
+{
+  element1,overlay,suzu40.png,92,63
+}
+
+surface.append1041
+{
+  element1,overlay,suzu41.png,92,63
+}
+
+surface.append1042
+{
+  element1,overlay,suzu42.png,92,63
+}
+
+surface.append1043
+{
+  element1,overlay,suzu43.png,92,63
+}
+
+surface.append1044
+{
+  element1,overlay,suzu44.png,92,63
+}
+
+surface.append1045
+{
+  element1,overlay,suzu45.png,92,63
+}
+
+surface.append1046
+{
+  element1,overlay,suzu46.png,92,63
+}
+
+surface.append1047
+{
+  element1,overlay,suzu47.png,92,63
+}
+
+surface.append1048
+{
+  element1,overlay,suzu48.png,92,63
+}
+
+surface.append1049
+{
+  element1,overlay,suzu49.png,92,63
+}
+
+surface.append1050
+{
+  element1,overlay,suzu50.png,92,63
+}
+
+surface.append1051
+{
+  element1,overlay,suzu51.png,92,63
+}
+
+surface.append1052
+{
+  element1,overlay,suzu52.png,92,63
+}
+
+surface.append1053
+{
+  element1,overlay,suzu53.png,92,63
+}
+
+surface.append1054
+{
+  element1,overlay,suzu54.png,92,63
+}
+
+surface.append1055
+{
+  element1,overlay,suzu55.png,92,63
+}
+
+surface.append1056
+{
+  element1,overlay,suzu56.png,92,63
+}
+
+surface.append1057
+{
+  element1,overlay,suzu57.png,92,63
+}
+
+surface.append1058
+{
+  element1,overlay,suzu58.png,92,63
+}
+
+surface.append1059
+{
+  element1,overlay,suzu59.png,92,63
+}
+
+surface.append1060
+{
+  element1,overlay,suzu60.png,92,63
+}
+
+surface.append1061
+{
+  element1,overlay,suzu61.png,92,63
+}
+
+surface.append1062
+{
+  element1,overlay,suzu62.png,92,63
+}
+
+surface.append1063
+{
+  element1,overlay,suzu63.png,92,63
+}
+
+surface.append1064
+{
+  element1,overlay,suzu64.png,92,63
+}
+
+surface.append1065
+{
+  element1,overlay,suzu65.png,92,63
+}
+
+surface.append1066
+{
+  element1,overlay,suzu66.png,92,63
+}
+
+surface.append1067
+{
+  element1,overlay,suzu67.png,92,63
+}
+
+surface.append1068
+{
+  element1,overlay,suzu68.png,92,63
+}
+
+surface.append1069
+{
+  element1,overlay,suzu69.png,92,63
+}
+
+surface.append1070
+{
+  element1,overlay,suzu70.png,92,63
+}
+
+surface.append1071
+{
+  element1,overlay,suzu71.png,92,63
+}
+
+surface.append1072
+{
+  element1,overlay,suzu72.png,92,63
+}
+
+surface.append1073
+{
+  element1,overlay,suzu73.png,92,63
+}
+
+surface.append1074
+{
+  element1,overlay,suzu74.png,92,63
+}
+
+surface.append1075
+{
+  element1,overlay,suzu75.png,92,63
+}
+
+surface.append1076
+{
+  element1,overlay,suzu76.png,92,63
+}
+
+surface.append1077
+{
+  element1,overlay,suzu77.png,92,63
+}
+
+surface.append1078
+{
+  element1,overlay,suzu78.png,92,63
+}
+
+surface.append1079
+{
+  element1,overlay,suzu79.png,92,63
+}
+
+surface.append1080
+{
+  element1,overlay,suzu80.png,92,63
+}
+
+surface.append1081
+{
+  element1,overlay,suzu81.png,92,63
+}
+
+surface.append1082
+{
+  element1,overlay,suzu82.png,92,63
+}
+
+surface.append1083
+{
+  element1,overlay,suzu83.png,92,63
+}
+
+surface.append1084
+{
+  element1,overlay,suzu84.png,92,63
+}
+
+surface.append1085
+{
+  element1,overlay,suzu85.png,92,63
+}
+
+surface.append1086
+{
+  element1,overlay,suzu86.png,92,63
+}
+
+surface.append1087
+{
+  element1,overlay,suzu87.png,92,63
+}
+
+surface.append1088
+{
+  element1,overlay,suzu88.png,92,63
+}
+
+surface.append1089
+{
+  element1,overlay,suzu89.png,92,63
+}
+
+surface.append1090
+{
+  element1,overlay,suzu90.png,92,63
+}
+
+surface.append1091
+{
+  element1,overlay,suzu91.png,92,63
+}
+
+surface.append1092
+{
+  element1,overlay,suzu92.png,92,63
+}
+
+surface.append1093
+{
+  element1,overlay,suzu93.png,92,63
+}
+
+surface.append1094
+{
+  element1,overlay,suzu94.png,92,63
+}
+
+surface.append1095
+{
+  element1,overlay,suzu95.png,92,63
+}
+
+surface.append1096
+{
+  element1,overlay,suzu96.png,92,63
+}
+
+surface.append1097
+{
+  element1,overlay,suzu97.png,92,63
+}
+
+surface.append1098
+{
+  element1,overlay,suzu98.png,92,63
+}
+
+surface.append1099
+{
+  element1,overlay,suzu99.png,92,63
+}
