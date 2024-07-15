@@ -14,4 +14,4 @@ shiori,yaya.dll
 
 craftman,suminezu
 craftmanw,墨鼠
-craftmanurl,http://ms.shillest.net/yayame.xhtml
+craftmanurl,https://x.com/prayfortiny

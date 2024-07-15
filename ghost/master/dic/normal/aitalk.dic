@@ -14,7 +14,7 @@ RandomTalk
 	case dicMode
 	{
 		when MODE_NORMAL
-			TOSTR(EVAL(CHR(0x22)+RandomTalkNormal()+CHR(0x22)))
+			TOSTR(EVAL(CHR(0x22)+RandomTalkBasic()+CHR(0x22)))
 		when MODE_YURI
 			TOSTR(EVAL(CHR(0x22)+RandomTalkYuri()+CHR(0x22)))
 		when MODE_SUZU
@@ -88,12 +88,6 @@ OnKeyPress
 			else {
 				'\![raise,OnMouseDoubleClick,0,0,0,0,__SYSTEM_KEYDOWN_COL,0,mouse]'
 			}
-		}
-		when 'b'{
-			NormalBootTalk
-		}
-		when 'c'{
-			NormalCloseTalk
 		}
 	}
 }

@@ -1148,7 +1148,7 @@ ChainTalk
 	if CHAIN.IDName != '' {
 		_res = EVAL(CHAIN.IDName)
 		if _res != '' {
-			_res
+			Init + _res
 			return
 		}
 	}
@@ -1156,7 +1156,7 @@ ChainTalk
 	if CHAIN.Script != '' {
 		_res = CHAIN.Script
 		CHAIN.Script = ''
-		_res
+		Init + _res
 		return
 	}
 

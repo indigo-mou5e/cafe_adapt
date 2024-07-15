@@ -131,7 +131,7 @@ NormalBootTalk
 	case dicMode
 	{
 		when MODE_NORMAL
-			TOSTR(EVAL(CHR(0x22)+BootTalkBase()+CHR(0x22)))
+			TOSTR(EVAL(CHR(0x22)+BootTalkBasic()+CHR(0x22)))
 		when MODE_YURI
 			TOSTR(EVAL(CHR(0x22)+BootTalkYuri()+CHR(0x22)))
 		when MODE_SUZU
@@ -174,7 +174,7 @@ NormalCloseTalk
 	case dicMode
 	{
 		when MODE_NORMAL
-			TOSTR(EVAL(CHR(0x22)+CloseTalkBase()+CHR(0x22)))
+			TOSTR(EVAL(CHR(0x22)+CloseTalkBasic()+CHR(0x22)))
 		when MODE_YURI
 			TOSTR(EVAL(CHR(0x22)+CloseTalkYuri()+CHR(0x22)))
 		when MODE_SUZU
