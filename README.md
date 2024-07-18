@@ -1,2 +1,2 @@
 # cafe_adapt
-Adaptation（仮）
+Adaptation

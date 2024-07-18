@@ -1,4 +1,4 @@
 charset,UTF-8
 type,ghost
-name,こびとに捧ぐうた
-directory,for_the_tiny
+name,Adaptation
+directory,cafe_adapt

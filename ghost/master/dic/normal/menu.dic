@@ -1,5 +1,4 @@
 //******************************************************************************
-// YAYA　ゴーストテンプレート
 // メニュー処理辞書
 //******************************************************************************
 
@@ -37,6 +36,13 @@ YuriMenuList
 		AYATEMPLATE.MenuItem('さっきの話は？', 'Menu_LASTTALK')
 	}
 	--
+	if dicMode != MODE_SUZU
+		AYATEMPLATE.MenuItem('悠梨に話しかける', 'Menu_COMMUNICATE')
+	--
+	AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionYuri')
+	--
+	AYATEMPLATE.MenuItem('質問コーナー','FAQ_Top')
+	--
 	AYATEMPLATE.MenuItem('ミニゲーム【リバーポーカー】', 'PokerMenu')
 	--
 	AYATEMPLATE.MenuItem('トーク設定', 'Menu_TALKSETTING')
@@ -46,16 +52,14 @@ YuriMenuList
 	if dicMode != MODE_SUZU
 		AYATEMPLATE.MenuItem('他のゴーストと話す', 'Menu_GHOSTCOMSTART')
 	--
-	if dicMode != MODE_SUZU
-		AYATEMPLATE.MenuItem('悠梨に話しかける', 'Menu_COMMUNICATE')
-	--
-	AYATEMPLATE.MenuItem("初起動トークを再生","Menu_FIRSTBOOT")
+	// AYATEMPLATE.MenuItem("初起動トークを再生","Menu_FIRSTBOOT")
 	--
 	//スタンプ帳チェック
 	if AYATEMPLATE.IsPluginExist('379E0DA0-131C-11DD-E1AC-90009E101CFE') {
 		AYATEMPLATE.MenuItem('スタンプを押す', 'Menu_STAMP')
 	}
 	--
+	/*
 	case dicMode {
 		when MODE_NORMAL
 			AYATEMPLATE.MenuItem('悠梨と二人で話す', 'Menu_ChangeYuriMode', 150)
@@ -64,6 +68,7 @@ YuriMenuList
 				AYATEMPLATE.MenuItem('鈴と二人で話す', 'Menu_ChangeSuzuMode')
 		}
 	}
+	*/
 	--
 	AYATEMPLATE.MenuItem('なんでもない', 'YuriMenu_CANCEL', 150)
 }
@@ -94,8 +99,11 @@ SuzuMenuList
 	--
 	AYATEMPLATE.MenuItem('鈴に話しかける', 'Menu_COMMUNICATE')
 	--
+	AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionSuzu')
+	--
 	// AYATEMPLATE.MenuItem('【デバッグ】トランプテスト', 'Debug_RandomCardTest')
 	--
+	/*
 	case dicMode {
 		when MODE_NORMAL
 			AYATEMPLATE.MenuItem('鈴と二人で話す', 'Menu_ChangeSuzuMode', 150)
@@ -104,6 +112,7 @@ SuzuMenuList
 				AYATEMPLATE.MenuItem('悠梨と二人で話す', 'Menu_ChangeYuriMode')
 		}
 	}
+	*/
 	--
 	AYATEMPLATE.MenuItem('なんでもない', 'SuzuMenu_CANCEL', 150)
 }
