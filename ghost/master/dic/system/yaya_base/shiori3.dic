@@ -298,6 +298,10 @@ C_CRLF2
 C_CRLF
 C_BYTE1
 tempUsername
+temp_boardCards
+temp_userHand
+temp_userHandChoise
+temp_yuriHand
 '>>
 	//以下は保存
 	//SHIORI3FW.ShellName

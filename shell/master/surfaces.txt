@@ -2,17 +2,25 @@ charset,UTF-8
 
 descript
 {
-version,1
+  version,1
 }
 
 surface0-99
 {
-element0,base,yuribase00.png,0,0
+  element0,base,yuribase00.png,0,0
+  collisionex0,Head,region,yuricollider00.png,255,0,0
+  collisionex1,Ear,region,yuricollider00.png,0,255,0
+  collisionex2,Hand,region,yuricollider00.png,0,0,255
+  collisionex3,Tail,region,yuricollider00.png,255,255,0
 }
 
 surface1000-1099
 {
   element0,base,suzubase00.png,0,0
+  collisionex0,Head,region,suzucollider00.png,255,0,0
+  collisionex1,Ear,region,suzucollider00.png,0,255,0
+  collisionex2,Hand,region,suzucollider00.png,0,0,255
+  collisionex3,Tail,region,suzucollider00.png,255,255,0
 }
 
 surface999
