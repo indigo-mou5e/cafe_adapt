@@ -95,3 +95,69 @@ StrArrayToString
 
     _string
 }
+
+
+Debug_RandomCardTest
+{
+	Init
+	--
+	'\1カードをランダムで引くよ。\n何枚引く？\n\n[half]'
+	--
+	'\q[2枚,DrawRandomCard_2]\n'
+	--
+	'\q[5枚,DrawRandomCard_5]\n'
+	--
+	'\q[30枚,DrawRandomCard_30]\n\n[half]'
+	--
+	'\q[やっぱりやめる,Menu_Close]'
+}
+
+DrawRandomCard_2
+{
+	_cards = GetRandomCardArray(2)
+	_cardStrArray = CardIndexToString(_cards)
+	_cardsStr = StrArrayToString('',_cardStrArray)
+
+	Init
+	--
+	'\1カードを2枚引いたよ。\n\n[half]'
+	--
+	'カードは' + _cardsStr + '。\n'
+	--
+	'評価値は' + LookUpHandTier_Yuri(_cards) + 'ってところね。\n\n[half]'
+	--
+	'\q[もう一回,DrawRandomCard_2]\n'
+	--
+	'\q[メニューへ,SuzuMenuList]'
+}
+
+DrawRandomCard_5
+{
+	_cards = GetRandomCardArray(5)
+	_cardStrArray = CardIndexToString(_cards)
+	_cardsStr = StrArrayToString(' ',_cardStrArray)
+
+	Init
+	--
+	'\1カードを5枚引いたよ。\n\n[half]'
+	--
+	_cardsStr + '\e'
+}
+
+DrawRandomCard_30
+{
+	_cards = GetRandomCardArray(30)
+	_cardStrArray = CardIndexToString(_cards)
+	_cardStrArray_0 = _cardStrArray[0,7]
+	_cardStrArray_1 = _cardStrArray[8,15]
+	_cardStrArray_2 = _cardStrArray[16,23]
+	_cardStrArray_3 = _cardStrArray[24,29]
+	_cardsStr = StrArrayToString(' ',_cardStrArray_0) + '\n' + StrArrayToString(' ',_cardStrArray_1) + '\n' + /
+	StrArrayToString(' ',_cardStrArray_2) + '\n' + StrArrayToString(' ',_cardStrArray_3)
+
+	Init
+	--
+	'\1カードを30枚引いたよ。\n\n[half]'
+	--
+	_cardsStr + '\e'
+}

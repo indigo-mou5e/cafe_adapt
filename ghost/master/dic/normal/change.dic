@@ -105,6 +105,8 @@ OnGhostChanging
 
 OnGhostChanged
 {
+	InitializeVariableOnBoot
+	--
 	Init
 	--
 	AYATEMPLATE.ExecuteChangeCallTalk("OnGhostChanged","OnBoot")
@@ -119,6 +121,8 @@ OnGhostCalling
 
 OnGhostCalled
 {
+	InitializeVariableOnBoot
+	--
 	Init
 	--
 	AYATEMPLATE.ExecuteChangeCallTalk("OnGhostCalled","OnBoot")

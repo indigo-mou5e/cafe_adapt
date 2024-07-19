@@ -97,8 +97,14 @@ OnKeyPress
 
 OnMinuteChange
 {
-	//---- 時間の分を見て 0 であれば時報。それ以外のときは重なり処理を行う
+	// 20分ごとに好感度上昇
+	if GetTotalOperation_minute % 20 == 0
+	{
+		fav_Yuri++
+		fav_Suzu++
+	}
 
+	//---- 時間の分を見て 0 であれば時報。それ以外のときは重なり処理を行う
 /*
 	if minute == 0{
 		//---- 分 = 0 だったので時報
@@ -168,6 +174,8 @@ OnMinuteChange
 //---------------------------------------------------------------------------
 OnSecondChange
 {
+	currentOperationSecond += 1
+	totalOperationSecond += 1
 
 	if AYATEMPLATE.mikireflag == 1 && reference[1] == 0{
 		//---- 見切れの終了

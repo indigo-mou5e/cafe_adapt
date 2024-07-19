@@ -19,6 +19,7 @@ OnFirstBoot
 	// ---- 変数の初期化 ----
 	lastIntroductionYuri = -1
 	lastIntroductionSuzu = -1
+	bootCount = 1
 
 	// ---- 初回起動トーク ----
 
@@ -119,11 +120,19 @@ InputLater
 OnBoot
 {
 	// ToDo: 起動時の処理を行う
-
+	InitializeVariableOnBoot
+	--
 	// ToDo: イベントなどの特別な起動があるとき
 
 	// 通常の起動
 	NormalBootTalk
+}
+
+// 起動時の諸変数設定
+InitializeVariableOnBoot : void
+{
+	currentOperationSecond = 0
+	bootCount++
 }
 
 NormalBootTalk
@@ -165,6 +174,11 @@ OnClose
 	// ToDo: 終了時の処理（Unload関数でいいかも）
 
 	// ToDo: イベント終了トークなどあれば
+	if currentOperationSecond < 600
+	{
+		EarlyCloseTalk
+		return
+	}
 
 	// 通常の終了トーク
 	NormalCloseTalk
@@ -187,6 +201,23 @@ NormalCloseTalk
 	'\w9\w9\-\e'
 }
 
+// 起動から10分以内に終了したとき
+EarlyCloseTalk
+{
+	Init
+	--
+	case dicMode
+	{
+		when MODE_NORMAL
+			TOSTR(EVAL(CHR(0x22)+EarlyCloseTalkBasic()+CHR(0x22)))
+		when MODE_YURI
+			TOSTR(EVAL(CHR(0x22)+CloseTalkYuri()+CHR(0x22)))
+		when MODE_SUZU
+			TOSTR(EVAL(CHR(0x22)+CloseTalkSuzu()+CHR(0x22)))
+	}
+	--
+	'\w9\w9\-\e'
+}
 
 //******************************************************************************
 //最小化からの復帰 OnWindowStateRestore

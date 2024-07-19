@@ -43,11 +43,9 @@ YuriMenuList
 	--
 	AYATEMPLATE.MenuItem('質問コーナー','FAQ_Top')
 	--
-	AYATEMPLATE.MenuItem('ミニゲーム【リバーポーカー】', 'PokerMenu')
+	// AYATEMPLATE.MenuItem('ミニゲーム【リバーポーカー】', 'PokerMenu')
 	--
 	AYATEMPLATE.MenuItem('トーク設定', 'Menu_TALKSETTING')
-	--
-	AYATEMPLATE.MenuItem('ユーザ情報', 'Menu_USERSETTING')
 	--
 	if dicMode != MODE_SUZU
 		AYATEMPLATE.MenuItem('他のゴーストと話す', 'Menu_GHOSTCOMSTART')
@@ -101,6 +99,8 @@ SuzuMenuList
 	--
 	AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionSuzu')
 	--
+	AYATEMPLATE.MenuItem('カウント集', 'Menu_UserInformation')
+	--
 	// AYATEMPLATE.MenuItem('【デバッグ】トランプテスト', 'Debug_RandomCardTest')
 	--
 	/*
@@ -136,71 +136,6 @@ OnChoiceTimeout
 Menu_FIRSTBOOT
 {
 	OnFirstBoot
-}
-
-Debug_RandomCardTest
-{
-	Init
-	--
-	'\1カードをランダムで引くよ。\n何枚引く？\n\n[half]'
-	--
-	'\q[2枚,DrawRandomCard_2]\n'
-	--
-	'\q[5枚,DrawRandomCard_5]\n'
-	--
-	'\q[30枚,DrawRandomCard_30]\n\n[half]'
-	--
-	'\q[やっぱりやめる,SuzuMenuList]'
-}
-
-DrawRandomCard_2
-{
-	_cards = GetRandomCardArray(2)
-	_cardStrArray = CardIndexToString(_cards)
-	_cardsStr = StrArrayToString('',_cardStrArray)
-
-	Init
-	--
-	'\1カードを2枚引いたよ。\n\n[half]'
-	--
-	'カードは' + _cardsStr + '。\n'
-	--
-	'評価値は' + LookUpHandTier_Yuri(_cards) + 'ってところね。\n\n[half]'
-	--
-	'\q[もう一回,DrawRandomCard_2]\n'
-	--
-	'\q[メニューへ,SuzuMenuList]'
-}
-
-DrawRandomCard_5
-{
-	_cards = GetRandomCardArray(5)
-	_cardStrArray = CardIndexToString(_cards)
-	_cardsStr = StrArrayToString(' ',_cardStrArray)
-
-	Init
-	--
-	'\1カードを5枚引いたよ。\n\n[half]'
-	--
-	_cardsStr + '\e'
-}
-
-DrawRandomCard_30
-{
-	_cards = GetRandomCardArray(30)
-	_cardStrArray = CardIndexToString(_cards)
-	_cardStrArray_0 = _cardStrArray[0,7]
-	_cardStrArray_1 = _cardStrArray[8,15]
-	_cardStrArray_2 = _cardStrArray[16,23]
-	_cardStrArray_3 = _cardStrArray[24,29]
-	_cardsStr = StrArrayToString(' ',_cardStrArray_0) + '\n' + StrArrayToString(' ',_cardStrArray_1) + '\n' + /
-	StrArrayToString(' ',_cardStrArray_2) + '\n' + StrArrayToString(' ',_cardStrArray_3)
-
-	Init
-	--
-	'\1カードを30枚引いたよ。\n\n[half]'
-	--
-	_cardsStr + '\e'
 }
 
 //---- 何か話して
@@ -308,18 +243,29 @@ SetTalkInterval_None
 	'\0じゃあこちらからは話しかけないでおくね。\1またお話聞きたくなったら言ってね。\e'
 }
 
-// ユーザ情報
-Menu_USERSETTING
+Menu_UserInformation
 {
-	'\0'
+	Init
 	--
-	AYATEMPLATE.MenuItem("ユーザ名称：%(username)", 'InputUserName', 0)
+	"\_q\0\![*]総起動回数　　：%(bootCount)回\n/
+	\![*]合計起動時間　：%(GetTotalOperation_hour)時間%(GetTotalOperation_minute)分%(GetTotalOperation_second)秒\n/
+	\![*]今回の起動時間：%(GetCurrentOperation_hour)時間%(GetCurrentOperation_minute)分%(GetCurrentOperation_second)秒\n\n[half]/
+	\_l[4em,]\![*]鈴\_l[16em,]\![*]悠梨\n/
+	\_l[3em,]好感度：%(fav_Suzu)\_l[16em,]好感度：%(fav_Yuri)\n/
+	スキンシップ：%(skinshipSuzuCount)回\_l[13em,]スキンシップ：%(skinshipYuriCount)回\n/
+	\_l[3em,]耳触り：%(harassmentSuzuCount)回\_l[16em,]耳触り：%(harassmentYuriCount)回/
+
+	\1\_q"
 	--
-	AYATEMPLATE.MenuItem("ユーザ性別：%(GetUserGender)", 'SelectUserGender', 100)
+	AYATEMPLATE.MenuItem("ユーザ名称　：%(username)", 'InputUserName', 0)
 	--
-	"\nユーザ誕生日：%(userBirthMonth)月%(userBirthDay)日"
+	AYATEMPLATE.MenuItem("ユーザ性別　：%(GetUserGender)", 'SelectUserGender', 100)
 	--
-	AYATEMPLATE.MenuItem('戻る', 'YuriMenuList', 150)
+	"\_q\n\![*]ユーザ誕生日：%(userBirthMonth)月%(userBirthDay)日\_q"
+	--
+	AYATEMPLATE.MenuItem('戻る', 'SuzuMenuList', 150)
+	--
+	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close')
 }
 
 InputUserName
@@ -475,6 +421,11 @@ SuzuMenu_CANCEL
 		'\1そう？\e'
 		'\1ん。\e'
 	}
+}
+
+Menu_Close
+{
+	'\e'
 }
 
 //---- ヘッドライン

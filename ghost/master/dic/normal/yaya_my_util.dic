@@ -65,3 +65,51 @@ RealToStr
 
 	_str
 }
+
+// 合計稼働時間（時間数）を取得するスクリプト。
+GetTotalOperation_hour
+{
+	_totalOperation_hour = totalOperationSecond / 3600
+
+	_totalOperation_hour
+}
+
+// 合計稼働時間（分数）を取得するスクリプト。
+GetTotalOperation_minute
+{
+	_totalOperation_minute = (totalOperationSecond / 60) % 60
+
+	_totalOperation_minute
+}
+
+// 合計稼働時間（秒数）を取得するスクリプト。
+GetTotalOperation_second
+{
+	_totalOperation_second = totalOperationSecond % 60
+
+	_totalOperation_second
+}
+
+// 今回の稼働時間（時間数）を取得するスクリプト。
+GetCurrentOperation_hour
+{
+	_currentOperation_hour = currentOperationSecond / 3600
+
+	_currentOperation_hour
+}
+
+// 今回の稼働時間（分数）を取得するスクリプト。
+GetCurrentOperation_minute
+{
+	_currentOperation_minute = (currentOperationSecond / 60) % 60
+
+	_currentOperation_minute
+}
+
+// 今回の稼働時間（秒数）を取得するスクリプト。
+GetCurrentOperation_second
+{
+	_currentOperation_second = currentOperationSecond % 60
+
+	_currentOperation_second
+}
