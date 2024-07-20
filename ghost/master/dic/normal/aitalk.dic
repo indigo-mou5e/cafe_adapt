@@ -97,8 +97,8 @@ OnKeyPress
 
 OnMinuteChange
 {
-	// 20分ごとに好感度上昇
-	if GetTotalOperation_minute % 20 == 0
+	// 30分ごとに好感度上昇
+	if GetTotalOperation_minute % 30 == 0
 	{
 		fav_Yuri++
 		fav_Suzu++

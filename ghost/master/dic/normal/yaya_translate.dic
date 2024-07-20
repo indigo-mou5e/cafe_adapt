@@ -29,7 +29,7 @@ OnTranslateInternal
 {
 	_text = _argv[0]
    	_text = REPLACE(_text, "。", "。\_w[610]")
-   	_text = REPLACE(_text, "。\_w[610]\n", "。\n")
+   	//_text = REPLACE(_text, "。\_w[610]\n", "。\n")
     _text = TextOnlyTranslator(_text,'TextOnlyTranslatorFunc')
 	_text
 }
@@ -66,10 +66,8 @@ TextOnlyTranslatorFunc
     	_text = REPLACE(_text, "…", "…\w5")
   	_text = REPLACE(_text, "！", "！\_w[360]")
     _text = REPLACE(_text, "？", "？\_w[360]")
-    _text = REPLACE(_text, "\_w[360]？", "？")
     _text = REPLACE(_text, "\_w[360]！", "！")
-    _text = REPLACE(_text, "？\_w[360]\n", "？\n")
-    _text = REPLACE(_text, "！\_w[360]\n", "！\n")
+    _text = REPLACE(_text, "\_w[360]？", "？")
 //    	_text = REPLACE(_text, "！", "！\_w[410]")
 //	    _text = REPLACE(_text, "？", "？\_w[410]")
 //	    _text = REPLACE(_text, "\_w[410]？", "？")
