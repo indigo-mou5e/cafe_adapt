@@ -621,3 +621,103 @@ OnScreenSaverEnd
 	\1[[1061]]………？？/
 	\0[[18]]%(username)、わかりますか。\nこれがスマホ世代です、ジェネレーションギャップです。\e"
 }
+
+//******************************************************************************
+//最小化、最小化復帰 OnWindowStateRestore
+//******************************************************************************
+OnWindowStateMinimize
+{
+	temp_minimizeSecond = currentOperationSecond
+}
+
+OnWindowStateRestore
+{
+	// 最小化していた秒数
+	_minimizeTime = currentOperationSecond - temp_minimizeSecond
+
+	Init
+	--
+	// 復帰1分以内
+	if _minimizeTime < 60
+	{
+		'\h[[0]]'
+		'\h[[6]]'
+		'\h[[16]]'
+		--
+		'\u[[1000]]\e'
+		'\u[[1006]]\e'
+		'\u[[1016]]\e'
+	}
+	// 復帰5分以内
+	elseif _minimizeTime < 300
+	{
+		"\u[[1000]]\h[[0]]ん、おかえり。/
+		\1[[1016]]もう用事はいいのかな。\e"
+
+		"\h\s[16]\u\s[1000]おかえりなさいませ。/
+		\0[[0]]早かったですね。\e"
+
+		"\u\s[1016]\h\s[0]用事は終わりましたか？/
+		\1[[1005]]%(username)、おかえりなさい。待ってたよ。\e"
+
+		"\h[[16]]\u[[1005]]%(username)、おかえりなさい。\e"
+
+		"\u[[1055]]\h[[0]]あら、戻ってきましたね。/
+		\1[[1005]]またゆっくりお話ししましょう？\e"
+	}
+	elseif _minimizeTime < 1200
+	{
+		"\u\s[1016]\h\s[0]用事は終わりましたか？/
+		\1[[1005]]%(username)、おかえりなさい。待ってたよ。\e"
+
+		"\h[[16]]\u[[1005]]%(username)、おかえりなさい。\e"
+
+		"\u[[1055]]\h[[0]]あら、戻ってきましたね。/
+		\1[[1005]]またゆっくりお話ししましょう？\e"
+	}
+	elseif _minimizeTime < 3600
+	{
+		"\h[[10]]\u[[16]]おかえりなさいませ。/
+		\0[[0]]長かったですね。\w7[[5]]待ってましたよ。\e"
+
+		"\u[[1000]]\h[[0]]ん、戻ってきましたね。/
+		\1[[1009]]%(username)、おそいよ。\e"
+	}
+	else
+	{
+		"\h[[10]]\u[[16]]おかえりなさいませ。/
+		\0[[0]]長かったですね。\w7[[5]]待ってましたよ。\e"
+
+		"\u[[1000]]\h[[0]]ん、戻ってきましたね。/
+		\1[[1009]]%(username)、おそいよ。\e"
+
+		"\h[[10]]\u[[1005]]お帰りなさいませ、ご主人様？/
+		\1[[13]]もう戻ってこないのかと思いましたよ。\e"
+
+		"\u[[1006]]\h[[0]]ん、ようやくお帰りですか。\n[[58]]鈴なら寝ちゃいましたよ。\nまたすぐ起きるでしょうけどね。\e"
+	}
+
+}
+
+OnNotifyUserInfo
+{
+	if isReadUserInfoAlready != 1
+	{
+		tempUsername = reference[0]
+		_birthDay = SPLIT(reference[2], ',')
+		userBirthMonth = TOINT(_birthDay[1])
+		userBirthDay = TOINT(_birthDay[2])
+		
+		case reference[3]
+		{
+			when 'male'
+				userGender = 1
+			when 'female'
+				userGender = 2
+			others
+				userGender = 0
+		}
+
+		isReadUserInfoAlready = 1
+	}
+}

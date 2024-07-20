@@ -302,6 +302,7 @@ temp_boardCards
 temp_userHand
 temp_userHandChoise
 temp_yuriHand
+temp_minimizeSecond
 '>>
 	//以下は保存
 	//SHIORI3FW.ShellName
