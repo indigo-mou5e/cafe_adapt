@@ -32,7 +32,6 @@ OnFirstBoot
 	\*\q[名前を教える,InputUsernameFirst]%(NewLine(2,0))/
 	\q[あとで教える,InputLater]"
 /*
-
 	_vanishcount = TOINT(reference[0])
 	
 	//---- Vanishカウントを見て、真の初回か否かを判定する
