@@ -20,6 +20,8 @@ OnFirstBoot
 	lastIntroductionYuri = -1
 	lastIntroductionSuzu = -1
 	bootCount = 1
+	talkAutoWait = 4
+	aitalkinterval = 180
 
 	// ---- 初回起動トーク ----
 
