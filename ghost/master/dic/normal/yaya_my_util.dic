@@ -113,3 +113,10 @@ GetCurrentOperation_second
 
 	_currentOperation_second
 }
+
+
+// えんいー。
+Yen_E
+{
+	'\e'
+}
