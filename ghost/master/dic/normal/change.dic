@@ -46,7 +46,7 @@ OnGhostChanged_Emily
 
 OnGhostChanging_悠梨
 {
-	'\0\s[1000]リロードするよー。'
+	'\0\s[0]リロードするよー。'
 }
 
 OnGhostChanged_悠梨
