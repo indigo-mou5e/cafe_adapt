@@ -19,9 +19,9 @@ OpenYuriMenu
 	Init
 	--
 	if dicMode != MODE_SUZU {
-		'\0\s[5]はい、なんでしょうか？\n\n'
+		'\0\s[5]はい、メニューです。\n\n'
 		"\0\s[5]%(username)、なんですか？\n\n"
-		'\0\s[0]ん……どうしたの？\n\n'
+		'\0\s[0]ん、どうしたの？\n\n'
 	}
 	--
 	YuriMenuList
@@ -82,9 +82,9 @@ OpenSuzuMenu
 	Init
 	--
 	if dicMode != MODE_YURI {
-		'\1\s[1000]はい、なんでしょうか？\n\n'
-		"\1\s[1000]%(username)、なんですか？\n\n"
-		'\1\s[1000]ん……どうしたの？\n\n'
+		'\1\s[1055]ん、なあに？\n\n'
+		"\1\s[1000]%(username)、なにか御用？\n\n"
+		'\1\s[1000]はい、なんでしょう？\n\n'
 	}
 	--
 	SuzuMenuList
@@ -105,7 +105,7 @@ SuzuMenuList
 	--
 	AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionSuzu')
 	--
-	AYATEMPLATE.MenuItem('カウント集', 'Menu_UserInformation')
+	AYATEMPLATE.MenuItem('ユーザ情報', 'Menu_UserInformation')
 	--
 	// AYATEMPLATE.MenuItem('【デバッグ】トランプテスト', 'Debug_RandomCardTest')
 	--
@@ -124,16 +124,32 @@ SuzuMenuList
 }
 
 //------------------------------------------------------------------------------
-//メニュー選択タイムアウト
+//メニュー選択キャンセル
 //------------------------------------------------------------------------------
-/*
-OnChoiceTimeout
+YuriMenu_CANCEL
 {
-'\0\s[7]ちゃんと選んでくださいっ！\e'
-'\0\s[4]ぷー。\w8\1落ち込むんじゃない。\e'
-'\0\s[4]一定時間が過ぎると。\w8\1キャンセルされるんだよな？\w8\0\n\n自爆します。\w8\1\s[1002]\n\nえ！？\w8\0\n\nマック朗が。\w8\1\n\nいや―――――――ッ！！\e'
+	Init
+	--
+	if dicMode != MODE_SUZU {
+		'\0[[6]]そう。\e'
+		'\0[[16]]ん、わかった。\e'
+	}
 }
-*/
+
+SuzuMenu_CANCEL
+{
+	Init
+	--
+	if dicMode != MODE_YURI {
+		'\1[[1016]]そう。\e'
+		'\1[[1006]]ん。\e'
+	}
+}
+
+Menu_Close
+{
+	'\h\s[16]\u\s[1016]\e'
+}
 
 //******************************************************************************
 //各項目の処理内容
@@ -421,7 +437,6 @@ GetUserGender
 {
 	case userGender {
 		when 0 {
-			'見たまんま'
 			'ひみつ'
 			'内緒'
 			'不定'
@@ -450,21 +465,21 @@ SetGenderMale
 {
 	userGender = 1
 
-	'\0では、そのように。'
+	'\0[[16]]では、そのように。'
 }
 
 SetGenderFemale
 {
 	userGender = 2
 
-	'\0では、そのように。'
+	'\0[[16]]では、そのように。'
 }
 
 SetGenderXXX
 {
 	userGender = 0
 
-	'\0では、そのように。'
+	'\0[[16]]では、そのように。'
 }
 
 Menu_ChangeNormalMode
@@ -500,12 +515,6 @@ Menu_ChangeSuzuMode
 	\1\s[1000]……ふたりきり、だね。ね、%(username)？"
 }
 
-//---- 文について説明
-Menu_ABOUTAYA
-{
-	'\0\s[0]わたしたちは、汎用DLL「文」の進化版、「YAYA」で制作されてるんだよね？\w8\1聞くなよ。その通りだ。\w9\nＣ言語風の読みやすいスクリプトで、SHIORIやSAORIを作ることが出来るんだ。\w8\0\s[5]\n\n最初は訳分かんないかもしれないけど、噛めば噛むほど面白くなるよ。\w8\s[4]\n多分。\w8\1\n\nおい。\e'
-}
-
 //---- ややめに話しかける
 Menu_COMMUNICATE
 {
@@ -520,34 +529,6 @@ Menu_COMMUNICATE
 Menu_GHOSTCOMSTART
 {
 	StartCommunicate
-}
-
-//---- キャンセルされた
-YuriMenu_CANCEL
-{
-	Init
-	--
-	if dicMode != MODE_SUZU {
-		'\0……そう。\e'
-		'\0……？\e'
-		'\0ん。\e'
-	}
-}
-
-SuzuMenu_CANCEL
-{
-	Init
-	--
-	if dicMode != MODE_YURI {
-		'\1うん、わかった。\e'
-		'\1そう？\e'
-		'\1ん。\e'
-	}
-}
-
-Menu_Close
-{
-	'\h\s[16]\u\s[1016]\e'
 }
 
 //---- ヘッドライン
