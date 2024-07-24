@@ -131,8 +131,8 @@ YuriMenu_CANCEL
 	Init
 	--
 	if dicMode != MODE_SUZU {
-		'\0[[6]]そう。\e'
-		'\0[[16]]ん、わかった。\e'
+		'\0\s[6]そう。\e'
+		'\0\s[16]ん、わかった。\e'
 	}
 }
 
@@ -141,8 +141,8 @@ SuzuMenu_CANCEL
 	Init
 	--
 	if dicMode != MODE_YURI {
-		'\1[[1016]]そう。\e'
-		'\1[[1006]]ん。\e'
+		'\1\s[1016]そう。\e'
+		'\1\s[1006]ん。\e'
 	}
 }
 
