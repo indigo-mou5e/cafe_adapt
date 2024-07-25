@@ -379,7 +379,21 @@ MouseDoubleClick1
 
 OnMouseMove
 {
-	AYATEMPLATE.MouseMoveWheelFunc(0,40,'MouseMove')
+	case nadeSensitivity
+	{
+		when 0{
+		AYATEMPLATE.MouseMoveWheelFunc(0,25,'MouseMove')
+		}
+		when 1{
+		AYATEMPLATE.MouseMoveWheelFunc(0,40,'MouseMove')
+		}
+		when 2{
+		AYATEMPLATE.MouseMoveWheelFunc(0,60,'MouseMove')
+		}
+		others{
+		AYATEMPLATE.MouseMoveWheelFunc(0,40,'MouseMove')
+		}
+	}
 }
 
 OnMouseWheel

@@ -49,6 +49,8 @@ YuriMenuList
 	--
 	AYATEMPLATE.MenuItem('トーク設定', 'Menu_TALKSETTING',150)
 	--
+	AYATEMPLATE.MenuItem('バージョン情報', 'Menu_Version')
+	--
 	/*
 	if dicMode != MODE_SUZU
 		AYATEMPLATE.MenuItem('他のゴーストと話す', 'Menu_GHOSTCOMSTART')
@@ -176,28 +178,34 @@ Menu_LASTTALK
 //---- トーク頻度の調整
 Menu_TALKSETTING
 {
-	'\_q\0\s[0]-- ランダムトーク間隔 --\n'
+	'\_q\0\s[0]\f[align,center]---- ランダムトーク間隔 ----\n'
 	--
-	"\q[%(Choice_TaikInterval(60)),SetTalkInterval_60] /
+	"\f[align,center]\q[%(Choice_TaikInterval(60)),SetTalkInterval_60] /
 	\q[%(Choice_TaikInterval(120)),SetTalkInterval_120] /
 	\q[%(Choice_TaikInterval(180)),SetTalkInterval_180] /
 	\q[%(Choice_TaikInterval(300)),SetTalkInterval_300] /
 	\q[%(Choice_TaikInterval(600)),SetTalkInterval_600] /
 	\q[%(Choice_TaikInterval(0)),SetTalkInterval_None]"
 	--
-	'\n\n -- 自動ウェイトの待ち時間 --\n　　/
-	（大きいほど句読点や改行時の待ち時間が\n　　　/
-	増えてトークがゆっくりになります）\n'
+	'\n\n\f[align,center]---- 自動ウェイトの待ち時間 ----\n/
+	\f[align,center]（大きいほど句読点や改行時の待ち時間が　\n/
+	\f[align,center]　増えてトークがゆっくりになります）\n'
 	--
-	"\q[%(Choice_TalkAutoWait(1)),SetTalkWait_1] /
-	\q[%(Choice_TalkAutoWait(2)),SetTalkWait_2] /
-	\q[%(Choice_TalkAutoWait(3)),SetTalkWait_3] /
-	\q[%(Choice_TalkAutoWait(4)),SetTalkWait_4] /
-	\q[%(Choice_TalkAutoWait(5)),SetTalkWait_5] /
-	\q[%(Choice_TalkAutoWait(6)),SetTalkWait_6] /
+	"\f[align,center]/
+	\q[%(Choice_TalkAutoWait(1)),SetTalkWait_1]　/
+	\q[%(Choice_TalkAutoWait(2)),SetTalkWait_2]　/
+	\q[%(Choice_TalkAutoWait(3)),SetTalkWait_3]　/
+	\q[%(Choice_TalkAutoWait(4)),SetTalkWait_4]　/
+	\q[%(Choice_TalkAutoWait(5)),SetTalkWait_5]　/
+	\q[%(Choice_TalkAutoWait(6)),SetTalkWait_6]　/
 	\q[%(Choice_TalkAutoWait(7)),SetTalkWait_7]"
 	--
-	AYATEMPLATE.MenuItem('戻る', 'Menu_Close', 150)
+	"\n\n\f[align,center] ---- 撫で反応の敏感さ ----\n\f[align,center]/
+	\q[%(Choice_NadeSensitivity(0)),SetNadeSense_0]　/
+	\q[%(Choice_NadeSensitivity(1)),SetNadeSense_1]　/
+	\q[%(Choice_NadeSensitivity(2)),SetNadeSense_2]\n\n[half]\f[align,left]"
+	--
+	AYATEMPLATE.MenuItem('戻る', 'Menu_Close',0)
 	--
 	'\_q'
 }
@@ -252,6 +260,51 @@ Choice_TalkAutoWait
 			'７'
 		}
 	}
+}
+
+Choice_NadeSensitivity
+{
+	if _argv[0] == nadeSensitivity {
+		'●'
+	}
+	else
+	{
+		'○'
+	}
+	--
+	case _argv[0]
+	{
+		when 0{
+			'敏感'
+		}
+		when 1{
+			'ふつう'
+		}
+		when 2{
+			'にぶい'
+		}
+	}
+}
+
+SetNadeSense_0
+{
+	nadeSensitivity = 0
+
+	Menu_TALKSETTING
+}
+
+SetNadeSense_1
+{
+	nadeSensitivity = 1
+
+	Menu_TALKSETTING
+}
+
+SetNadeSense_2
+{
+	nadeSensitivity = 2
+
+	Menu_TALKSETTING
 }
 
 SetTalkWait_1
@@ -381,6 +434,29 @@ SetTalkInterval_None
 	*/
 }
 
+Menu_Version
+{
+	Init
+	--
+	"\hAdaptation / %(GetVersion)\n/
+	Shiori：YAYA(Version %(SHIORI3EV.On_version))\n\n[half]/
+	総ランダムトーク数：%(OUTPUTNUM('RandomTalkBasic'))\n/
+	前回の更新内容：「%(LastUpdate)」"
+	--
+	AYATEMPLATE.MenuItem('更新履歴を見る', 'OpenVersionHistory',200)
+	--
+	AYATEMPLATE.MenuItem('ネットワーク更新', 'OnUpdateBegin')	
+	--
+	AYATEMPLATE.MenuItem('戻る', 'YuriMenuList', 200)
+	--
+	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close')
+}
+
+OpenVersionHistory
+{
+	'\![open,file,..\..\version.txt]\e'
+}
+
 Menu_UserInformation
 {
 	Init
@@ -390,8 +466,6 @@ Menu_UserInformation
 	\![*]今回の起動時間：%(GetCurrentOperation_hour)時間%(GetCurrentOperation_minute)分%(GetCurrentOperation_second)秒\n\n[half]/
 	\_l[4em,]\![*]鈴\_l[16em,]\![*]悠梨\n/
 	\_l[3em,]好感度：%(fav_Suzu)\_l[16em,]好感度：%(fav_Yuri)\n/
-	スキンシップ：%(skinshipSuzuCount)回\_l[13em,]スキンシップ：%(skinshipYuriCount)回\n/
-	\_l[3em,]耳触り：%(harassmentSuzuCount)回\_l[16em,]耳触り：%(harassmentYuriCount)回/
 
 	\1\_q"
 	--

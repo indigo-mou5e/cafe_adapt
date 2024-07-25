@@ -22,6 +22,10 @@ OnFirstBoot
 	bootCount = 1
 	talkAutoWait = 4
 	aitalkinterval = 180
+	nadeSensitivity = 1
+	fav_Suzu = 0
+	fav_Yuri = 0
+
 
 	// ---- 初回起動トーク ----
 
