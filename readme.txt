@@ -64,22 +64,22 @@
 
 　７．こういう機能が欲しいです
 　　何らかの手段で作者に連絡していただければ前向きに検討します。
-　　一番手っ取り早いのは以下の連絡フォームです。
-　　（リンク）
+　　連絡フォームを建設予定ですが、それまではTwitterのDMにてお願いします
+　　https://x.com/prayfortiny
 
 
 　７．ゴーストを再配布してもいい？
 　　CCライセンス「CC BY-NC-SA 4.0」に沿っていただければ再配布していただいて構いません。
 　　https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja
 
-　　簡単に言えば、「作者のクレジットを行う」「非営利に限る」を守れば大丈夫です。
+　　簡単に言えば、「作者のクレジットを表示する」「非営利に限る」を守れば大丈夫です。
 　　改造してもいいですが、その場合は同様のライセンスで再配布してください。
 　　作者への連絡も必要ありません。
 
 
 　８．バグや誤字、誤りを見つけた
 　　お手数ですが以下のフォームから報告してくれると幸いです。
-　　（リンク）
+　　https://x.com/prayfortiny
 
 
 
@@ -106,9 +106,9 @@
 　SSP     : http://ssp.shillest.net/
 
 ・SHIORI配布元
-　（ToDo:書け！！）
+　https://github.com/YAYA-shiori/yaya-shiori/wiki
 
 ----------------------------------------
 
 Author : 墨鼠
-URL    : （URL）
+URL    : https://x.com/prayfortiny
