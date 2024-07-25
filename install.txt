@@ -2,3 +2,5 @@ charset,UTF-8
 type,ghost
 name,Adaptation
 directory,cafe_adapt
+
+balloon.directory,lilies

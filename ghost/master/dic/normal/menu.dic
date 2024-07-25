@@ -438,18 +438,23 @@ Menu_Version
 {
 	Init
 	--
-	"\hAdaptation / %(GetVersion)\n/
+	"\h\_qAdaptation / %(GetVersion)\n/
 	Shiori：YAYA(Version %(SHIORI3EV.On_version))\n\n[half]/
 	総ランダムトーク数：%(OUTPUTNUM('RandomTalkBasic'))\n/
-	前回の更新内容：「%(LastUpdate)」"
+	前回の更新内容：「%(LastUpdate)」\_q"
 	--
 	AYATEMPLATE.MenuItem('更新履歴を見る', 'OpenVersionHistory',200)
 	--
-	AYATEMPLATE.MenuItem('ネットワーク更新', 'OnUpdateBegin')	
+	AYATEMPLATE.MenuItem('ネットワーク更新', 'Menu_UpdateMyself')	
 	--
 	AYATEMPLATE.MenuItem('戻る', 'YuriMenuList', 200)
 	--
 	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close')
+}
+
+Menu_UpdateMyself
+{
+	'\![updatebymyself]'
 }
 
 OpenVersionHistory

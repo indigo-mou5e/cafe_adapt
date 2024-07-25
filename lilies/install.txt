@@ -1,0 +1,8 @@
+charset, UTF-8
+
+type,balloon
+name,Lilies
+directory,lilies
+
+refresh,0
+script,\h\s[0]「%lastobjectname」\n\nのインストールが無事に終了しました。\e

@@ -5,6 +5,8 @@ type,ghost
 
 sakura.name,悠梨
 kero.name,鈴
+sakura.defaultleft,1600
+kero.defaultleft,1080
 
 sstp.allowunspecifiedsend,1
 

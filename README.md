@@ -1,2 +1,0 @@
-# cafe_adapt
-Adaptation

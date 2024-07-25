@@ -16,10 +16,10 @@ sakura.balloon.alignment,left
 kero.balloon.alignment,right
 
 sakura.balloon.offsetx,70
-sakura.balloon.offsety,55
+sakura.balloon.offsety,85
 
 kero.balloon.offsetx,50
-kero.balloon.offsety,210
+kero.balloon.offsety,320
 
 menu.background.bitmap.filename,menu_background.png
 menu.foreground.bitmap.filename,menu_foreground.png
