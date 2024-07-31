@@ -2,6 +2,10 @@
 // メニュー処理辞書
 //******************************************************************************
 
+// サーフェス短縮表記
+#define [[ \s[
+#define ]] ]
+
 //******************************************************************************
 //メインメニューの展開
 //
@@ -45,18 +49,16 @@ YuriMenuList
 	--
 	AYATEMPLATE.MenuItem('質問コーナー','FAQ_Top')
 	--
-	// AYATEMPLATE.MenuItem('ミニゲーム【リバーポーカー】', 'PokerMenu')
-	--
 	AYATEMPLATE.MenuItem('トーク設定', 'Menu_TALKSETTING',150)
 	--
 	AYATEMPLATE.MenuItem('バージョン情報', 'Menu_Version')
+	--
+	// AYATEMPLATE.MenuItem('スクリーンショット用トーク','Debug_ForPrintScreen',150)
 	--
 	/*
 	if dicMode != MODE_SUZU
 		AYATEMPLATE.MenuItem('他のゴーストと話す', 'Menu_GHOSTCOMSTART')
 	*/
-	--
-	// AYATEMPLATE.MenuItem("初起動トークを再生","Menu_FIRSTBOOT")
 	--
 	/*
 	//スタンプ帳チェック
@@ -103,13 +105,11 @@ SuzuMenuList
 		AYATEMPLATE.MenuItem('さっきの話は？', 'Menu_LASTTALK')
 	}
 	--
-	AYATEMPLATE.MenuItem('鈴に話しかける', 'Menu_COMMUNICATE')
+	// AYATEMPLATE.MenuItem('鈴に話しかける', 'Menu_COMMUNICATE')
 	--
-	AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionSuzu')
+	AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionSuzu',150)
 	--
-	AYATEMPLATE.MenuItem('ユーザ情報', 'Menu_UserInformation')
-	--
-	// AYATEMPLATE.MenuItem('【デバッグ】トランプテスト', 'Debug_RandomCardTest')
+	AYATEMPLATE.MenuItem('ユーザ情報', 'Menu_UserInformation',150)
 	--
 	/*
 	case dicMode {
@@ -697,4 +697,13 @@ OnStampMenuExec
 		マック朗スタンプ,/
 		マック朗が押したスタンプ。黒林檎。見た目に反して毒はない…と信じたい。]'
 	}
+}
+
+Debug_ForPrintScreen
+{
+	Init
+	--
+	"\0\s[0]ここは保護猫カフェ「アダプト」。\n行き先のない猫たちを保護したり、里親さんと巡り合わせたりするお店。/
+	\1\s[1000]わたしたちはここのウェイターだよ。\nわたしが鈴、こっちの真面目なのが悠梨っていうの。/
+	\n\n[half]気が向いた時に遊びに来て、わたしたちとお話ししてくれたらうれしいな。\e"
 }

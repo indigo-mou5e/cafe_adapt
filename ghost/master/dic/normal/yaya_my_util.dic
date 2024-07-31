@@ -5,12 +5,12 @@
 // バージョン
 GetVersion
 {
-	'Ver 0.9.3'
+	'Ver 1.0.0'
 }
 
 LastUpdate
 {
-	'シェルの初期位置を設定'
+	'公開！'
 }
 
 // サーフェス、バルーンの初期設定
@@ -31,7 +31,7 @@ Init
 
 // 改行スクリプト
 // 引数0：改行の大きさ。(引数0)*50%の改行を行う。指定しない場合は1.5行分。
-// 引数1：待ち時間。(引数1)*50ミリ秒待つ。指定しない場合は改行1行につき 120 * talkAutoWait ミリ秒待つ。
+// 引数1：待ち時間。(引数1)*50ミリ秒待つ。指定しない場合は改行1行につき 150 * talkAutoWait ミリ秒待つ。
 NewLine
 {
     _lineCount = 3
@@ -39,7 +39,7 @@ NewLine
     if _argc > 0
         _lineCount = _argv[0]
     
-    _waitTime = 60 * _lineCount * talkAutoWait
+    _waitTime = 75 * _lineCount * talkAutoWait
 
     if _argc > 1
         _waitTime = _argv[1]

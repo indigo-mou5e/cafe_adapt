@@ -113,7 +113,7 @@ OnInstallComplete
 			--
 			AYATEMPLATE.MenuItem("切り替える","OnAYATEMPLATE.InstallChange",_id,200)
 			--
-			AYATEMPLATE.MenuItem("切り替えない","Menu_CANCEL")
+			AYATEMPLATE.MenuItem("切り替えない","Yen_E")
 		}
 	}
 }

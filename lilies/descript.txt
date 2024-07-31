@@ -4,7 +4,7 @@ type,balloon
 name,Lilies
 id,lilies
 
-homeurl,https://x.com/prayfortiny
+homeurl,http://cherry.narnaloader.ukagaka.net/data/lilies/
 
 
 
