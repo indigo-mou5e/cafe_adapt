@@ -67,7 +67,6 @@ YuriMenuList
 	}
 	*/
 	--
-	/*
 	case dicMode {
 		when MODE_NORMAL
 			AYATEMPLATE.MenuItem('悠梨と二人で話す', 'Menu_ChangeYuriMode', 150)
@@ -76,7 +75,6 @@ YuriMenuList
 				AYATEMPLATE.MenuItem('鈴と二人で話す', 'Menu_ChangeSuzuMode')
 		}
 	}
-	*/
 	--
 	AYATEMPLATE.MenuItem('なんでもない', 'YuriMenu_CANCEL', 150)
 }
@@ -111,7 +109,6 @@ SuzuMenuList
 	--
 	AYATEMPLATE.MenuItem('ユーザ情報', 'Menu_UserInformation',150)
 	--
-	/*
 	case dicMode {
 		when MODE_NORMAL
 			AYATEMPLATE.MenuItem('鈴と二人で話す', 'Menu_ChangeSuzuMode', 150)
@@ -120,7 +117,6 @@ SuzuMenuList
 				AYATEMPLATE.MenuItem('悠梨と二人で話す', 'Menu_ChangeYuriMode')
 		}
 	}
-	*/
 	--
 	AYATEMPLATE.MenuItem('なんでもない', 'SuzuMenu_CANCEL', 150)
 }
