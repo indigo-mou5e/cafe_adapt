@@ -114,7 +114,7 @@ SuzuMenuList
 			AYATEMPLATE.MenuItem('鈴と二人で話す', 'Menu_ChangeSuzuMode', 150)
 		when MODE_SUZU {
 			AYATEMPLATE.MenuItem('三人モードに戻る', 'Menu_ChangeNormalMode', 150) + /
-				AYATEMPLATE.MenuItem('悠梨と二人で話す', 'Menu_ChangeYuriMode')
+			AYATEMPLATE.MenuItem('悠梨と二人で話す', 'Menu_ChangeYuriMode')
 		}
 	}
 	--

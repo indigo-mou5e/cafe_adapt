@@ -12,6 +12,7 @@
 
 OnSystemLoad.SHIORI3FW.OPTIONAL
 {
+	ERASEVAR('undefined')
 }
 
 OnSystemUnload.SHIORI3FW.OPTIONAL

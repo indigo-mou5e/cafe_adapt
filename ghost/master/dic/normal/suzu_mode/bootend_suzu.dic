@@ -59,7 +59,7 @@ BootTalkSuzu
 // 終了時トーク。\eを付けないこと。
 CloseTalkSuzu
 {
-	'[[1000]]またね。\n[[36]]はやくここのトークが書かれるといいね。'
+	'[[1000]]またね。\n[[1036]]はやくここのトークが書かれるといいね。'
 	/*
 	_timeslot = GetTimeSlot
 	if _timeslot == '朝'{

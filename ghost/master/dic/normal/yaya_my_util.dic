@@ -125,6 +125,17 @@ GetCurrentOperation_second
 	_currentOperation_second
 }
 
+// 鈴の一人称を取得。
+
+GetSuzuMyself
+{
+	if suzu_myself == undefined{
+		'わたし'
+		return
+	}
+
+	suzu_myself
+}
 
 // えんいー。
 Yen_E
