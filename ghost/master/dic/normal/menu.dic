@@ -45,9 +45,11 @@ YuriMenuList
 		AYATEMPLATE.MenuItem('悠梨に話しかける', 'Menu_COMMUNICATE')
 		*/
 	--
-	AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionYuri',150)
+	if dicMode == MODE_NORMAL
+		AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionYuri',150)
 	--
-	AYATEMPLATE.MenuItem('質問コーナー','FAQ_Top')
+	if dicMode == MODE_NORMAL
+		AYATEMPLATE.MenuItem('質問コーナー','FAQ_Top')
 	--
 	AYATEMPLATE.MenuItem('トーク設定', 'Menu_TALKSETTING',150)
 	--
@@ -105,7 +107,8 @@ SuzuMenuList
 	--
 	// AYATEMPLATE.MenuItem('鈴に話しかける', 'Menu_COMMUNICATE')
 	--
-	AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionSuzu',150)
+	if dicMode == MODE_NORMAL
+		AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionSuzu',150)
 	--
 	AYATEMPLATE.MenuItem('ユーザ情報', 'Menu_UserInformation',150)
 	--

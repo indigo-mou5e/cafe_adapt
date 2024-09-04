@@ -64,6 +64,8 @@ siritori_end
 
 OnKeyPress
 {
+	Init
+	--
 	case reference0 {
 		/*
 		when 'f1' {
