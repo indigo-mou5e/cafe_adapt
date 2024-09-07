@@ -136,6 +136,8 @@ OnBoot
 // 起動時の諸変数設定
 InitializeVariableOnBoot : void
 {
+	dicMode = MODE_NORMAL
+
 	currentOperationSecond = 0
 	bootCount++
 }
@@ -176,7 +178,8 @@ GetTimeSlot
 
 OnClose
 {
-	// ToDo: 終了時の処理（Unload関数でいいかも）
+	// 終了時の処理（Unload関数でいいかも）
+	dicMode = MODE_NORMAL
 
 	// ToDo: イベント終了トークなどあれば
 	if currentOperationSecond < 600

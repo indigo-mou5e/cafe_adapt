@@ -46,6 +46,8 @@ OnGhostChanged_Emily
 
 OnGhostChanging_悠梨
 {
+	dicMode = MODE_NORMAL
+
 	'\0\s[0]リロードするよー。'
 }
 

@@ -1,0 +1,389 @@
+//******************************************************************************
+// メニュー処理辞書
+//******************************************************************************
+
+// サーフェス短縮表記
+#define [[ \s[
+#define ]] ]
+
+//******************************************************************************
+//メインメニューの展開
+//
+//AYATEMPLATE.MenuItemの使い方
+//1つめの文字列＝選択肢に表示する文字列
+//2つめの文字列＝選んだときに実行される関数名
+//3つめの文字列＝改行する量　50%刻み　省略すると100%（＝\n）
+//******************************************************************************
+
+//------------------------------------------------------------------------------
+//メインメニュー展開
+//------------------------------------------------------------------------------
+OpenYuriMenu
+{
+	Init
+	--
+	if dicMode != MODE_SUZU {
+		'\0\s[5]はい、メニューです。\n\n'
+		"\0\s[5]%(username)、なんですか？\n\n"
+		'\0\s[0]ん、どうしたの？\n\n'
+	}
+	--
+	YuriMenuList
+}
+
+YuriMenuList
+{
+	if dicMode != MODE_SUZU
+		AYATEMPLATE.MenuItem('ランダムトーク', 'Menu_AITALK', 0)
+	--
+	if (STRLEN(AYATEMPLATE.LastTalk) > 0 && dicMode != MODE_SUZU) {
+		AYATEMPLATE.MenuItem('さっきの話は？', 'Menu_LASTTALK')
+	}
+	--
+	/*
+	if dicMode != MODE_SUZU
+		AYATEMPLATE.MenuItem('悠梨に話しかける', 'Menu_COMMUNICATE')
+		*/
+	--
+	if dicMode == MODE_NORMAL
+		AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionYuri',150)
+	--
+	if dicMode == MODE_NORMAL
+		AYATEMPLATE.MenuItem('質問コーナー','FAQ_Top')
+	--
+	AYATEMPLATE.MenuItem('トーク設定', 'Menu_TALKSETTING',150)
+	--
+	AYATEMPLATE.MenuItem('バージョン情報', 'Menu_Version')
+	--
+	// AYATEMPLATE.MenuItem('スクリーンショット用トーク','Debug_ForPrintScreen',150)
+	--
+	/*
+	if dicMode != MODE_SUZU
+		AYATEMPLATE.MenuItem('他のゴーストと話す', 'Menu_GHOSTCOMSTART')
+	*/
+	--
+	/*
+	//スタンプ帳チェック
+	if AYATEMPLATE.IsPluginExist('379E0DA0-131C-11DD-E1AC-90009E101CFE') {
+		AYATEMPLATE.MenuItem('スタンプを押す', 'Menu_STAMP')
+	}
+	*/
+	--
+	case dicMode {
+		when MODE_NORMAL
+			AYATEMPLATE.MenuItem('悠梨と二人で話す', 'Menu_ChangeYuriMode', 150)
+		when MODE_YURI {
+			AYATEMPLATE.MenuItem('三人モードに戻る', 'Menu_ChangeNormalMode', 150) + /
+				AYATEMPLATE.MenuItem('鈴と二人で話す', 'Menu_ChangeSuzuMode')
+		}
+	}
+	--
+	AYATEMPLATE.MenuItem('なんでもない', 'YuriMenu_CANCEL', 150)
+}
+
+//------------------------------------------------------------------------------
+//メニュー選択キャンセル
+//------------------------------------------------------------------------------
+YuriMenu_CANCEL
+{
+	Init
+	--
+	if dicMode != MODE_SUZU {
+		'\0\s[6]そう。\e'
+		'\0\s[16]ん、わかった。\e'
+	}
+}
+
+//******************************************************************************
+// トーク設定
+//******************************************************************************
+Menu_TALKSETTING
+{
+	'\_q\0\s[0]\f[align,center]---- ランダムトーク間隔 ----\n'
+	--
+	"\f[align,center]\q[%(Choice_TaikInterval(60)),SetTalkInterval_60] /
+	\q[%(Choice_TaikInterval(120)),SetTalkInterval_120] /
+	\q[%(Choice_TaikInterval(180)),SetTalkInterval_180] /
+	\q[%(Choice_TaikInterval(300)),SetTalkInterval_300] /
+	\q[%(Choice_TaikInterval(600)),SetTalkInterval_600] /
+	\q[%(Choice_TaikInterval(0)),SetTalkInterval_None]"
+	--
+	'\n\n\f[align,center]---- 自動ウェイトの待ち時間 ----\n/
+	\f[align,center]（大きいほど句読点や改行時の待ち時間が　\n/
+	\f[align,center]　増えてトークがゆっくりになります）\n'
+	--
+	"\f[align,center]/
+	\q[%(Choice_TalkAutoWait(1)),SetTalkWait_1]　/
+	\q[%(Choice_TalkAutoWait(2)),SetTalkWait_2]　/
+	\q[%(Choice_TalkAutoWait(3)),SetTalkWait_3]　/
+	\q[%(Choice_TalkAutoWait(4)),SetTalkWait_4]　/
+	\q[%(Choice_TalkAutoWait(5)),SetTalkWait_5]　/
+	\q[%(Choice_TalkAutoWait(6)),SetTalkWait_6]　/
+	\q[%(Choice_TalkAutoWait(7)),SetTalkWait_7]"
+	--
+	"\n\n\f[align,center] ---- 撫で反応の敏感さ ----\n\f[align,center]/
+	\q[%(Choice_NadeSensitivity(0)),SetNadeSense_0]　/
+	\q[%(Choice_NadeSensitivity(1)),SetNadeSense_1]　/
+	\q[%(Choice_NadeSensitivity(2)),SetNadeSense_2]\n\n[half]\f[align,left]"
+	--
+	AYATEMPLATE.MenuItem('戻る', 'Menu_Close',0)
+	--
+	'\_q'
+}
+
+Choice_TaikInterval
+{
+	if _argv[0] <= 0 {
+		if aitalkinterval <= 0
+			'●喋らない'
+		else
+			'○喋らない'
+	}
+	else {
+		if _argv[0] == aitalkinterval
+			"●%(_argv[0])s"
+		else
+			"○%(_argv[0])s"
+	}
+}
+
+Choice_TalkAutoWait
+{
+	if _argv[0] == talkAutoWait {
+		'●'
+	}
+	else
+	{
+		'○'
+	}
+	--
+	case _argv[0]
+	{
+		when 1{
+			'１'
+		}
+		when 2{
+			'２'
+		}
+		when 3{
+			'３'
+		}
+		when 4{
+			'４'
+		}
+		when 5{
+			'５'
+		}
+		when 6{
+			'６'
+		}
+		when 7{
+			'７'
+		}
+	}
+}
+
+Choice_NadeSensitivity
+{
+	if _argv[0] == nadeSensitivity {
+		'●'
+	}
+	else
+	{
+		'○'
+	}
+	--
+	case _argv[0]
+	{
+		when 0{
+			'敏感'
+		}
+		when 1{
+			'ふつう'
+		}
+		when 2{
+			'にぶい'
+		}
+	}
+}
+
+SetNadeSense_0
+{
+	nadeSensitivity = 0
+
+	Menu_TALKSETTING
+}
+
+SetNadeSense_1
+{
+	nadeSensitivity = 1
+
+	Menu_TALKSETTING
+}
+
+SetNadeSense_2
+{
+	nadeSensitivity = 2
+
+	Menu_TALKSETTING
+}
+
+SetTalkWait_1
+{
+	talkAutoWait = 1
+
+	Menu_TALKSETTING
+}
+
+SetTalkWait_2
+{
+	talkAutoWait = 2
+
+	Menu_TALKSETTING
+}
+
+SetTalkWait_3
+{
+	talkAutoWait = 3
+
+	Menu_TALKSETTING
+}
+
+SetTalkWait_4
+{
+	talkAutoWait = 4
+
+	Menu_TALKSETTING
+}
+
+SetTalkWait_5
+{
+	talkAutoWait = 5
+
+	Menu_TALKSETTING
+}
+
+SetTalkWait_6
+{
+	talkAutoWait = 6
+
+	Menu_TALKSETTING
+}
+
+SetTalkWait_7
+{
+	talkAutoWait = 7
+
+	Menu_TALKSETTING
+}
+
+SetTalkInterval_60
+{
+	aitalkinterval = 60
+
+	Menu_TALKSETTING
+	
+	/*
+	Init
+	--
+	'\0[[16]]60秒に設定しました。\w9\1[[1016]]それは篠突く雨のように。\e'
+	*/
+}
+
+SetTalkInterval_120
+{
+	aitalkinterval = 120
+
+	Menu_TALKSETTING
+	
+	/*
+	Init
+	--
+	'\0[[16]]120秒に設定しました。\1[[1018]]話すことがなくなっても知らないよ？\e'
+	*/
+}
+
+SetTalkInterval_180
+{
+	aitalkinterval = 180
+
+	Menu_TALKSETTING
+	
+	/*
+	Init
+	--
+	'\0[[16]]180秒に設定しました。\1[[1055]]いつもどおり、だね。\e'
+	*/
+}
+
+SetTalkInterval_300
+{
+	aitalkinterval = 300
+
+	Menu_TALKSETTING
+	
+	/*
+	Init
+	--
+	'\0[[16]]300秒に設定しました。\1[[1016]]まったりゆっくり、ね。\e'
+	*/
+}
+
+SetTalkInterval_600
+{
+	aitalkinterval = 600
+
+	Menu_TALKSETTING
+	
+	/*
+	Init
+	--
+	'\0[[16]]600秒に設定しました。\1[[1006]]……ちょっと退屈かも。\e'
+	*/
+}
+
+SetTalkInterval_None
+{
+	aitalkinterval = 0
+
+	Menu_TALKSETTING
+	
+	/*
+	Init
+	--
+	'\0[[0]]じゃあこちらからは話しかけないでおくね。\1[[1055]]またお話聞きたくなったら言ってね。\e'
+	*/
+}
+
+
+
+//******************************************************************************
+// バージョン情報
+//******************************************************************************
+Menu_Version
+{
+	Init
+	--
+	"\h\_qAdaptation / %(GetVersion)\n/
+	Shiori：YAYA(Version %(SHIORI3EV.On_version))\n\n[half]/
+	総ランダムトーク数：%(OUTPUTNUM('RandomTalkBasic'))\n/
+	前回の更新内容：「%(LastUpdate)」\_q"
+	--
+	AYATEMPLATE.MenuItem('更新履歴を見る', 'OpenVersionHistory',200)
+	--
+	AYATEMPLATE.MenuItem('ネットワーク更新', 'Menu_UpdateMyself')	
+	--
+	AYATEMPLATE.MenuItem('戻る', 'YuriMenuList', 200)
+	--
+	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close')
+}
+
+Menu_UpdateMyself
+{
+	'\![updatebymyself]'
+}
+
+OpenVersionHistory
+{
+	'\![open,file,..\..\version.txt]\e'
+}

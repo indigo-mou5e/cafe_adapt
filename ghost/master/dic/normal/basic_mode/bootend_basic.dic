@@ -13,6 +13,9 @@
 #define \0 %(NewLine(3))\0
 #define \1 %(NewLine(3))\1
 
+// 鈴の一人称を書き換え
+#define わたし %(GetSuzuMyself)
+
 // 表情を短縮表記で書けるようにする [[15]]→\s[15]
 #define [[ \s[
 #define ]] ]

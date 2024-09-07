@@ -29,8 +29,8 @@
 //Init関数でスコープの設定はできているので、\1の記述は不要
 //------------------------------------------------------------------------------
 
-RandomTalkSuzu : sequential // デバッグ用
-// RandomTalkSuzu : nonoverlap
+// RandomTalkSuzu : sequential // デバッグ用
+RandomTalkSuzu : nonoverlap
 {
 
 '%(SP_call_myself_boku)'
