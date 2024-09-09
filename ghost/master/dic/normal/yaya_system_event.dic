@@ -29,11 +29,22 @@ OnShellChanging
 {
 	Init
 	--
-	"\1[[1055]]うん、お着替えしてくるね。/
-	\0[[16]]%(username)、少々お待ちください。\e"
 
-	"\1[[1000]]お着替えの時間です。/
-	\0[[55]]猫と戯れながらお待ちください。\e"
+	case dicMode {
+		when MODE_NORMAL {
+			"\1[[1055]]うん、お着替えしてくるね。/
+			\0[[16]]%(username)、少々お待ちください。\e"
+
+			"\1[[1000]]お着替えの時間です。/
+			\0[[55]]猫と戯れながらお待ちください。\e"
+		}
+		when MODE_YURI {
+			"\0[[16]]お着替えしてきますね。\n少々お待ちを……\e"
+		}
+		when MODE_SUZU {
+			"\1[[1055]]うん、いいよ。\n[[1005]]それじゃあ着替えてくるね？\e"
+		}
+	}
 }
 
 //------------------------------------------------------------------------------
@@ -44,20 +55,38 @@ OnShellChanged
 	Init
 	--
 	_escaped_name = SHIORI3FW.EscapeAllTags(reference[0])
-	
-	case _escaped_name
-	{
-		when 'master'{
-			"\1[[1000]]お待たせ！\nいつもの鈴ちゃんだよ。/
-			\0[[16]]やっぱりこの格好が一番落ち着きますね。\e"
+
+	case _escaped_name {
+		when 'master' {
+			case dicMode{
+				when MODE_NORMAL{
+					"\1[[1000]]お待たせ！\nいつもの鈴ちゃんだよ。/
+					\0[[16]]やっぱりこの格好が一番落ち着きますね。\e"
+				}
+				when MODE_YURI{
+					'\0[[16]]ん。いつもの格好は落ち着きますね。\e'
+				}
+				when MODE_SUZU{
+					"\1[[1000]]お待たせ！\nいつもの鈴ちゃんだよ。\e"
+				}
+			}
 		}
-		others{
-			"\0[[16]]お待たせしました。/
-			\1[[1005]]どうかな、似合ってる？？\e"
+		others {
+			case dicMode{
+				when MODE_NORMAL{
+					"\0[[16]]お待たせしました。/
+					\1[[1005]]どうかな、似合ってる？？\e"
+				}
+				when MODE_YURI{
+					'\0[[0]]お待たせ！　どうかな？？\e'
+				}
+				when MODE_SUZU{
+					"\1[[1000]]着替えてきたよ。\nどう、かわいい？？\e"
+				}
+			}
 		}
 	}
 }
-
 
 //******************************************************************************
 //インストール関連
@@ -68,7 +97,15 @@ OnShellChanged
 //------------------------------------------------------------------------------
 OnInstallBegin
 {
-	"\0[[16]]インストール中です………\e"
+	Init
+	--
+	if dicMode != MODE_SUZU
+	{
+		'\0[[16]]インストール中です………\e'
+	}
+	else{
+		'\1[[1016]]インストール中です………\e'
+	}
 }
 
 //------------------------------------------------------------------------------
@@ -76,9 +113,14 @@ OnInstallBegin
 //------------------------------------------------------------------------------
 OnInstallComplete
 {
-	_ref0 = SPLIT(reference[0],' with',2)[0]//hogehoge with hemohemo
+	_ref0 = SPLIT(reference[0], ' with', 2)[0] //hogehoge with hemohemo
 
-	"\0\s[25]"
+	if dicMode != MODE_SUZU{
+	'\0\s[25]'
+	}
+	else{
+	'\1\s[1005]'	
+	}
 	--
 	if _ref0 == 'shell' {
 		'シェル'
@@ -96,6 +138,13 @@ OnInstallComplete
 	_escaped_name = SHIORI3FW.EscapeAllTags(reference[1])
 	"「%(_escaped_name)」のインストールが完了しました。\n"
 	--
+	if dicMode != MODE_SUZU{
+	'\s[0]'
+	}
+	else{
+	'\s[1000]'	
+	}
+	--
 	if basewarenameex == 'SSP' {
 		_id = ''
 		if _ref0 == 'shell' {
@@ -109,11 +158,11 @@ OnInstallComplete
 		}
 
 		if _id != '' {
-			'[[16]]切り替えますか？'
+			'切り替えますか？'
 			--
-			AYATEMPLATE.MenuItem("切り替える","OnAYATEMPLATE.InstallChange",_id,200)
+			AYATEMPLATE.MenuItem('切り替える', 'OnAYATEMPLATE.InstallChange', _id, 200)
 			--
-			AYATEMPLATE.MenuItem("切り替えない","Yen_E")
+			AYATEMPLATE.MenuItem('切り替えない', 'Yen_E')
 		}
 	}
 }
@@ -132,8 +181,23 @@ OnInstallFailure
 
 	Init
 	--
-	"\0\s[4]インストールに失敗しました……/
-	\1[[1004]]原因は以下の通りみたいね。\n「%(_escaped_message)」\e"
+	case dicMode{
+		when MODE_NORMAL{
+			"\0\s[4]インストールに失敗しました……/
+			\1[[1004]]原因は以下の通りみたいね。%(NewLine(3,0))/
+			\_q「%(_escaped_message)」\_q\e"
+		}
+		when MODE_YURI{
+			"\0\s[4]インストールに失敗しました……\n/
+			[[56]]原因は以下の通りみたいです。%(NewLine(3,0))/
+			\_q「%(_escaped_message)」\_q\e"
+		}
+		when MODE_SUZU{
+			"\1[[1056]]インストールに失敗したみたい。\n/
+			[[1004]]原因は以下の通りみたいね。%(NewLine(3,0))/
+			\_q「%(_escaped_message)」\_q\e"
+		}
+	}
 }
 
 //------------------------------------------------------------------------------
@@ -142,13 +206,24 @@ OnInstallFailure
 OnInstallRefuse
 {
 	_escaped_name = SHIORI3FW.EscapeAllTags(reference[0])
-	
+
 	Init
 	--
-	"\0\s[11]あれれ。\n[[36]]これは%(_escaped_name)さん用のアーカイブみたい。/
-	\1\s[1016]本人に直接渡してあげてね。\e"
+	case dicMode{
+		when MODE_NORMAL{
+			"\0\s[11]ありゃ。\n[[6]]これは%(_escaped_name)さん用のアーカイブみたい。/
+			\1\s[1016]本人に直接渡してあげてね。\e"
+		}
+		when MODE_YURI{
+			"\0\s[11]ありゃ。\n[[6]]これは%(_escaped_name)さん用のアーカイブみたい。\n/
+			\s[16]本人に直接渡してあげてね。\e"
+		}
+		when MODE_SUZU{
+			"\1[[1006]]ん。これは%(_escaped_name)さん用のアーカイブみたいね。\n/
+			\s[1000]本人に直接渡してあげてね。\e"
+		}
+	}
 }
-
 
 //******************************************************************************
 //消滅関連
@@ -161,8 +236,9 @@ OnVanishSelecting
 {
 	Init
 	--
-	"\0\s[3]えっ？\n%(username)、遠くに行っちゃうの？/
+	"\u[[1013]]\h[[3]]えっ？\n%(username)、遠くに行っちゃうの？/
 	\1\s[1013]ざんねん。寂しくなるわね。\e"
+
 }
 
 //------------------------------------------------------------------------------
@@ -182,10 +258,9 @@ OnVanishSelected
 //------------------------------------------------------------------------------
 OnVanishCancel
 {
-	
 	Init
 	--
-	"\0\s[14]はあ、冗談でしたか……/
+	"\u[[1055]]\h\s[14]はあ、冗談でしたか……/
 	\1[[1005]]よかった。\nまだしばらく楽しみましょうね？/
 	\0[[6]]ん。\w6[[0]]引き続きよろしくお願いしますね、%(username)。\e"
 }
@@ -196,6 +271,7 @@ OnVanishCancel
 OnVanished
 {
 	_escaped_name = SHIORI3FW.EscapeAllTags(reference[0])
+	dicMode = MODE_NORMAL
 
 	Init
 	--
@@ -208,7 +284,6 @@ OnVanished
 	\0[[54]]はい、がんばります……\e"
 }
 
-
 //******************************************************************************
 //メールチェック
 //******************************************************************************
@@ -220,7 +295,19 @@ OnBIFFBegin
 {
 	Init
 	--
-	"\h[[16]]\u\s[1016]メールチェックを開始します。\e"
+	case dicMode{
+		when MODE_NORMAL{
+			'\h[[16]]\u\s[1016]'
+		}
+		when MODE_YURI{
+			'\h\s[16]'
+		}
+		when MODE_SUZU{
+			'\u\s[1016]'
+		}
+	}
+	--
+	'メールチェックを開始します。\e'
 }
 
 //------------------------------------------------------------------------------
@@ -230,13 +317,30 @@ OnBIFFComplete
 {
 	Init
 	--
-	if TOINT(reference[0]) == 0{
-		//---- メールは無かった
-		"\h[[16]]\u\s[1000]チェック完了。\n残念ながら、新着メールはなかったみたい。\e"
+	case dicMode{
+		when MODE_NORMAL{
+			'\h[[16]]\u\s[1000]'
+		}
+		when MODE_YURI{
+			'\h\s[0]'
+		}
+		when MODE_SUZU{
+			'\u\s[1000]'
+		}
 	}
-	else{
+
+	if TOINT(reference[0]) == 0 {
+		//---- メールは無かった
+		"チェック完了。\n残念ながら、新着メールはなかったみたい。\e"
+	}
+	else {
 		//---- メールが届いていた
-		"\h[[16]]\u\s[1000]チェック完了。\n%(reference[0])通のメールが届いているみたい。\s[1016]見てみるといいんじゃないかしら。\e"
+		if dicMode == MODE_SUZU{
+			"チェック完了。\n%(reference[0])通のメールが届いているみたい。\s[1016]見てみるといいんじゃないかしら。\e"
+		}
+		else{
+			"チェック完了。\n%(reference[0])通のメールが届いているみたい。\s[16]確認してみたら？\e"
+		}
 	}
 }
 
@@ -245,26 +349,46 @@ OnBIFFComplete
 //------------------------------------------------------------------------------
 OnBIFFFailure
 {
-	Init + "\h[[16]]\u[[1056]]メールチェックに失敗しちゃいました。"
+	Init
 	--
-	if reference[0] == 'timeout'{
-		//---- タイムアウト
-		"\h[[4]]接続がタイムアウトしたようです。\e"
+	case dicMode{
+		when MODE_NORMAL{
+			"\h[[16]]\u[[1056]]"
+		}
+		when MODE_YURI{
+			'\h[[56]]'
+		}
+		when MODE_SUZU{
+			"\u[[1056]]"
+		}
 	}
-	elseif reference[0] == 'kick'{
-		//---- 蹴られた
-		"\h[[4]]キックされちゃったみたい。\e"
-	}
-	elseif reference[0] == 'defect'{
-		//---- 設定誤り
-		"\h[[4]]メールチェックの設定がどうもおかしいみたい。\n設定を見直してみてください。\e"
+	--
+	"メールチェックに失敗しちゃいました。\n\n[half]"
+	--
+	if dicMode != MODE_SUZU{
+		'\h[[4]]'
 	}
 	else{
+		'\u[[1004]]'
+	}
+	--
+	if reference[0] == 'timeout' {
+		//---- タイムアウト
+		'\h[[4]]接続がタイムアウトしたみたい。\e'
+	}
+	elseif reference[0] == 'kick' {
+		//---- 蹴られた
+		'\h[[4]]キックされちゃったみたい。\e'
+	}
+	elseif reference[0] == 'defect' {
+		//---- 設定誤り
+		"\h[[4]]メールチェックの設定がどうもおかしいみたい。\n設定を見直してみてね。\e"
+	}
+	else {
 		//---- 原因不明
-		"\h[[4]]原因は、不明です……\e"
+		'\h[[4]]原因は、不明です……\e'
 	}
 }
-
 
 //******************************************************************************
 //ネットワーク更新
@@ -277,9 +401,14 @@ OnUpdateBegin
 {
 	Init
 	--
-	"\0[[55]]お届け物が届いてないか確認するね。\e"
-	"\0[[35]]お届け物の確認の時間だ！！\e"
-	"\0[[16]]素敵なお届け物、届いてないかしら。\e"
+	if dicMode != MODE_SUZU{
+		'\0[[55]]お届け物が届いてないか確認するね。\e'
+		'\0[[35]]お届け物の確認の時間だ！！\e'
+		'\0[[16]]素敵なお届け物、届いてないかしら。\e'
+	}
+	else{
+		'\1[[1016]]お届け物がないか確認してくるね。\e'
+	}
 }
 
 //------------------------------------------------------------------------------
@@ -289,6 +418,12 @@ OnUpdateReady
 {
 	Init
 	--
+	if dicMode != MODE_SUZU{
+
+	}
+	else{
+
+	}
 	"\0\s[16]%(TOINT(reference[0])+1)個のお届け物がありました！\e"
 }
 
@@ -299,25 +434,37 @@ OnUpdateComplete
 {
 	Init
 	--
-	if reference[0] == 'none'{
-		//---- 更新すべきファイルが無かった
-		"\0[[4]]……お届け物、何もありませんでした。/
-		\1[[1006]]お疲れ様。\e"
-
-		"\0[[56]]まだ何も届いてなかったみたいです。/
-		\1[[1050]]そう。果報はゆっくり待ちましょう。\e"
+	case dicMode{
+		when MODE_NORMAL{
+			
+		}
+		when MODE_YURI{
+			
+		}
+		when MODE_SUZU{
+			
+		}
 	}
-	else{
+
+	if reference[0] == 'none' {
+		//---- 更新すべきファイルが無かった
+		'\0[[4]]……お届け物、何もありませんでした。/
+		\1[[1006]]お疲れ様。\e'
+
+		'\0[[56]]まだ何も届いてなかったみたいです。/
+		\1[[1050]]そう。果報はゆっくり待ちましょう。\e'
+	}
+	else {
 		//---- 実際に更新が完了した
-		"\0\s[25]お届け物、受領完了！！/
-		\1\s[1016]ん、おつかれさま。\e"
+		'\0\s[25]お届け物、受領完了！！/
+		\1\s[1016]ん、おつかれさま。\e'
 
-		"\0\s[0]ん、これで全部かな。/
+		'\0\s[0]ん、これで全部かな。/
 		\1\s[1016]これでまた新しいトークができるわね。/
-		\0[[54]]メタ発言はおやめになっていただいて。\e"
+		\0[[54]]メタ発言はおやめになっていただいて。\e'
 
-		"\0\s[5]終わりー！！/
-		\1[[1050]]ありがと。\n何が届いたのかしら。\e"
+		'\0\s[5]終わりー！！/
+		\1[[1050]]ありがと。\n何が届いたのかしら。\e'
 	}
 }
 
@@ -326,17 +473,17 @@ OnUpdateComplete
 //------------------------------------------------------------------------------
 OnUpdateFailure
 {
-	Init + "\0[[56]]お届け物、受け取れませんでした……"
+	Init + '\0[[56]]お届け物、受け取れませんでした……'
 	--
-	if reference[0] == 'timeout'{
+	if reference[0] == 'timeout' {
 		//---- タイムアウトした
-		"\1[[1004]]接続がタイムアウトしちゃったみたい。\e"
+		'\1[[1004]]接続がタイムアウトしちゃったみたい。\e'
 	}
-	elseif reference[0] == 'md5 miss'{
+	elseif reference[0] == 'md5 miss' {
 		//---- MD5値が一致しなかった
-		"\u\s[1004]MD5値が一致しなかったみたい。\nお手数だけれど、配布元に訊ねてみて。\e"
+		'\u\s[1004]MD5値が一致しなかったみたい。\nお手数だけれど、配布元に訊ねてみて。\e'
 	}
-	else{
+	else {
 		//---- 上記以外の理由で失敗した
 		_escaped_message = SHIORI3FW.EscapeAllTags(reference[0])
 		"\1\s[[1004]]エラーメッセージは以下の通りよ。\n「%(_escaped_message)」\e"
@@ -348,10 +495,19 @@ OnUpdateFailure
 //------------------------------------------------------------------------------
 OnUpdate.OnDownloadBegin
 {
-    SHIORI3FW.ResetAITalkInterval
-
+	SHIORI3FW.ResetAITalkInterval
 	_escaped_name = SHIORI3FW.EscapeAllTags(reference[0])
-	"\0\s[16]お届け物「%(_escaped_name)」を受け取り中………\e"
+	
+	Init
+	--
+	if dicMode != MODE_SUZU{
+		'\0\s[16]'
+	}
+	else{
+		'\1\s[1016]'
+	}
+	--
+	"お届け物「%(_escaped_name)」を受け取り中………\e"
 }
 
 //------------------------------------------------------------------------------
@@ -359,7 +515,13 @@ OnUpdate.OnDownloadBegin
 //------------------------------------------------------------------------------
 OnUpdate.OnMD5CompareBegin
 {
-	"\0\s[6]MD5値確認中……\w8\e"
+	if dicMode != MODE_SUZU{
+		'\0\s[6]'
+	}
+	else{
+		'\1\s[1006]'
+	}
+	'MD5値確認中……\w8\e'
 }
 
 //------------------------------------------------------------------------------
@@ -367,7 +529,13 @@ OnUpdate.OnMD5CompareBegin
 //------------------------------------------------------------------------------
 OnUpdate.OnMD5CompareComplete
 {
-	"\0\s[55]ん、オッケー。\e"
+	if dicMode != MODE_SUZU{
+		'\0\s[55]'
+	}
+	else{
+		'\1\s[1055]'
+	}
+	'ん、オッケー。\e'
 }
 
 //------------------------------------------------------------------------------
@@ -375,7 +543,13 @@ OnUpdate.OnMD5CompareComplete
 //------------------------------------------------------------------------------
 OnUpdate.OnMD5CompareFailure
 {
-	"\0\s[4]あ、ダメっぽい……\_q\n\n[half]（MD5値が一致しません。\n　製作者にお問い合わせ願います。）\_q\e"
+	if dicMode != MODE_SUZU{
+		'\0\s[4]'
+	}
+	else{
+		'\1\s[1004]'
+	}
+	'あ、ダメっぽい……\_q\n\n[half]（MD5値が一致しません。\n　製作者にお問い合わせ願います。）\_q\e'
 }
 
 //******************************************************************************
@@ -390,7 +564,17 @@ OnUpdate.OnMD5CompareFailure
 OnHeadlinesenseBegin
 {
 	_escaped_name = SHIORI3FW.EscapeAllTags(reference[0])
-	"\0\s[0]%(_escaped_name)ヘッドライン取得中。\e"
+	
+	Init
+	--
+	if dicMode != MODE_SUZU{
+		'\0\s[0]'
+	}
+	else{
+		'\1\s[1000]'
+	}
+	--
+	"%(_escaped_name)ヘッドライン取得中。\e"
 }
 
 //------------------------------------------------------------------------------
@@ -398,38 +582,47 @@ OnHeadlinesenseBegin
 //------------------------------------------------------------------------------
 OnHeadlinesense.OnFind
 {
+	Init
+	--
+	if dicMode != MODE_SUZU{
+		'\0\s[0]'
+	}
+	else{
+		'\1\s[1000]'
+	}
+	--
 	_escaped_name = SHIORI3FW.EscapeAllTags(reference[0])
 	//---- はじめのセリフ
-	if reference[2] == "First" || reference[2] == "First and Last"{
+	if reference[2] == 'First' || reference[2] == 'First and Last' {
 		//---- 最初のページ
-		"\0\b2\s[0]%(_escaped_name)のヘッドラインです。"
+		"\b2%(_escaped_name)のヘッドラインです。"
 	}
-	elseif reference[2] == 'Next'{
+	elseif reference[2] == 'Next' {
 		//---- 真ん中あたりのページ
-		"\0\b2\s[0]%(_escaped_name)ヘッドライン、続き。"
+		"\b2%(_escaped_name)ヘッドライン、続き。"
 	}
-	elseif reference[2] == 'Last'{
+	elseif reference[2] == 'Last' {
 		//---- 最後のページ
-		"\0\b2\s[0]%(_escaped_name)ヘッドライン、これが最後のページです。"
+		"\b2%(_escaped_name)ヘッドライン、これが最後のページです。"
 	}
 	--
 	//---- ヘッドライン本体
 	"\n\n%(reference[3])\n"
 	--
 	//---- 選択肢
-	if reference[2] == "First" || reference[2] == "Next"{
+	if reference[2] == 'First' || reference[2] == 'Next' {
 		//---- 次のページがある場合
-		AYATEMPLATE.MenuItem("次のページ","")
+		AYATEMPLATE.MenuItem('次のページ', '')
 		--
-		AYATEMPLATE.MenuItem('サイトへ',reference[1])
+		AYATEMPLATE.MenuItem('サイトへ', reference[1])
 		--
-		AYATEMPLATE.MenuItem("やめ","Menu_HEADLINECANCEL",150)
+		AYATEMPLATE.MenuItem('やめ', 'Menu_HEADLINECANCEL', 150)
 	}
-	else{
+	else {
 		//---- 次のページがない場合
-		AYATEMPLATE.MenuItem('サイトへ',reference[1])
+		AYATEMPLATE.MenuItem('サイトへ', reference[1])
 		--
-		AYATEMPLATE.MenuItem("やめ","Menu_HEADLINECANCEL",150)
+		AYATEMPLATE.MenuItem('やめ', 'Menu_HEADLINECANCEL', 150)
 	}
 }
 
@@ -439,7 +632,17 @@ OnHeadlinesense.OnFind
 OnHeadlinesenseComplete
 {
 	_escaped_name = SHIORI3FW.EscapeAllTags(reference[0])
-	"\0\s[0]%(_escaped_name)、更新はないみたいです。\e"
+
+	Init
+	--
+	if dicMode != MODE_SUZU{
+		'\0\s[0]'
+	}
+	else{
+		'\1\s[1000]'
+	}
+	--
+	"%(_escaped_name)、更新はないみたいです。\e"
 }
 
 //------------------------------------------------------------------------------
@@ -447,21 +650,31 @@ OnHeadlinesenseComplete
 //------------------------------------------------------------------------------
 OnHeadlinesenseFailure
 {
-	"\0\s[0]ヘッドラインセンスに失敗しました。\n\n理由："
+	_escaped_name = SHIORI3FW.EscapeAllTags(reference[0])
+	
+	Init
 	--
-	if reference[0] == "can't download"{
-		'ダウンロード失敗。'
-	}
-	elseif reference[0] == "can't analyze"{
-		'ヘッドライン解析失敗。'
+	if dicMode != MODE_SUZU{
+		'\0\s[0]'
 	}
 	else{
+		'\1\s[1000]'
+	}
+	--
+	'ヘッドラインセンスに失敗しました。\n\n理由：'
+	--
+	if reference[0] == "can't download" {
+		'ダウンロード失敗。'
+	}
+	elseif reference[0] == "can't analyze" {
+		'ヘッドライン解析失敗。'
+	}
+	else {
 		'謎。'
 	}
 	--
-	"\e"
+	'\e'
 }
-
 
 //******************************************************************************
 //ファイル作成関連
@@ -472,7 +685,14 @@ OnHeadlinesenseFailure
 //------------------------------------------------------------------------------
 OnUpdatedataCreating
 {
-	"\0\s[6]アップデートデータ作成中デス。\e"
+	Init
+	--
+	if dicMode != MODE_SUZU{
+		'\0\s[6]アップデートデータ作成中デス。\e'
+	}
+	else{
+		'\1\s[1006]アップデートデータを作成するね。\e'
+	}
 }
 
 //------------------------------------------------------------------------------
@@ -480,7 +700,14 @@ OnUpdatedataCreating
 //------------------------------------------------------------------------------
 OnUpdatedataCreated
 {
-	"\0\s[5]ん。アップデートデータ、作成完了！\e"
+	Init
+	--
+	if dicMode != MODE_SUZU{
+		'\0\s[5]ん。updates2.dau、作成完了！\e'
+	}
+	else{
+		'\1\s[1005]OK。updates2.dau、作成できたよ。\e'
+	}
 }
 
 //------------------------------------------------------------------------------
@@ -488,7 +715,14 @@ OnUpdatedataCreated
 //------------------------------------------------------------------------------
 OnNarCreating
 {
-	"\0\s[6]narファイルを作成するね。\e"
+	Init
+	--
+	if dicMode != MODE_SUZU{
+		'\0\s[6]narファイルを作成します。\e'
+	}
+	else{
+		'\1\s[1006]narファイルを作成するね。\e'
+	}
 }
 
 //------------------------------------------------------------------------------
@@ -496,7 +730,14 @@ OnNarCreating
 //------------------------------------------------------------------------------
 OnNarCreated
 {
-	"\0\s[5]ん、終わり。\n「%(SHIORI3FW.EscapeAllTags(reference[0]))」のnarファイルを「%(SHIORI3FW.EscapeAllTags(reference[1]))」に詰め込みました。\e"
+	Init
+	--
+	if dicMode != MODE_SUZU{
+		"\0\s[5]ん、終わり。\n\_q「%(SHIORI3FW.EscapeAllTags(reference[0]))」\_qのnarファイルを\_q「%(SHIORI3FW.EscapeAllTags(reference[1]))」\_qに詰め込みました。\e"
+	}
+	else{
+		"\1\s[1005]終わったよ。\n\_q「%(SHIORI3FW.EscapeAllTags(reference[0]))」\_qのnarファイルを\_q「%(SHIORI3FW.EscapeAllTags(reference[1]))」\_qに置いておいたよ。\e"
+	}
 }
 
 //******************************************************************************
@@ -521,8 +762,8 @@ OnSNTPBegin
 
 SNTPCompare_StrForm
 {
-	_txt = SPLIT(_argv[0],',')
-	STRFORM('$04d/$02d/$02d $02d:$02d:$02d',TOINT(_txt[0]),TOINT(_txt[1]),TOINT(_txt[2]),TOINT(_txt[3]),TOINT(_txt[4]),TOINT(_txt[5]))
+	_txt = SPLIT(_argv[0], ',')
+	STRFORM('$04d/$02d/$02d $02d:$02d:$02d', TOINT(_txt[0]), TOINT(_txt[1]), TOINT(_txt[2]), TOINT(_txt[3]), TOINT(_txt[4]), TOINT(_txt[5]))
 }
 
 OnSNTPCompare
@@ -532,10 +773,10 @@ OnSNTPCompare
 	修正後 %(SNTPCompare_StrForm(reference[1]))\n/
 	\_q\n"
 	--
-	if reference[3] == 0{
-		"[[76]]うーん、ぴったりデスね……\e"
+	if reference[3] == 0 {
+		'[[76]]うーん、ぴったりデスね……\e'
 	}
-	else{
+	else {
 		//\6は補正実行タグ。消しちゃだめ
 		"\6\0\n\s[5]%(SHIORI3FW.EscapeAllTags(reference[3]))秒のずれを修正しました。"
 	}
@@ -546,9 +787,8 @@ OnSNTPCompare
 //------------------------------------------------------------------------------
 OnSNTPFailure
 {
-	"\0\s[4]……時計合わせ失敗。\nサービスに繋がらないようです。\e"
+	'\0\s[4]……時計合わせ失敗。\nサービスに繋がらないようです。\e'
 }
-
 
 //******************************************************************************
 //そのほか
@@ -561,8 +801,8 @@ OnDisplayChange
 {
 	//---- 変数にディスプレイ解像度と色深度に関する情報を取得
 	//---- 使うかどうかは分からないがとりあえず保持しておく
-	displaybpp    = reference[0]
-	displaywidth  = reference[1]
+	displaybpp = reference[0]
+	displaywidth = reference[1]
 	displayheight = reference[2]
 	SHIORI3FW.RegisterTempVar('displaybpp', 'displaywidth', 'displayheight')
 }
@@ -582,7 +822,7 @@ OnURLDropping
 /*
 OnEmbryoExist
 {
-	"\0\s[0]あれ、「伺か」が起動してるよ。\w8\1ありがたやありがたや。\w8\0\s[4]\n\nなんで拝むの？\e"
+"\0\s[0]あれ、「伺か」が起動してるよ。\w8\1ありがたやありがたや。\w8\0\s[4]\n\nなんで拝むの？\e"
 }
 */
 
@@ -592,7 +832,7 @@ OnEmbryoExist
 /*
 OnNekodorifExist
 {
-	"\0\s[2]うわ、猫どりふだ‥\w5‥\w5\w8\1\s[1002]まだあったのか！\w8\0\s[4]\n\nえ、そこが問題なの？\e"
+"\0\s[2]うわ、猫どりふだ‥\w5‥\w5\w8\1\s[1002]まだあったのか！\w8\0\s[4]\n\nえ、そこが問題なの？\e"
 }
 */
 
@@ -602,7 +842,7 @@ OnNekodorifExist
 /*
 OnScreenSaverStart
 {
-	"\0\s[5]画面の焼き付きを保護する開始っ！\w8\e"
+"\0\s[5]画面の焼き付きを保護する開始っ！\w8\e"
 }
 */
 
@@ -613,11 +853,11 @@ OnScreenSaverEnd
 {
 	Init
 	--
-	"\1\s[1000]あ、おはよう。/
-	\0[[8]]よく寝てたから起こさないでおきましたよ。\e"
+	'\1\s[1000]あ、おはよう。/
+	\0[[8]]よく寝てたから起こさないでおきましたよ。\e'
 
-	"\0[[10]]ん、仮眠終了ですか？/
-	\1[[1055]]休んでても作業しててもいいからね？\e"
+	'\0[[10]]ん、仮眠終了ですか？/
+	\1[[1055]]休んでても作業しててもいいからね？\e'
 
 	"\0[[76]]スクリーンセーバーがなくなったようですね。/
 	\1[[1061]]………？？/
@@ -640,8 +880,7 @@ OnWindowStateRestore
 	Init
 	--
 	// 復帰1分以内
-	if _minimizeTime < 60
-	{
+	if _minimizeTime < 60 {
 		'\h[[0]]'
 		'\h[[6]]'
 		'\h[[16]]'
@@ -651,67 +890,61 @@ OnWindowStateRestore
 		'\u[[1016]]\e'
 	}
 	// 復帰5分以内
-	elseif _minimizeTime < 300
-	{
-		"\u[[1000]]\h[[0]]ん、おかえり。/
-		\1[[1016]]もう用事はいいのかな。\e"
+	elseif _minimizeTime < 300 {
+		'\u[[1000]]\h[[0]]ん、おかえり。/
+		\1[[1016]]もう用事はいいのかな。\e'
 
-		"\h\s[16]\u\s[1000]おかえりなさいませ。/
-		\0[[0]]早かったですね。\e"
+		'\h\s[16]\u\s[1000]おかえりなさいませ。/
+		\0[[0]]早かったですね。\e'
 
 		"\u\s[1016]\h\s[0]用事は終わりましたか？/
 		\1[[1005]]%(username)、おかえりなさい。待ってたよ。\e"
 
 		"\h[[16]]\u[[1005]]%(username)、おかえりなさい。\e"
 
-		"\u[[1055]]\h[[0]]あら、戻ってきましたね。/
-		\1[[1005]]またゆっくりお話ししましょう？\e"
+		'\u[[1055]]\h[[0]]あら、戻ってきましたね。/
+		\1[[1005]]またゆっくりお話ししましょう？\e'
 	}
-	elseif _minimizeTime < 1200
-	{
+	elseif _minimizeTime < 1200 {
 		"\u\s[1016]\h\s[0]用事は終わりましたか？/
 		\1[[1005]]%(username)、おかえりなさい。待ってたよ。\e"
 
 		"\h[[16]]\u[[1005]]%(username)、おかえりなさい。\e"
 
-		"\u[[1055]]\h[[0]]あら、戻ってきましたね。/
-		\1[[1005]]またゆっくりお話ししましょう？\e"
+		'\u[[1055]]\h[[0]]あら、戻ってきましたね。/
+		\1[[1005]]またゆっくりお話ししましょう？\e'
 	}
-	elseif _minimizeTime < 3600
-	{
-		"\h[[10]]\u[[16]]おかえりなさいませ。/
-		\0[[0]]長かったですね。\w7[[5]]待ってましたよ。\e"
+	elseif _minimizeTime < 3600 {
+		'\h[[10]]\u[[16]]おかえりなさいませ。/
+		\0[[0]]長かったですね。\w7[[5]]待ってましたよ。\e'
 
 		"\u[[1000]]\h[[0]]ん、戻ってきましたね。/
 		\1[[1009]]%(username)、おそいよ。\e"
 	}
-	else
-	{
-		"\h[[10]]\u[[16]]おかえりなさいませ。/
-		\0[[0]]長かったですね。\w7[[5]]待ってましたよ。\e"
+	else {
+		'\h[[10]]\u[[16]]おかえりなさいませ。/
+		\0[[0]]長かったですね。\w7[[5]]待ってましたよ。\e'
 
 		"\u[[1000]]\h[[0]]ん、戻ってきましたね。/
 		\1[[1009]]%(username)、おそいよ。\e"
 
-		"\h[[10]]\u[[1005]]お帰りなさいませ、ご主人様？/
-		\1[[13]]もう戻ってこないのかと思いましたよ。\e"
+		'\h[[10]]\u[[1005]]お帰りなさいませ、ご主人様？/
+		\1[[13]]もう戻ってこないのかと思いましたよ。\e'
 
-		"\u[[1006]]\h[[0]]ん、ようやくお帰りですか。\n[[58]]鈴なら寝ちゃいましたよ。\nまたすぐ起きるでしょうけどね。\e"
+		'\u[[1006]]\h[[0]]ん、ようやくお帰りですか。\n[[58]]鈴なら寝ちゃいましたよ。\nまたすぐ起きるでしょうけどね。\e'
 	}
 
 }
 
 OnNotifyUserInfo
 {
-	if isReadUserInfoAlready != 1
-	{
+	if isReadUserInfoAlready != 1 {
 		tempUsername = reference[0]
 		_birthDay = SPLIT(reference[2], ',')
 		userBirthMonth = TOINT(_birthDay[1])
 		userBirthDay = TOINT(_birthDay[2])
-		
-		case reference[3]
-		{
+
+		case reference[3] {
 			when 'male'
 				userGender = 1
 			when 'female'
