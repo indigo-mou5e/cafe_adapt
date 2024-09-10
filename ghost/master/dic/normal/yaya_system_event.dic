@@ -7,10 +7,10 @@
 #define \n %(NewLine(2))
 
 // 最初のスコープ変更以外に改行とウェイトを追加
-#define '\0 '\u\s[1000]\h
-#define '\1 '\h\s[0]\u
-#define "\0 "\u\s[1000]\h
-#define "\1 "\h\s[0]\u
+#define '\0 '\h
+#define '\1 '\u
+#define "\0 "\h
+#define "\1 "\u
 #define \0 %(NewLine(3))\0
 #define \1 %(NewLine(3))\1
 
@@ -335,7 +335,7 @@ OnBIFFComplete
 	}
 	else {
 		//---- メールが届いていた
-		if dicMode == MODE_SUZU{
+		if dicMode != MODE_YURI{
 			"チェック完了。\n%(reference[0])通のメールが届いているみたい。\s[1016]見てみるといいんじゃないかしら。\e"
 		}
 		else{
@@ -365,28 +365,28 @@ OnBIFFFailure
 	--
 	"メールチェックに失敗しちゃいました。\n\n[half]"
 	--
-	if dicMode != MODE_SUZU{
-		'\h[[4]]'
+	if dicMode != MODE_YURI{
+		'\u[[1004]]'
 	}
 	else{
-		'\u[[1004]]'
+		'\h[[4]]'
 	}
 	--
 	if reference[0] == 'timeout' {
 		//---- タイムアウト
-		'\h[[4]]接続がタイムアウトしたみたい。\e'
+		'接続がタイムアウトしたみたい。\e'
 	}
 	elseif reference[0] == 'kick' {
 		//---- 蹴られた
-		'\h[[4]]キックされちゃったみたい。\e'
+		'キックされちゃったみたい。\e'
 	}
 	elseif reference[0] == 'defect' {
 		//---- 設定誤り
-		"\h[[4]]メールチェックの設定がどうもおかしいみたい。\n設定を見直してみてね。\e"
+		"メールチェックの設定がどうもおかしいみたい。\n設定を見直してみてね。\e"
 	}
 	else {
 		//---- 原因不明
-		'\h[[4]]原因は、不明です……\e'
+		'原因不明。\e'
 	}
 }
 
@@ -582,6 +582,8 @@ OnHeadlinesenseBegin
 //------------------------------------------------------------------------------
 OnHeadlinesense.OnFind
 {
+	_escaped_name = SHIORI3FW.EscapeAllTags(reference[0])
+
 	Init
 	--
 	if dicMode != MODE_SUZU{
@@ -591,7 +593,6 @@ OnHeadlinesense.OnFind
 		'\1\s[1000]'
 	}
 	--
-	_escaped_name = SHIORI3FW.EscapeAllTags(reference[0])
 	//---- はじめのセリフ
 	if reference[2] == 'First' || reference[2] == 'First and Last' {
 		//---- 最初のページ
@@ -752,11 +753,16 @@ OnSNTPBegin
 {
 	Init
 	--
-	if dicMode != MODE_SUZU{
-		'\0\s[6]'
-	}
-	else{
-		'\1\s[1006]'
+	case dicMode{
+		when MODE_NORMAL{
+			'\0\s[6]'
+		}
+		when MODE_YURI{
+			'\u[[1999]]\h[[6]]'
+		}
+		when MODE_SUZU{
+			'\h[[999]]\u[[1006]]'
+		}
 	}
 	--
 	"%(SHIORI3FW.EscapeAllTags(reference[0]))から正しい時刻を取得中……\e"
@@ -779,11 +785,16 @@ OnSNTPCompare
 {
 	Init
 	--
-	if dicMode != MODE_SUZU{
-		'\0\s[76]'
-	}
-	else{
-		'\1[[1005]]'
+	case dicMode{
+		when MODE_NORMAL{
+			'\0\s[76]'
+		}
+		when MODE_YURI{
+			'\u[[1999]]\h[[76]]'
+		}
+		when MODE_SUZU{
+			'\h[[999]]\u[[1005]]'
+		}
 	}
 	--
 	"\_q/
@@ -802,10 +813,10 @@ OnSNTPCompare
 	else {
 		//\6は補正実行タグ。消しちゃだめ
 		if dicMode != MODE_SUZU{
-			"\6\0\s[5]%(SHIORI3FW.EscapeAllTags(reference[3]))秒のずれを修正しました。\e"
+			"\6\h\s[5]%(SHIORI3FW.EscapeAllTags(reference[3]))秒のずれを修正しました。\e"
 		}
 		else{
-			"\6\1\s[1005]%(SHIORI3FW.EscapeAllTags(reference[3]))秒ズレてたみたい。\n修正しておいたよ。\e"
+			"\6\u\s[1005]%(SHIORI3FW.EscapeAllTags(reference[3]))秒ズレてたみたい。\n修正しておいたよ。\e"
 		}
 	}
 }
@@ -956,7 +967,7 @@ OnWindowStateRestore
 			'\u[[1016]]\e'
 		}
 		else{
-			'\h[[1999]]\e'
+			'\u[[1999]]\e'
 		}
 	}
 	// 復帰5分以内

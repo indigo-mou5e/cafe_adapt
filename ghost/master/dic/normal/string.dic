@@ -33,7 +33,7 @@ On_sakura.portalsites_EX : array
 //------------------------------------------------------------------------------
 On_recommendrootbutton.caption
 {
-	'悠梨のお気に入り'
+	'二人のアルバム'
 }
 
 //------------------------------------------------------------------------------
@@ -41,8 +41,8 @@ On_recommendrootbutton.caption
 //------------------------------------------------------------------------------
 On_sakura.recommendsites_EX : array
 {
-	'里々/整備班カスタム | https://github.com/ukatech/satoriya-shiori/wiki | '
-	'華和梨              | https://kawari.github.io/                       | '
+	'写真(Instagram)  | https://www.instagram.com/pray_fortiny | '
+	'イラスト(Pixiv)  | https://www.pixiv.net/users/2538606                       | '
 }
 
 //------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ On_sakura.recommendsites_EX : array
 //------------------------------------------------------------------------------
 On_kero.recommendbuttoncaption
 {
-	'鈴のお気に入り'
+	'連絡先'
 }
 
 //------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ On_kero.recommendbuttoncaption
 //------------------------------------------------------------------------------
 On_kero.recommendsites_EX : array
 {
-	'YAYA                | https://github.com/YAYA-shiori/yaya-shiori/wiki | '
+	'作者Twitter               | https://x.com/prayfortiny | '
 }
 
 //------------------------------------------------------------------------------

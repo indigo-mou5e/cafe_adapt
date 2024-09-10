@@ -5,28 +5,28 @@
 // バージョン
 GetVersion
 {
-	'Ver 1.0.0'
+	'Ver 1.1.0'
 }
 
 LastUpdate
 {
-	'公開！'
+	'ソロゴーストモードを追加'
 }
 
 // サーフェス、バルーンの初期設定
 Init
 {
-	'\0'
-	--
-	if (dicMode == MODE_SUZU)
-		'\s[999]'
-	--
-	'\1\b[2]'
-	--
-	if (dicMode == MODE_YURI)
-		'\s[1999]\0'
-	--
-	'\c'
+	case dicMode{
+		when MODE_NORMAL{
+			'\1\s[1000]\b[2]\0\s[0]\c'
+		}
+		when MODE_YURI{
+			'\1\s[1999]\b[2]\0\s[0]\c'
+		}
+		when MODE_SUZU{
+			'\0\s[999]\1\s[1000]\b[2]\c'
+		}
+	}
 }
 
 // 改行スクリプト
@@ -126,7 +126,6 @@ GetCurrentOperation_second
 }
 
 // 鈴の一人称を取得。
-
 GetSuzuMyself
 {
 	if suzu_myself == undefined{

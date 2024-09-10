@@ -366,16 +366,16 @@ Menu_Version
 	--
 	"\h\_qAdaptation / %(GetVersion)\n/
 	Shiori：YAYA(Version %(SHIORI3EV.On_version))\n\n[half]/
-	総ランダムトーク数：%(OUTPUTNUM('RandomTalkBasic'))\n/
+	ランダムトーク数：%(OUTPUTNUM('RandomTalkBasic'))\n/
+	悠梨ソロトーク数：%(OUTPUTNUM('RandomTalkYuri'))\n/
+	鈴ソロトーク数：%(OUTPUTNUM('RandomTalkSuzu'))\n/
 	前回の更新内容：「%(LastUpdate)」\_q"
 	--
-	AYATEMPLATE.MenuItem('更新履歴を見る', 'OpenVersionHistory',200)
+	AYATEMPLATE.MenuItem('更新履歴を見る', 'OpenVersionHistory',150)
 	--
 	AYATEMPLATE.MenuItem('ネットワーク更新', 'Menu_UpdateMyself')	
 	--
-	AYATEMPLATE.MenuItem('戻る', 'YuriMenuList', 200)
-	--
-	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close')
+	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
 }
 
 Menu_UpdateMyself

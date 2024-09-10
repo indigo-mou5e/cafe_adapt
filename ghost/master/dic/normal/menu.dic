@@ -17,7 +17,17 @@
 
 Menu_Close
 {
-	'\h\s[16]\u\s[1016]\e'
+	case dicMode{
+		when MODE_NORMAL{
+			'\h\s[16]\u\s[1016]\e'
+		}
+		when MODE_YURI{
+			'\h\s[16]\u\s[1999]\e'
+		}
+		when MODE_SUZU{
+			'\h\s[999]\u\s[1016]\e'
+		}
+	}
 }
 
 //******************************************************************************
@@ -46,33 +56,36 @@ Menu_ChangeNormalMode
 {
 	dicMode = MODE_NORMAL
 	AYATEMPLATE.LastTalk = ''
+	SHIORI3FW.EndChainTalk
 
 	Init
 	--
 	"\0\s[0]\1\s[1000]じゃあまた三人でお話しましょうか。/
-	\0よろしく、%(username)。\e"
+	\0[[25]]よろしく、%(username)。\e"
 }
 
 Menu_ChangeYuriMode
 {
 	dicMode = MODE_YURI
 	AYATEMPLATE.LastTalk = ''
+	SHIORI3FW.EndChainTalk
 
 	Init
 	--
-	"\1\s[1000]それじゃあわたしはキッチンの方に行ってくるね？\nいつでも呼んでいいからね、%(username)。\s[1999]/
-	\0\s[0]……さて、何を話せばいいのかな？\e"
+	"\1\s[1016]それじゃあわたしはキッチンの方に行ってくるね？\n[[1015]]いつでも呼んでいいからね、%(username)。\s[1999]/
+	\0\s[5]……さて、何を話せばいいのかな？\e"
 }
 
 Menu_ChangeSuzuMode
 {
 	dicMode = MODE_SUZU
 	AYATEMPLATE.LastTalk = ''
+	SHIORI3FW.EndChainTalk
 
 	Init
 	--
-	"\0\s[0]オッケー。私は猫たちの世話でもしてこようかな。また後でね、%(username)。\s[999]/
-	\1\s[1000]……ふたりきり、だね。ね、%(username)？"
+	"\0\s[6]オッケー。私は猫たちの世話でもしてこようかな。\n[[5]]また後でね、%(username)。\s[999]/
+	\1\s[1055]……ふたりきり、だね。\n[[1000]]ね、%(username)？"
 }
 
 /*
@@ -98,8 +111,12 @@ Menu_HEADLINECANCEL
 {
 	Init
 	--
-	//---- キャンセルされた
-	'\0\s[5]はーい。\e'
+	if dicMode != MODE_SUZU{
+		'\0\s[16]ん、終わりね。\e'
+	}
+	else{
+		'\1\s[1016]ヘッドライン、おしまい。\e'
+	}
 }
 
 //---- スタンプ帳
