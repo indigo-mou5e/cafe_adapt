@@ -18,13 +18,13 @@ Init
 {
 	case dicMode{
 		when MODE_NORMAL{
-			'\1\s[1000]\b[2]\0\s[0]\c'
+			'\1\b[2]\0\c'
 		}
 		when MODE_YURI{
-			'\1\s[1999]\b[2]\0\s[0]\c'
+			'\1\s[1999]\b[2]\0\c'
 		}
 		when MODE_SUZU{
-			'\0\s[999]\1\s[1000]\b[2]\c'
+			'\0\s[999]\1\b[2]\c'
 		}
 	}
 }
