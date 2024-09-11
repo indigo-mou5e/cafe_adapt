@@ -99,7 +99,7 @@ Menu_UserInformation
 	--
 	AYATEMPLATE.MenuItem("ユーザ性別　：%(GetUserGender)", 'SelectUserGender', 100)
 	--
-	"\_q\n\![*]ユーザ誕生日：%(userBirthMonth)月%(userBirthDay)日\_q"
+	// "\_q\n\![*]ユーザ誕生日：%(userBirthMonth)月%(userBirthDay)日\_q"
 	--
 	AYATEMPLATE.MenuItem('戻る', 'SuzuMenuList', 150)
 	--

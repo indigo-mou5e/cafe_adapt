@@ -62,9 +62,11 @@ Boku_First
 {
     "[[1055]]%(username)、ボクっ子は好き？\n/
     [[1000]]あなたが望むなら、わたしは自分のことをボクって呼んでもいいんだよ。\n\n/
-    [[1015]]ねえ、どうかな？%(NewLine(4, 0))/
-    \q[ぜひ！！,Boku_SelectMyself]%(NewLine(2, 0))/
-    \q[そのままで,Boku_StayMyselfOn]"
+    [[1015]]ねえ、どうかな？"
+    --
+    AYATEMPLATE.MenuItem('ぜひ！！','Boku_SelectMyself',200)
+    --
+    AYATEMPLATE.MenuItem('そのままで','Boku_StayMyselfOn')
 }
 
 Boku_SelectMyself
@@ -72,11 +74,15 @@ Boku_SelectMyself
     Init
     --
     "[[1005]]うん。\n/
-    [[1020]]どの「ボク」にすればいいかな？%(NewLine(4, 0))/
-    \q[ボク,Boku_ToKatakana]%(NewLine(2, 0))/
-    \q[僕,Boku_ToKanji]%(NewLine(2, 0))/
-    \q[ぼく,Boku_ToHiragana]%(NewLine(2, 0))/
-    \q[「わたし」のまま,Boku_StayMyselfOn]"
+    [[1020]]どの「ボク」にすればいいかな？"
+    --
+    AYATEMPLATE.MenuItem('ボク','Boku_ToKatakana',200)
+    --
+    AYATEMPLATE.MenuItem('僕','Boku_ToKanji')
+    --
+    AYATEMPLATE.MenuItem('ぼく','Boku_ToHiragana')
+    --
+    AYATEMPLATE.MenuItem('「わたし」のままで','Boku_StayMyselfOn')
 }
 
 Boku_ToKatakana

@@ -32,9 +32,6 @@
 // RandomTalkSuzu : sequential // デバッグ用
 RandomTalkSuzu : nonoverlap
 {
-
-'%(SP_call_myself_boku)'
-
 '[[1006]]わたしの言葉に意味はないよ。\n/
 [[1055]]会話に意味なんて、なくてもいいもの。\e'
 
@@ -240,6 +237,10 @@ case month{
     when 12{
         '%(IF_grayish_winter)'
     }
+}
+
+if fav_Suzu > 20{
+    '%(SP_call_myself_boku)'
 }
 
 '%(CT_change_personality)'
