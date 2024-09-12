@@ -1,0 +1,62 @@
+//******************************************************************************
+// イベントトーク
+//******************************************************************************
+
+// 自動でトーク中の改行にウェイトを追加
+#define \n[half] %(NewLine(1))
+#define \n %(NewLine(2))
+
+// 最初のスコープ変更以外に改行とウェイトを追加
+#define '\0 '\u\s[1050]\h
+#define '\1 '\h\s[50]\u
+#define "\0 "\u\s[1050]\h
+#define "\1 "\h\s[50]\u
+#define \0 %(NewLine(3))\0
+#define \1 %(NewLine(3))\1
+
+// 鈴の一人称を書き換え
+#define わたし %(GetSuzuMyself)
+
+// サーフェス短縮表記
+#define [[ \s[
+#define ]] ]
+
+//******************************************************************************
+// ユーザー誕生日
+//******************************************************************************
+
+// 起動時
+BootOnUserBirthDay
+{
+	Init
+	--
+	if lastYearOnCelebrateBirthDay == undefined{
+		// 初めての誕生日
+		lastYearOnCelebrateBirthDay = year
+		"\u[[1015]]\h[[15]]\_s%(username)、誕生日おめでとう！！！\_s/
+		\0うれしいですね、こんなめでたい日にウチに来てもらえるなんて。/
+		\1ねえ、誕生日のひとにはね、お祝いの特別メニューがあるんだよ？/
+		\0%(username)がよければ、今から作ってくるよ。\nどうかな？？%(NewLine(3))/
+		\_q\t\*\q[ぜひ！,ReceiveBirthDayParfait]\n
+		\q[後でもらう,ReceiveBirthDayParfaitLater]"
+	}
+	elseif year == lastYearOnCelebrateBirthDay{
+		// 誕生日祝われ済
+	}
+	else{
+		// 今年初めての誕生日来店 ToDo: 書いてる途中にゃ。
+		lastYearOnCelebrateBirthDay = year
+		"\u[[1015]]\h[[15]]\_s%(username)、誕生日おめでとう！！！\_s/
+		\0"
+	}
+}
+
+ReceiveBirthDayParfait
+{
+	// ToDo: なんか、がんばって。
+}
+
+ReceiveBirthDayParfaitLater
+{
+	// ToDo: 書こう！！！
+}

@@ -74,8 +74,18 @@ OnMinuteChange
 	// 30分ごとに好感度上昇
 	if GetTotalOperation_minute % 30 == 0
 	{
-		fav_Yuri++
-		fav_Suzu++
+		case dicMode{
+			when MODE_NORMAL{
+				fav_Yuri++
+				fav_Suzu++
+			}
+			when MODE_YURI{
+				fav_Yuri += 2
+			}
+			when MODE_SUZU{
+				fav_Suzu += 2
+			}
+		}
 	}
 
 	//---- 時間の分を見て 0 であれば時報。それ以外のときは重なり処理を行う
