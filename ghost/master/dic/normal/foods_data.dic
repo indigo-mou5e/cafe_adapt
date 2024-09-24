@@ -1,0 +1,95 @@
+//******************************************************************************
+// 食べ物や飲み物についてのテキストまとめ
+//******************************************************************************
+
+#define DESCRIPTION 0
+#define TEXT_TO_GIVE_YURI 1
+#define TEXT_TO_GIVE_SUZU 2
+#define TEXT_TASTING 3
+#define IS_GIVABLE_YURI 4
+#define IS_GIVABLE_YURI 5
+
+// ToDo: 要らなそうなやつは後で消す
+// 自動でトーク中の改行にウェイトを追加
+#define \n[half] %(NewLine(1))
+#define \n %(NewLine(2))
+
+// 最初のスコープ変更以外に改行とウェイトを追加
+#define '\0 '\h
+#define '\1 '\u
+#define "\0 "\h
+#define "\1 "\u
+#define \0 %(NewLine(3))\0
+#define \1 %(NewLine(3))\1
+
+// 鈴の一人称を書き換え
+#define わたし %(GetSuzuMyself)
+
+// サーフェス短縮表記
+#define [[ \s[
+#define ]] ]
+
+//******************************************************************************
+// FAQ
+//******************************************************************************
+
+// 引数1(フードメニュー)の引数2(データの種類)を取得する
+GetFoodsData
+{
+    TOSTR(EVAL(CHR(0x22)+RawFoodsData(_argv)+CHR(0x22)))
+}
+
+// データ保管場所。軽量化のために''で囲って記述すること。
+RawFoodsData
+{
+    case _argv[0]{
+        when 'ブレンドコーヒー'{
+            case _argv[1]{
+                when DESCRIPTION{
+                    '\0二人による説明'
+                }
+                when TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when IS_GIVABLE_YURI{
+                    // 悠梨に差し入れできるなら1、できないなら0。
+                    1
+                }
+                when IS_GIVABLE_SUZU{
+                    // 鈴に差し入れできるなら1、できないなら0。
+                    1
+                }
+            }
+        }
+	    when 'カフェラテ'{
+            case _argv[1]{
+                when DESCRIPTION{
+                    '\0二人による説明'
+                }
+                when TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when IS_GIVABLE_YURI{
+                    // 悠梨に差し入れできるなら1、できないなら0。
+                    1
+                }
+                when IS_GIVABLE_SUZU{
+                    // 鈴に差し入れできるなら1、できないなら0。
+                    1
+                }
+            }
+        }
+    }
+}
