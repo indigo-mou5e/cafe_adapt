@@ -57,6 +57,7 @@ See: https://github.com/YAYA-shiori/yaya-dic/issues/19
 enabling Delayed EVAL will make your ghost more vulnerable to unsuspecting people using it to attack users' computers
 make sure this switch is turned off if you can
 */
+
 #globaldefine	SHIORI3FW.ENABLE_DELAYED_EVAL	0
 
 #globaldefine	INPUT_TIMEOUT "__TIMEOUT__"
@@ -65,3 +66,5 @@ make sure this switch is turned off if you can
 #globaldefine	MODE_NORMAL 0
 #globaldefine	MODE_YURI 1
 #globaldefine	MODE_SUZU 2
+
+#globaldefine	\2 \p[2]\s[-1]

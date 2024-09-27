@@ -27,5 +27,11 @@
 
 OpenFoodMenu
 {
-
+    "\0フードデータ取得のテストです。\x/
+    %(GetFoodsData('ブレンドコーヒー',0))\x/
+    %(GetFoodsData('ブレンドコーヒー',1))\x/
+    %(GetFoodsData('ブレンドコーヒー',2))\x/
+    %(GetFoodsData('ブレンドコーヒー',3))\x/
+    \0IS_GIVABLE_YURIは%(GetFoodsData('ブレンドコーヒー',4))、\n/
+    IS_GIVABLE_SUZUは%(GetFoodsData('ブレンドコーヒー',5))です。\e"
 }
