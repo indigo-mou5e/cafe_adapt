@@ -3,8 +3,8 @@
 //******************************************************************************
 
 // 自動でトーク中の改行にウェイトを追加
-#define \n[half] %(NewLine(1))
-#define \n %(NewLine(2))
+// #define \n[half] %(NewLine(1))
+// #define \n %(NewLine(2))
 
 // 最初のスコープ変更以外に改行とウェイトを追加
 #define '\0 '\h
@@ -27,6 +27,27 @@
 
 OpenFoodMenu
 {
+    Init
+    --
+    "\1はいっ。%(NewLine(2))こちらフードメニューになります。"
+    --
+    AYATEMPLATE.MenuItem('ドリンク', 'DrinkMenu', 150)
+    --
+    AYATEMPLATE.MenuItem('ホットドリンク', 'HotDrinkMenu')
+    --
+    AYATEMPLATE.MenuItem('アルコール', 'AlcoholMenu')
+    --
+    AYATEMPLATE.MenuItem('フードメニュー', 'FoodMenu')
+    --
+    AYATEMPLATE.MenuItem('ホットドリンク', 'DrinkMenu')
+    --
+    AYATEMPLATE.MenuItem('スイーツ', 'SweetsMenu')
+    --
+    AYATEMPLATE.MenuItem('おまかせで', 'OmakaseMenu', 150)
+    --
+    AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close', 150)
+
+    /*
     "\0フードデータ取得のテストです。\x/
     %(GetFoodsData('ブレンドコーヒー',0))\x/
     %(GetFoodsData('ブレンドコーヒー',1))\x/
@@ -34,4 +55,65 @@ OpenFoodMenu
     %(GetFoodsData('ブレンドコーヒー',3))\x/
     \0IS_GIVABLE_YURIは%(GetFoodsData('ブレンドコーヒー',4))、\n/
     IS_GIVABLE_SUZUは%(GetFoodsData('ブレンドコーヒー',5))です。\e"
+    */
+}
+
+ChooseFood
+{
+    temp_chosenFood = temp_ChoiseExRef
+
+    Init
+    --
+    "\2\_q【%(temp_chosenFood)】\_q"
+    --
+    GetFoodsData(temp_chosenFood, 0)
+    --
+    '\2'
+    --
+    AYATEMPLATE.MenuItem('オーダーする', 'OrderFood', 150)
+    --
+    AYATEMPLATE.MenuItem('他のメニューも見てみる', 'OpenFoodMenu')
+}
+
+OrderFood
+{
+    '\0[[6]]Order text is here.\n[[48]]ネズ、早く書きなさい。\e'
+}
+
+DrinkMenu
+{
+    _arrLen = WD_drink(-1)
+    _text = Init
+    _text += '\1\_q ---- ドリンクメニュー ----\n[half]'
+    
+    for _i = 0; _i < _arrLen; _i++ {
+        _text += "\n\![*]\q[%(WD_drink(_i)),ChooseFood,%(WD_drink(_i))]"
+    }
+
+    _text += '\_q'
+
+    _text
+    --
+    AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
+    --
+    AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
+}
+
+HotDrinkMenu
+{
+    _arrLen = WD_hotdrink(-1)
+    _text = Init
+    _text += '\1\_q ---- ホットドリンク ----\n[half]'
+    
+    for _i = 0; _i < _arrLen; _i++ {
+        _text += "\n\![*]\q[%(WD_hotdrink(_i)),ChooseFood,%(WD_hotdrink(_i))]"
+    }
+
+    _text += '\_q'
+
+    _text
+    --
+    AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
+    --
+    AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
 }

@@ -75,8 +75,22 @@ OnChoiceSelect
 	}
 	else
 	{
-		"\0選択肢のジャンプ先「%(reference[0])」は存在しないよ。/
-		\1……不具合ね。\e"
+		"\0\s[4]選択肢のジャンプ先「%(reference[0])」は存在しないよ。/
+		\1\s[1004]……不具合ね。\e"
+	}
+}
+
+OnChoiceSelectEx
+{
+	if ISFUNC(reference[1])
+	{
+		temp_ChoiseExRef = reference[2]
+		EVAL(reference[1])
+	}
+	else
+	{
+		"\0\s[4]選択肢のジャンプ先「%(reference[1])」は存在しないよ。/
+		\1\s[1004]……不具合ね。\e"
 	}
 }
 

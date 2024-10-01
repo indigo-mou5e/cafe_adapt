@@ -304,6 +304,8 @@ temp_userHandChoise
 temp_yuriHand
 temp_minimizeSecond
 temp_BirthMonth
+temp_ChoiseExRef
+temp_SelectedFoodMenu
 '>>
 	//以下は保存
 	//SHIORI3FW.ShellName
