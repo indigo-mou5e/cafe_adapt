@@ -1,0 +1,20 @@
+//******************************************************************************
+// globaldefineを定義する
+// このファイルはnormalより早く読み込まれるため、globaldefineはここに記述すること
+//******************************************************************************
+
+#globaldefine	INPUT_TIMEOUT "__TIMEOUT__"
+#globaldefine	INPUT_CLOSE	"__CLOSE__"
+
+#globaldefine	MODE_NORMAL 0
+#globaldefine	MODE_YURI 1
+#globaldefine	MODE_SUZU 2
+
+#globaldefine   FOOD_DESCRIPTION 4000
+#globaldefine   FOOD_TEXT_TO_GIVE_YURI 4001
+#globaldefine   FOOD_TEXT_TO_GIVE_SUZU 4002
+#globaldefine   FOOD_TEXT_TASTING 4003
+#globaldefine   FOOD_GET_FAV_YURI 4004
+#globaldefine   FOOD_GET_FAV_SUZU 4005
+
+#globaldefine	\2 \p[2]\s[-1]

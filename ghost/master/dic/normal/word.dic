@@ -78,11 +78,33 @@ WD_hotdrink
 
 WD_alcohol
 {
-	'モヒート'
-	'ラムコーク'
-	'ストーンズバック'
-	'シャンディガフ'
-	'シードル'
+	_menus = (/
+	'モヒート',/
+	'ラムコーク',/
+	'ストーンズバック',/
+	'シャンディガフ',/
+	'シードル')
+
+	// 引数が適切なindexのときはそれに応じた配列の要素を返す
+	_index = _argv[0]
+	_rev = ''
+
+	// 引数が-1のときは配列の大きさを返す
+	if _index == '-1'{
+		_rev = ARRAYSIZE(_menus)
+	}
+	// 上記のどちらでもないときは配列からランダムな値を返す
+	// （引数無しで呼んだ場合含む。つまりは、普通の単語集としても使える。）
+	else{
+		if _index == "" || _index < 0 || _index >= ARRAYSIZE(_menus){
+			_index = RAND(ARRAYSIZE(_menus))
+		}
+
+		_rev = _menus[_index]
+	}
+
+	// return _rev
+	_rev
 }
 
 WD_newmenu
@@ -129,22 +151,71 @@ WD_newmenu
 
 WD_food
 {
-	'チーズトースト'
-	'ベーグル'
-	'気まぐれパスタ'
-	'カルボナーラ'
-	'ボロネーゼ'
-	'ジェノベーゼ'
+	_menus = (/
+	'チーズトースト',/
+	'ベーグル',/
+	'気まぐれパスタ',/
+	'カルボナーラ',/
+	'ボロネーゼ',/
+	'ジェノベーゼ')
+
+	// 引数が適切なindexのときはそれに応じた配列の要素を返す
+	_index = _argv[0]
+	_rev = ''
+
+	// 引数が-1のときは配列の大きさを返す
+	if _index == '-1'{
+		_rev = ARRAYSIZE(_menus)
+	}
+	// 上記のどちらでもないときは配列からランダムな値を返す
+	// （引数無しで呼んだ場合含む。つまりは、普通の単語集としても使える。）
+	else{
+		if _index == "" || _index < 0 || _index >= ARRAYSIZE(_menus){
+			_index = RAND(ARRAYSIZE(_menus))
+		}
+
+		_rev = _menus[_index]
+	}
+
+	// return _rev
+	_rev
 }
 
 WD_sweets
 {
-	'クッキー'
-	'ドーナツ'
-	'スコーン'
-	'フレンチトースト'
-	'猫パフェ'
-	WD_newmenu
+	_menus = (/
+	'クッキー',/
+	'ドーナツ',/
+	'スコーン',/
+	'フレンチトースト',/
+	'猫パフェ')
+
+	// 引数が適切なindexのときはそれに応じた配列の要素を返す
+	_index = _argv[0]
+	_rev = ''
+
+	// 引数が-1のときは配列の大きさを返す
+	if _index == '-1'{
+		_rev = ARRAYSIZE(_menus)
+	}
+	// 上記のどちらでもないときは配列からランダムな値を返す
+	// （引数無しで呼んだ場合含む。つまりは、普通の単語集としても使える。）
+	else{
+		if _index == "" || _index < 0 || _index >= ARRAYSIZE(_menus){
+			_index = RAND(ARRAYSIZE(_menus) + 1)
+		}
+
+		// 配列に月ごとのメニューを加える
+		if _index == ARRAYSIZE(_menus){
+			_rev = WD_newmenu
+		}
+		else{
+			_rev = _menus[_index]
+		}
+	}
+
+	// return _rev
+	_rev
 }
 
 WD_sir

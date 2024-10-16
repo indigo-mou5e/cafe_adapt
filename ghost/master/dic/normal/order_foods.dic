@@ -22,7 +22,7 @@
 #define ]] ]
 
 //******************************************************************************
-// FAQ
+// フードオーダー周り
 //******************************************************************************
 
 OpenFoodMenu
@@ -39,23 +39,12 @@ OpenFoodMenu
     --
     AYATEMPLATE.MenuItem('フードメニュー', 'FoodMenu')
     --
-    AYATEMPLATE.MenuItem('ホットドリンク', 'DrinkMenu')
-    --
     AYATEMPLATE.MenuItem('スイーツ', 'SweetsMenu')
     --
     AYATEMPLATE.MenuItem('おまかせで', 'OmakaseMenu', 150)
     --
     AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close', 150)
 
-    /*
-    "\0フードデータ取得のテストです。\x/
-    %(GetFoodsData('ブレンドコーヒー',0))\x/
-    %(GetFoodsData('ブレンドコーヒー',1))\x/
-    %(GetFoodsData('ブレンドコーヒー',2))\x/
-    %(GetFoodsData('ブレンドコーヒー',3))\x/
-    \0IS_GIVABLE_YURIは%(GetFoodsData('ブレンドコーヒー',4))、\n/
-    IS_GIVABLE_SUZUは%(GetFoodsData('ブレンドコーヒー',5))です。\e"
-    */
 }
 
 ChooseFood
@@ -66,7 +55,7 @@ ChooseFood
     --
     "\2\_q【%(temp_chosenFood)】\_q"
     --
-    GetFoodsData(temp_chosenFood, 0)
+    GetFoodsData(temp_chosenFood, FOOD_DESCRIPTION)
     --
     '\2'
     --
@@ -77,8 +66,54 @@ ChooseFood
 
 OrderFood
 {
-    '\0[[6]]Order text is here.\n[[48]]ネズ、早く書きなさい。\e'
+    Init
+    --
+    "\u[[1016]]\h[[16]]はーい。それじゃ、作ってくるね。[[999]]/
+    \0…\w9\w9\w9…\w9\w9\w9…/
+    \0[[16]]おまたせしました。\n/
+    %(temp_chosenFood)になります。\2"
+    --
+    AYATEMPLATE.MenuItem('いただく', 'EatFood', 0)
+    --
+    AYATEMPLATE.MenuItem('悠梨に差し入れる', 'GiveToYuri', 150)
+    --
+    AYATEMPLATE.MenuItem('鈴に差し入れる', 'GiveToSuzu')
 }
+
+EatFood
+{
+    Init
+    --
+    GetFoodsData(temp_chosenFood, FOOD_TEXT_TASTING)
+    --
+    '\e'
+}
+
+GiveToYuri
+{
+    fav_Yuri += GetFoodsData(temp_chosenFood, FOOD_GET_FAV_YURI)
+
+    Init
+    --
+    GetFoodsData(temp_chosenFood, FOOD_TEXT_TO_GIVE_YURI)
+    --
+    '\e'
+}
+
+GiveToSuzu
+{
+    fav_Suzu += GetFoodsData(temp_chosenFood, FOOD_GET_FAV_SUZU)
+
+    Init
+    --
+    GetFoodsData(temp_chosenFood, FOOD_TEXT_TO_GIVE_SUZU)
+    --
+    '\e'
+}
+
+//******************************************************************************
+// 各フードカテゴリーごとのテキスト
+//******************************************************************************
 
 DrinkMenu
 {
@@ -116,4 +151,110 @@ HotDrinkMenu
     AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
     --
     AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
+}
+
+AlcoholMenu
+{
+    _arrLen = WD_alcohol(-1)
+    _text = Init
+    _text += '\1\_q ---- アルコール ----\n[half]'
+    
+    for _i = 0; _i < _arrLen; _i++ {
+        _text += "\n\![*]\q[%(WD_alcohol(_i)),ChooseFood,%(WD_alcohol(_i))]"
+    }
+
+    _text += '\_q'
+
+    _text
+    --
+    AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
+    --
+    AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
+}
+
+FoodMenu
+{
+    _arrLen = WD_food(-1)
+    _text = Init
+    _text += '\1\_q ---- フードメニュー ----\n[half]'
+    
+    for _i = 0; _i < _arrLen; _i++ {
+        _text += "\n\![*]\q[%(WD_food(_i)),ChooseFood,%(WD_food(_i))]"
+    }
+
+    _text += '\_q'
+
+    _text
+    --
+    AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
+    --
+    AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
+}
+
+SweetsMenu
+{
+    _arrLen = WD_sweets(-1)
+    _text = Init
+    _text += "\1\_q ---- スイーツ ----\n\n[half]今月の限定メニュー\n\![*]\q[%(WD_newmenu),ChooseFood,%(WD_newmenu)]\n[half]"
+    
+    for _i = 0; _i < _arrLen; _i++ {
+        _text += "\n\![*]\q[%(WD_sweets(_i)),ChooseFood,%(WD_sweets(_i))]"
+    }
+
+    _text += '\_q'
+
+    _text
+    --
+    AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
+    --
+    AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
+}
+
+OmakaseMenu
+{
+    // メニューの総数をカウント
+    _menuCount = WD_drink(-1) + WD_hotdrink(-1) + WD_alcohol(-1) + WD_food(-1) + WD_sweets(-1) + 1
+
+    _randomMenu = RAND(_menuCount)
+
+    if _randomMenu < WD_drink(-1)
+    {
+        temp_ChoiseExRef = WD_drink(_randomMenu)
+    }
+    else{
+        _randomMenu -= WD_drink(-1)
+
+        if _randomMenu < WD_hotdrink(-1)
+        {
+            temp_ChoiseExRef = WD_hotdrink(_randomMenu)
+        }
+        else{
+            _randomMenu -= WD_hotdrink(-1)
+
+            if _randomMenu < WD_alcohol(-1)
+            {
+                temp_ChoiseExRef = WD_alcohol(_randomMenu)
+            }
+            else{
+                _randomMenu -= WD_alcohol(-1)
+
+                if _randomMenu < WD_food(-1)
+                {
+                    temp_ChoiseExRef = WD_food(_randomMenu)
+                    return
+                }
+                else{
+                    _randomMenu -= WD_food(-1)
+
+                    if _randomMenu < WD_sweets(-1)
+                    {
+                        temp_ChoiseExRef = WD_sweets(_randomMenu)
+                        return
+                    }
+                }
+            }
+        }
+    }
+
+    ChooseFood
 }
