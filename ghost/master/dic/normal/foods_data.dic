@@ -2,7 +2,6 @@
 // 食べ物や飲み物についてのテキストまとめ
 //******************************************************************************
 
-
 // ToDo: 要らなそうなやつは後で消す
 // 自動でトーク中の改行にウェイトを追加
 #define \n[half] %(NewLine(1))
@@ -100,6 +99,864 @@ RawFoodsData
                 }
             }
         }
+	    when '紅茶'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'ハーブティー'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'ホットチョコレート'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'チャイ'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'オレンジジュース'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'グレープフルーツジュース'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'ジンジャーエール'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'レモネード'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'アイスコーヒー'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'アイスティー'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'コーヒーフロート'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'モヒート'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'ラムコーク'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'ストーンズバック'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'シャンディガフ'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'シードル'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'チーズトースト'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'たまごサンド'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'ベーグル'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when '気まぐれパスタ'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'カルボナーラ'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'ジェノベーゼ'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'クッキー'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'ドーナツ'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'スコーン'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'フレンチトースト'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when '猫パフェ'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'ガレットデロワ'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when '生チョコ'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'ストロベリーパフェ'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'さくらベーグル'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when '抹茶ロールケーキ'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when '梅ゼリーポンチ'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'マンゴープリン'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'チョコミントドリンク'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'ワインゼリー'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'かぼちゃタルト'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'レモンパイ'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
+	    when 'シュトーレン'{
+            case _argv[1]{
+                when FOOD_DESCRIPTION{
+                    '\0[[4]]テキストがまだないにゃ。'
+                }
+                when FOOD_TEXT_TO_GIVE_YURI{
+                    '\0悠梨にあげた時のコメント'
+                }
+                when FOOD_TEXT_TO_GIVE_SUZU{
+                    '\1鈴にあげた時のコメント'
+                }
+                when FOOD_TEXT_TASTING{
+                    '\2ユーザが食べた時のコメント'
+                }
+                when FOOD_GET_FAV_YURI{
+                    0
+                }
+                when FOOD_GET_FAV_SUZU{
+                    0
+                }
+            }
+        }
         others{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
@@ -116,11 +973,11 @@ RawFoodsData
                 }
                 when FOOD_GET_FAV_YURI{
                     // あげたときの好感度上昇。マイナスなら差し入れできない。
-                    1
+                    0
                 }
                 when FOOD_GET_FAV_SUZU{
                     // あげたときの好感度上昇。マイナスなら差し入れできない。
-                    1
+                    0
                 }
             }
         }
