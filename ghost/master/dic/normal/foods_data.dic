@@ -102,7 +102,8 @@ RawFoodsData
 	    when '紅茶'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\1ダージリンとアッサムとアールグレイを揃えております。/
+                    \0紅茶もこだわりたいですけど、店員がみんなコーヒー派なんですよね……'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -124,7 +125,10 @@ RawFoodsData
 	    when 'ハーブティー'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\1ルイボス、カモミール、ラベンダー、ローズヒップ、レモングラス、エトセトラetc……/
+                    \0……紅茶より多くないですか？/
+                    \1わたしが好きだから勝手に揃えて勝手に売ってるの。/
+                    \0%(username)が信じかねない冗談はやめてください……'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -146,7 +150,9 @@ RawFoodsData
 	    when 'ホットチョコレート'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\1ココアじゃないよ。チョコレートを溶かして作るから、ココアより濃厚なの。
+                    \0この子、このために製菓用チョコレートを買ってきてますからね。\n/
+                    味は保証済ですよ。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -158,61 +164,20 @@ RawFoodsData
                     '\2ユーザが食べた時のコメント'
                 }
                 when FOOD_GET_FAV_YURI{
-                    0
+                    1
                 }
                 when FOOD_GET_FAV_SUZU{
-                    0
+                    2
                 }
             }
         }
 	    when 'チャイ'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
-                }
-                when FOOD_TEXT_TO_GIVE_YURI{
-                    '\0悠梨にあげた時のコメント'
-                }
-                when FOOD_TEXT_TO_GIVE_SUZU{
-                    '\1鈴にあげた時のコメント'
-                }
-                when FOOD_TEXT_TASTING{
-                    '\2ユーザが食べた時のコメント'
-                }
-                when FOOD_GET_FAV_YURI{
-                    0
-                }
-                when FOOD_GET_FAV_SUZU{
-                    0
-                }
-            }
-        }
-	    when 'オレンジジュース'{
-            case _argv[1]{
-                when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
-                }
-                when FOOD_TEXT_TO_GIVE_YURI{
-                    '\0悠梨にあげた時のコメント'
-                }
-                when FOOD_TEXT_TO_GIVE_SUZU{
-                    '\1鈴にあげた時のコメント'
-                }
-                when FOOD_TEXT_TASTING{
-                    '\2ユーザが食べた時のコメント'
-                }
-                when FOOD_GET_FAV_YURI{
-                    0
-                }
-                when FOOD_GET_FAV_SUZU{
-                    0
-                }
-            }
-        }
-	    when 'グレープフルーツジュース'{
-            case _argv[1]{
-                when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\1チャーイ。/
+                    \0チャーイ。/
+                    \1本場インド風のチャイを目指しております。/
+                    \0要は、ミルクと砂糖マシマシってことですよ。お気をつけて。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -234,7 +199,8 @@ RawFoodsData
 	    when 'ジンジャーエール'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\0瓶入りがうれしいジンジャーエールだよ。/
+                    ちょっと辛口だから注意してね。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -256,7 +222,8 @@ RawFoodsData
 	    when 'レモネード'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\0自家製の甘めのレモネードだよ。/
+                    炭酸水でも水でも好きな方でどうぞ。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -278,7 +245,9 @@ RawFoodsData
 	    when 'アイスコーヒー'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\0アイスコーヒーを作るコツはできるだけ急冷することです。/
+                    濃い目に入れたコーヒーをクラッシュしたたっぷりの氷に注ぎ、さらに……/
+                    \1つまり、普通のアイスコーヒーよ。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -300,7 +269,8 @@ RawFoodsData
 	    when 'アイスティー'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\0当店では水出しのアールグレイでアイスティーを作っております。/
+                    \1ホットとは違う香りを楽しんでね。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -322,7 +292,8 @@ RawFoodsData
 	    when 'コーヒーフロート'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\1アイスコーヒーにアイスクリームを乗せた贅沢なスイーツだよ。/
+                    \0当店のコーヒーは甘くしても美味しいですよ？'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -344,29 +315,8 @@ RawFoodsData
 	    when 'モヒート'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
-                }
-                when FOOD_TEXT_TO_GIVE_YURI{
-                    '\0悠梨にあげた時のコメント'
-                }
-                when FOOD_TEXT_TO_GIVE_SUZU{
-                    '\1鈴にあげた時のコメント'
-                }
-                when FOOD_TEXT_TASTING{
-                    '\2ユーザが食べた時のコメント'
-                }
-                when FOOD_GET_FAV_YURI{
-                    0
-                }
-                when FOOD_GET_FAV_SUZU{
-                    0
-                }
-            }
-        }
-	    when 'ラムコーク'{
-            case _argv[1]{
-                when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\0私の好きなカクテル。/
+                    ミントとライムをたっぷり入れた少し甘めのお酒だよ。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -388,7 +338,8 @@ RawFoodsData
 	    when 'ストーンズバック'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\0ジンジャーワインにジンジャーエールを加えたカクテルだよ。/
+                    度数が低くて飲みやすいからお酒が苦手な人にもおすすめデス。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -410,7 +361,8 @@ RawFoodsData
 	    when 'シャンディガフ'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\0ビールをジンジャーエールで割ったカクテルだよ。/
+                    ほろ酔いしたいときにぜひ。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -432,7 +384,8 @@ RawFoodsData
 	    when 'シードル'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\0りんごから作られたお酒だよ。/
+                    度数が低いから色んな料理やお菓子に合わせて飲むと美味しいんだ。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -454,7 +407,9 @@ RawFoodsData
 	    when 'チーズトースト'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\0卵とチーズを乗せてトーストしたパン。\n/
+                    仕上げにコショウを一振りすれば、もう言葉は要りません。/
+                    \1………webに掲載している紹介文の棒読みじゃない。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -476,7 +431,8 @@ RawFoodsData
 	    when 'たまごサンド'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\1たまごとマヨネーズをやわらかパンで挟んだ最高のサンドイッチね。/
+                    \0鈴のお気に入りです。%(username)にはマスタードと胡椒も添えてお出ししますよ。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -498,7 +454,9 @@ RawFoodsData
 	    when 'ベーグル'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\1茹でたドーナツ。/
+                    \0雑すぎます。全く別物ですし。\n/
+                    お望みなら気まぐれで何かサンドしてお出ししますよ。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -520,7 +478,8 @@ RawFoodsData
 	    when '気まぐれパスタ'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\0私のその日の気分と冷蔵庫の状況次第で変わる日替わりのパスタです。/
+                    何が出てくるかはお楽しみですよ。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -542,7 +501,9 @@ RawFoodsData
 	    when 'カルボナーラ'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\0みんな大好き、卵とチーズと胡椒のパスタです。/
+                    \1悠梨の作るカルボナーラは絶品よ。%(username)も是非。/
+                    \0お褒めに頂き光栄で御座います。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -564,7 +525,8 @@ RawFoodsData
 	    when 'ジェノベーゼ'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\1鮮やかな緑のパスタね。/
+                    \0バジルの香りを楽しんでいただければ幸いでございます。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -586,7 +548,9 @@ RawFoodsData
 	    when 'クッキー'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\0鈴が焼いてくれているクッキーですよ。/
+                    \1アーモンド、チョコレート、紅茶味の3種類になっております。/
+                    \0コーヒーやお茶のお供にぜひどうぞ。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -608,7 +572,10 @@ RawFoodsData
 	    when 'ドーナツ'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\0悠梨ちゃん謹製のドーナツです。/
+                    毎朝揚げているので数量限定ですよ。/
+                    \1結構な人気ぶりよね。羨ましい限りよ。/
+                    \0ありがたいことです。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -630,7 +597,9 @@ RawFoodsData
 	    when 'スコーン'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\1プレーンなスコーンだよ。\n/
+                    季節のジャムとクロテッドクリームでどうぞ。/
+                    \0たまに鈴の作ったジャムが添えられますので、お楽しみに。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -652,7 +621,9 @@ RawFoodsData
 	    when 'フレンチトースト'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\1卵とメイプルシロップをふんだんに使った贅沢なフレンチトーストになっております。\n/
+                    トッピングでバニラアイスも添えてどうぞ。/
+                    \0それは甘すぎ。と言いたいところですけど、案外バニラアイス添えが好評なんてすよね……'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
@@ -674,7 +645,8 @@ RawFoodsData
 	    when '猫パフェ'{
             case _argv[1]{
                 when FOOD_DESCRIPTION{
-                    '\0[[4]]テキストがまだないにゃ。'
+                    '\1悠梨が頑張って作るねこちゃんパフェだよ。/
+                    \0なにが猫かどうかは届いてみてのお楽しみですよ。'
                 }
                 when FOOD_TEXT_TO_GIVE_YURI{
                     '\0悠梨にあげた時のコメント'
