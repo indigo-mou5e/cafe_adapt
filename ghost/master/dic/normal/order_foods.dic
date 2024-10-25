@@ -31,6 +31,10 @@ OpenFoodMenu
     --
     "\1はいっ。%(NewLine(2))こちらフードメニューになります。"
     --
+    if month == userBirthMonth && day == userBirthDay && !isReceivedBirthDayParfait{
+        '\_q\n\n[half]\![*]\q[スペシャル猫パフェ,ChooseFood,スペシャル猫パフェ]'
+    }
+    --
     AYATEMPLATE.MenuItem('ドリンク', 'DrinkMenu', 150)
     --
     AYATEMPLATE.MenuItem('ホットドリンク', 'HotDrinkMenu')
@@ -70,7 +74,7 @@ OrderFood
     --
     "\u[[1016]]\h[[16]]はーい。それじゃ、作ってくるね。[[999]]/
     \0…\w9\w9\w9…\w9\w9\w9…/
-    \0[[16]]おまたせしました。\n/
+    \0[[16]]おまたせしました。%(NewLine(2))/
     %(temp_chosenFood)になります。\2"
     --
     AYATEMPLATE.MenuItem('いただく', 'EatFood', 0)

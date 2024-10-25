@@ -28,13 +28,13 @@
 // 起動時
 BootOnUserBirthDay
 {
-	isReceivedBirthDayParfait = 0
-
 	Init
 	--
 	if lastYearOnCelebrateBirthDay == undefined{
 		// 初めての誕生日
+		isReceivedBirthDayParfait = 0
 		lastYearOnCelebrateBirthDay = year
+
 		"\u[[1015]]\h[[15]]\_s%(username)、誕生日おめでとう！！！\_s/
 		\0うれしいですね、こんなめでたい日にウチに来てもらえるなんて。/
 		\1ねえ、誕生日のひとにはね、お祝いの特別メニューがあるんだよ？/
@@ -50,8 +50,10 @@ BootOnUserBirthDay
 		\0そうですね。%(username)、おめでとうございます。\nゆっくりしていってくださいね。\e"
 	}
 	else{
-		// 今年初めての誕生日来店 ToDo: 書いてる途中にゃ。
+		// 今年初めての誕生日来店
+		isReceivedBirthDayParfait = 0
 		lastYearOnCelebrateBirthDay = year
+
 		"\u[[1015]]\h[[15]]\_s%(username)、誕生日おめでとう！！！\_s/
 		\0またウチで誕生日を過ごしてもらえるんですね、ありがとうございます。/
 		\1ねえ、お祝いの特別メニュー、食べる？？/
@@ -61,26 +63,89 @@ BootOnUserBirthDay
 	}
 }
 
+ChooseBirthDayParfait
+{
+	Init
+	--
+	"\2\_q【スペシャル猫パフェ】\_q/
+	\0お誕生日のお客さん限定の猫パフェだよ。/
+	\1今日の間しか頼めないから、忘れずに頼んでみてね。\2"
+	--
+    AYATEMPLATE.MenuItem('オーダーする', 'ReceiveBirthDayParfait', 150)
+    --
+    AYATEMPLATE.MenuItem('他のメニューも見てみる', 'OpenFoodMenu')
+}
+
 ReceiveBirthDayParfait
 {
-	isReceivedBirthDayParfait = 1
-	
-	"\0オッケー！\nじゃあ、ちょっと作ってくるね。\n\n[half]/
-	\w9…\w9…\w9…\w9\n\n[half]/
-	お待たせ！\nアダプト謹製猫パフェ、スペシャルバージョンだよ！！/
-	\1上に乗ってる猫アイスが全種類載せてあるの。\n/
+    Init
+    --
+	"\0オッケー！\nじゃあ、さっそく作ってくるね。\n\n[half]/
+	…\w9\w9\w9…\w9\w9\w9…\w9\w9\w9…/\n\n[half]/
+	お待たせ！\nアダプト謹製猫パフェ、スペシャルバージョンだよ！！\2"
+    --
+    AYATEMPLATE.MenuItem('いただく', 'EatBirthDayParfait', 0)
+}
+
+EatBirthDayParfait
+{
+    Init
+    --
+	"\2（猫の顔の形にデコレーションされたアイスが乗った猫パフェだ。\n/
+	いつもの2倍、猫アイスが盛られている。）\x[noclear]"
+	--
+	"\1上に乗ってる猫アイスが全種類載せてあるの。\n/
 	わたしと悠梨、アンジェと桃の4つとなっております。/
 	\0みんなからのお祝いということで。\n/
 	崩れないうちに召し上がってくださいね。\n/
-	\1わたしだと思って大事に食べていいんだよ？？/
-	\0改めまして、%(username)。\n誕生日おめでとうございます。/
+	\1わたしだと思って大事に食べていいんだよ？？\x"
+	--
+	"\2（バニラ、チョコレート、紅茶、ストロベリーの4つのアイスクリームが代わる代わるその表情を見せる。\n/
+	添えられたクッキーや焼き菓子のかけら、アーモンドたちとそれぞれ絡み合い、舌の上でさまざまに踊るようだ。）\x[noclear]"
+	--
+	"\0ふふん、どうですか？\n/
+	スペシャル猫パフェのお味は。/
+	\1ねこちゃんたちが元気にはしゃぎまわる、このお店みたいに楽しいパフェにしてみたの。/
+	\0大変でしたよ、いろんな味を調和させるのは。\nもう慣れっこですけどね。/
+	\1そんなわたしたちも貴方のおかげでここにいることができるの。\n/いつも遊んでくれてありがとうね、%(username)。\x"
+	--
+	"\_q\![*]\q[こちらこそいつもありがとう,EatBirthDayParfaitAfter,0]%(NewLine(2,0))/
+	\![*]\q[とても楽しいパフェだったよ,EatBirthDayParfaitAfter,1]%(NewLine(2,0))/
+	\![*]\q[また来年も祝ってほしいな,EatBirthDayParfaitAfter,2]\_q"
+}
+
+EatBirthDayParfaitAfter
+{
+	isReceivedBirthDayParfait = 1
+	
+	Init
+	--
+	case temp_ChoiseExRef{
+		when 0{
+			"\0いえいえ、それはこっちのセリフですよ。\n/
+			\1大事な日をわたしたちと過ごしてくれて、わたしたちもうれしいよ。\n/
+			ありがとうね？"
+		}
+		when 1{
+			"\0それはよかったです。\n/
+			楽しんでもらえれば何よりでございますので。/
+			\1さ、パフェだけじゃなく、わたしたちとも楽しく過ごそう？"
+		}
+		when 2{
+			"\0もちろん。また来年も来てくれればお祝いしますよ。/
+			\1関係が続く限り、永遠にお祝いしましょうね。"
+		}
+	}
+	"\0改めまして、%(username)。\n誕生日おめでとうございます。/
 	\1おめでとう、%(username)。\n今日という素敵な日をゆっくり楽しんでね。\e"
 }
 
 ReceiveBirthDayParfaitLater
 {
+    Init
+    --
 	"\0ありゃ、そうですか。/
 	\1今日のうちならメニュー表から受け取れるから、気が向いたら言ってね？/
 	\0とにかく、%(username)。おめでとうございます。/
-	\1今日という素敵な日をゆっくり楽しんでいってね。\e"
+	\1ん、おめでとう。\n今年もいい一年になりますように。\e"
 }
