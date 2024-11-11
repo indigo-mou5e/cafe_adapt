@@ -46,7 +46,7 @@ YuriMenuList
 		*/
 	--
 	if dicMode == MODE_NORMAL
-		AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionYuri',150)
+		AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionYuri')
 	--
 	if dicMode == MODE_NORMAL
 		AYATEMPLATE.MenuItem('質問コーナー','FAQ_Top')

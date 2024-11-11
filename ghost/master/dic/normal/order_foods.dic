@@ -45,11 +45,16 @@ OpenFoodMenu
     --
     AYATEMPLATE.MenuItem('スイーツ', 'SweetsMenu')
     --
+    if isDebugMode
+        AYATEMPLATE.MenuItem('【デバッグ】限定メニュー', 'Debug_LimitedMenu')
+    --
     AYATEMPLATE.MenuItem('おまかせで', 'OmakaseMenu', 150)
     --
     AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close', 150)
 
 }
+
+
 
 ChooseFood
 {
@@ -57,7 +62,7 @@ ChooseFood
 
     Init
     --
-    "\2\_q【%(temp_chosenFood)】\_q"
+    "\2\_q【%(temp_chosenFood)】\_q\w[1600]"
     --
     GetFoodsData(temp_chosenFood, FOOD_DESCRIPTION)
     --
@@ -72,16 +77,26 @@ OrderFood
 {
     Init
     --
-    "\u[[1016]]\h[[16]]はーい。それじゃ、作ってくるね。[[999]]/
+    "\u[[1016]]\h[[16]]はーい。それじゃ、用意しますね。[[999]]/
     \0…\w9\w9\w9…\w9\w9\w9…/
     \0[[16]]おまたせしました。%(NewLine(2))/
     %(temp_chosenFood)になります。\2"
     --
     AYATEMPLATE.MenuItem('いただく', 'EatFood', 0)
     --
-    AYATEMPLATE.MenuItem('悠梨に差し入れる', 'GiveToYuri', 150)
+    if isGivenFoodToYuri{
+        '\_q\n\![*]\f[strike,1]悠梨に差し入れる\f[strike,0]（また明日）\_q'
+    }
+    else{
+        AYATEMPLATE.MenuItem('悠梨に差し入れる', 'GiveToYuri', 150)
+    }
     --
+    if isGivenFoodToSuzu{
+        '\_q\n\![*]\f[strike,1]鈴に差し入れる\f[strike,0]（また明日）\_q'
+    }
+    else{
     AYATEMPLATE.MenuItem('鈴に差し入れる', 'GiveToSuzu')
+    }
 }
 
 EatFood
@@ -95,24 +110,67 @@ EatFood
 
 GiveToYuri
 {
-    fav_Yuri += GetFoodsData(temp_chosenFood, FOOD_GET_FAV_YURI)
+    _favPoint = GetFoodsData(temp_chosenFood, FOOD_GET_FAV_YURI)
+    _favPoint = TOINT(_favPoint)
+
+    if _favPoint >= 0 {
+        fav_Yuri += _favPoint
+
+        if !isDebugMode
+            isGivenFoodToYuri = 1
+    }
 
     Init
     --
     GetFoodsData(temp_chosenFood, FOOD_TEXT_TO_GIVE_YURI)
     --
-    '\e'
+    if _favPoint >= 0 {
+        '\e'
+    }
+    else{
+        '\2'
+        --
+        AYATEMPLATE.MenuItem('自分でいただく', 'EatFood', 0)
+        --
+        if isGivenFoodToSuzu {
+            '\_q\n\![*]\f[strike,1]鈴に差し入れる\f[strike,0]（また明日）\_q'
+        }
+        else{
+            AYATEMPLATE.MenuItem('鈴に差し入れる', 'GiveToSuzu')
+        }
+    }
 }
 
 GiveToSuzu
 {
-    fav_Suzu += GetFoodsData(temp_chosenFood, FOOD_GET_FAV_SUZU)
+    _favPoint = GetFoodsData(temp_chosenFood, FOOD_GET_FAV_SUZU)
+
+    if _favPoint >= 0 {
+        fav_Suzu += _favPoint
+
+        if !isDebugMode
+            isGivenFoodToSuzu = 1
+    }
 
     Init
     --
     GetFoodsData(temp_chosenFood, FOOD_TEXT_TO_GIVE_SUZU)
     --
-    '\e'
+    if _favPoint >= 0 {
+        '\e'
+    }
+    else{
+        '\2'
+        --
+        AYATEMPLATE.MenuItem('自分でいただく', 'EatFood', 0)
+        --
+        if isGivenFoodToYuri {
+            '\_q\n\![*]\f[strike,1]悠梨に差し入れる\f[strike,0]（また明日）\_q'
+        }
+        else{
+            AYATEMPLATE.MenuItem('悠梨に差し入れる', 'GiveToYuri')
+        }
+    }
 }
 
 //******************************************************************************
@@ -208,6 +266,29 @@ SweetsMenu
     _text += '\_q'
 
     _text
+    --
+    AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
+    --
+    AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
+}
+
+Debug_LimitedMenu
+{
+    Init
+    --
+    '\1\_q ---- 限定メニュー ----\n[half]/
+    \n\![*]\q[ガレットデロワ,ChooseFood,ガレットデロワ]/
+    \n\![*]\q[生チョコ,ChooseFood,生チョコ]/
+    \n\![*]\q[ストロベリーパフェ,ChooseFood,ストロベリーパフェ]/
+    \n\![*]\q[さくらベーグル,ChooseFood,さくらベーグル]/
+    \n\![*]\q[抹茶ロールケーキ,ChooseFood,抹茶ロールケーキ]/
+    \n\![*]\q[梅ゼリーポンチ,ChooseFood,梅ゼリーポンチ]/
+    \n\![*]\q[マンゴープリン,ChooseFood,マンゴープリン]/
+    \n\![*]\q[チョコミントドリンク,ChooseFood,チョコミントドリンク]/
+    \n\![*]\q[ワインゼリー,ChooseFood,ワインゼリー]/
+    \n\![*]\q[かぼちゃキッシュ,ChooseFood,かぼちゃキッシュ]/
+    \n\![*]\q[レモンパイ,ChooseFood,レモンパイ]/
+    \n\![*]\q[シュトーレン,ChooseFood,シュトーレン]'
     --
     AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
     --

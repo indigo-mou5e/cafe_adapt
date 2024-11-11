@@ -48,16 +48,16 @@ SuzuMenuList
 	// AYATEMPLATE.MenuItem('鈴に話しかける', 'Menu_COMMUNICATE')
 	--
 	if dicMode == MODE_NORMAL
-		AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionSuzu',150)
+		AYATEMPLATE.MenuItem('自己紹介を聞く', 'IntroductionSuzu')
 	--
 	if dicMode ==MODE_NORMAL
 		AYATEMPLATE.MenuItem('フードメニューを開く', 'OpenFoodMenu', 150)
 	--
-	if suzu_myself != undefined
-		AYATEMPLATE.MenuItem('鈴の一人称を変える', 'Menu_ChangeSuzuMyself', 150)
-	--
 	if dicMode == MODE_NORMAL
 		AYATEMPLATE.MenuItem('ユーザ情報', 'Menu_UserInformation',150)
+	--
+	if suzu_myself != undefined
+		AYATEMPLATE.MenuItem('鈴の一人称を変える', 'Menu_ChangeSuzuMyself')
 	--
 	case dicMode {
 		when MODE_NORMAL

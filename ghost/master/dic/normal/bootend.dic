@@ -110,6 +110,14 @@ OnBoot
 // 起動時の諸変数設定
 InitializeVariableOnBoot : void
 {
+	// その日最初の起動の場合
+	if lastBootDate != year * 10000 + month * 100 + day{
+		lastBootDate = year * 10000 + month * 100 + day
+
+		isGivenFoodToYuri = 0
+		isGivenFoodToSuzu = 0
+	}
+
 	dicMode = MODE_NORMAL
 
 	currentOperationSecond = 0
