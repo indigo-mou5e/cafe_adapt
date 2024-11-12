@@ -29,6 +29,7 @@ OnTranslateInternal
 {
 	_text = _argv[0]
    	_text = REPLACE(_text, "。", "。\_w[%(PeriodWait)]")
+	_text = REPLACE(_text, "\_w[%(PeriodWait)]）", '）')
     _text = TextOnlyTranslator(_text,'TextOnlyTranslatorFunc')
 	_text
 }

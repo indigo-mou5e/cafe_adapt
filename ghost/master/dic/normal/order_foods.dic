@@ -29,15 +29,29 @@ OpenFoodMenu
 {
     Init
     --
-    "\1はいっ。%(NewLine(2))こちらフードメニューになります。"
+    "\h[[0]]\u[[1015]]はいっ。%(NewLine(2))[[1000]]こちらフードメニューになります。\n\n[half]"
     --
+    FoodMenuTop
+}
+
+RevertFoodMenu
+{
+    Init
+    --
+    "\h[[0]]\u[[1000]]"
+    --
+    FoodMenuTop
+}
+
+FoodMenuTop
+{
     if month == userBirthMonth && day == userBirthDay && !isReceivedBirthDayParfait{
-        '\_q\n\n[half]\![*]\q[スペシャル猫パフェ,ChooseFood,スペシャル猫パフェ]'
+        '\_q\![*]\q[スペシャル猫パフェ,ChooseFood,スペシャル猫パフェ]\n'
     }
     --
-    AYATEMPLATE.MenuItem('ドリンク', 'DrinkMenu', 150)
+    AYATEMPLATE.MenuItem('ホットドリンク', 'HotDrinkMenu', 0)
     --
-    AYATEMPLATE.MenuItem('ホットドリンク', 'HotDrinkMenu')
+    AYATEMPLATE.MenuItem('ドリンク', 'DrinkMenu')
     --
     AYATEMPLATE.MenuItem('アルコール', 'AlcoholMenu')
     --
@@ -51,10 +65,7 @@ OpenFoodMenu
     AYATEMPLATE.MenuItem('おまかせで', 'OmakaseMenu', 150)
     --
     AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close', 150)
-
 }
-
-
 
 ChooseFood
 {
@@ -70,7 +81,7 @@ ChooseFood
     --
     AYATEMPLATE.MenuItem('オーダーする', 'OrderFood', 150)
     --
-    AYATEMPLATE.MenuItem('他のメニューも見てみる', 'OpenFoodMenu')
+    AYATEMPLATE.MenuItem('他のメニューも見てみる', 'RevertFoodMenu')
 }
 
 OrderFood
@@ -105,7 +116,18 @@ EatFood
     --
     GetFoodsData(temp_chosenFood, FOOD_TEXT_TASTING)
     --
-    '\e'
+    if isDebugMode{
+        '\n[150]【デバッグモード】'
+        --
+        AYATEMPLATE.MenuItem('悠梨に差し入れる', 'GiveToYuri')
+        --
+        AYATEMPLATE.MenuItem('鈴に差し入れる', 'GiveToSuzu')
+        --
+        AYATEMPLATE.MenuItem('やめる', 'Menu_Close')
+    }
+    else{
+        '\e'
+    }
 }
 
 GiveToYuri
@@ -125,7 +147,18 @@ GiveToYuri
     GetFoodsData(temp_chosenFood, FOOD_TEXT_TO_GIVE_YURI)
     --
     if _favPoint >= 0 {
-        '\e'
+        if isDebugMode{
+            '\2【デバッグモード】'
+            --
+            AYATEMPLATE.MenuItem('自分でいただく', 'EatFood')
+            --
+            AYATEMPLATE.MenuItem('鈴に差し入れる', 'GiveToSuzu')
+            --
+            AYATEMPLATE.MenuItem('やめる', 'Menu_Close')
+        }
+        else{
+            '\e'
+        }
     }
     else{
         '\2'
@@ -157,7 +190,18 @@ GiveToSuzu
     GetFoodsData(temp_chosenFood, FOOD_TEXT_TO_GIVE_SUZU)
     --
     if _favPoint >= 0 {
-        '\e'
+        if isDebugMode{
+            '\2【デバッグモード】'
+            --
+            AYATEMPLATE.MenuItem('自分でいただく', 'EatFood')
+            --
+            AYATEMPLATE.MenuItem('悠梨に差し入れる', 'GiveToYuri')
+            --
+            AYATEMPLATE.MenuItem('やめる', 'Menu_Close')
+        }
+        else{
+            '\e'
+        }
     }
     else{
         '\2'
@@ -191,7 +235,7 @@ DrinkMenu
 
     _text
     --
-    AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
+    AYATEMPLATE.MenuItem('もどる', 'RevertFoodMenu', 150)
     --
     AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
 }
@@ -210,7 +254,7 @@ HotDrinkMenu
 
     _text
     --
-    AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
+    AYATEMPLATE.MenuItem('もどる', 'RevertFoodMenu', 150)
     --
     AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
 }
@@ -229,7 +273,7 @@ AlcoholMenu
 
     _text
     --
-    AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
+    AYATEMPLATE.MenuItem('もどる', 'RevertFoodMenu', 150)
     --
     AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
 }
@@ -248,7 +292,7 @@ FoodMenu
 
     _text
     --
-    AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
+    AYATEMPLATE.MenuItem('もどる', 'RevertFoodMenu', 150)
     --
     AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
 }
@@ -267,7 +311,7 @@ SweetsMenu
 
     _text
     --
-    AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
+    AYATEMPLATE.MenuItem('もどる', 'RevertFoodMenu', 150)
     --
     AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
 }
@@ -290,7 +334,7 @@ Debug_LimitedMenu
     \n\![*]\q[レモンパイ,ChooseFood,レモンパイ]/
     \n\![*]\q[シュトーレン,ChooseFood,シュトーレン]'
     --
-    AYATEMPLATE.MenuItem('もどる', 'OpenFoodMenu', 150)
+    AYATEMPLATE.MenuItem('もどる', 'RevertFoodMenu', 150)
     --
     AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
 }
