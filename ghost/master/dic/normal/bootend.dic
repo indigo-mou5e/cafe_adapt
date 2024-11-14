@@ -25,10 +25,13 @@ OnFirstBoot
 	nadeSensitivity = 1
 	fav_Suzu = 0
 	fav_Yuri = 0
-
+	username = 'お客様'
 
 	// ---- 初回起動トーク ----
+	FirstBootTalk
+}
 
+FirstBootTalk{
 	Init
 	--
 	"\t\1[[1999]]\0[[0]]いらっしゃい。\n[[11]]あら、初めてのお客さんかな。\n[[50]]鈴ー！　お客さんの応対お願いー！！\n[half]\n/
@@ -82,8 +85,6 @@ SetUsernameFirst
 
 InputLater
 {
-	username = 'お客様'
-
 	"\1[[1055]]じゃあ、ひとまず%(username)で。/
 	\0[[16]]ゆっくりしていってくださいね、%(username)。\e"
 }

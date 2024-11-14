@@ -46,7 +46,9 @@ RevertFoodMenu
 FoodMenuTop
 {
     if month == userBirthMonth && day == userBirthDay && !isReceivedBirthDayParfait{
-        '\_q\![*]\q[スペシャル猫パフェ,ChooseFood,スペシャル猫パフェ]\n'
+        AYATEMPLATE.MenuItem('スペシャル猫パフェ', ChooseBirthDayParfait)
+        --
+        NewLine(3,0)
     }
     --
     AYATEMPLATE.MenuItem('ホットドリンク', 'HotDrinkMenu', 0)
@@ -59,8 +61,11 @@ FoodMenuTop
     --
     AYATEMPLATE.MenuItem('スイーツ', 'SweetsMenu')
     --
-    if isDebugMode
-        AYATEMPLATE.MenuItem('【デバッグ】限定メニュー', 'Debug_LimitedMenu')
+    if isDebugMode{
+        AYATEMPLATE.MenuItem('【デバッグ】イベントメニュー', 'Debug_EventFood')
+        --
+        AYATEMPLATE.MenuItem('【デバッグ】月替わりメニュー', 'Debug_LimitedFood')
+    }
     --
     AYATEMPLATE.MenuItem('おまかせで', 'OmakaseMenu', 150)
     --
@@ -88,10 +93,18 @@ OrderFood
 {
     Init
     --
-    "\u[[1016]]\h[[16]]はーい。それじゃ、用意しますね。[[999]]/
-    \0…\w9\w9\w9…\w9\w9\w9…/
-    \0[[16]]おまたせしました。%(NewLine(2))/
-    %(temp_chosenFood)になります。\2"
+    '\u[[1016]]\h[[16]]はーい。\w8それじゃ、用意しますね。'
+    '\u[[1000]]\h[[16]]ん、わかりました。\w9ちょっと待っててね。'
+    '\u[[1016]]\h[[55]]もちろん、よろこんで。\w6[[16]]少々お待ちください。'
+    --
+    "[[999]]\0…\w9\w9\w9…\w9\w9\w9…"
+    --
+    "\0[[0]]おまたせしました。%(NewLine(2))/
+    [[16]]%(temp_chosenFood)になります。\2"
+    "\0[[5]]お待たせ！！%(NewLine(2))/
+    [[16]]こちら、%(temp_chosenFood)になります。\2"
+    "\0[[25]]できました！！%(NewLine(2))/
+    [[16]]%(temp_chosenFood)、こちらにお置きしますね。\2"
     --
     AYATEMPLATE.MenuItem('いただく', 'EatFood', 0)
     --
@@ -316,11 +329,23 @@ SweetsMenu
     AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
 }
 
-Debug_LimitedMenu
+Debug_EventFood
 {
     Init
     --
-    '\1\_q ---- 限定メニュー ----\n[half]/
+    '\1\_q ---- イベントメニュー ----\n[half]/
+    \n\![*]\q[スペシャル猫パフェ,ChooseBirthDayParfait]\_q'
+    --
+    AYATEMPLATE.MenuItem('もどる', 'RevertFoodMenu', 150)
+    --
+    AYATEMPLATE.MenuItem('やっぱりやめる', 'Menu_Close')
+}
+
+Debug_LimitedFood
+{
+    Init
+    --
+    '\1\_q ---- 月替わりメニュー ----\n[half]/
     \n\![*]\q[ガレットデロワ,ChooseFood,ガレットデロワ]/
     \n\![*]\q[生チョコ,ChooseFood,生チョコ]/
     \n\![*]\q[ストロベリーパフェ,ChooseFood,ストロベリーパフェ]/
@@ -332,7 +357,8 @@ Debug_LimitedMenu
     \n\![*]\q[ワインゼリー,ChooseFood,ワインゼリー]/
     \n\![*]\q[かぼちゃキッシュ,ChooseFood,かぼちゃキッシュ]/
     \n\![*]\q[レモンパイ,ChooseFood,レモンパイ]/
-    \n\![*]\q[シュトーレン,ChooseFood,シュトーレン]'
+    \n\![*]\q[シュトーレン,ChooseFood,シュトーレン]/
+    \_q'
     --
     AYATEMPLATE.MenuItem('もどる', 'RevertFoodMenu', 150)
     --

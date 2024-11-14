@@ -34,10 +34,6 @@ Menu_Close
 //各項目の処理内容
 //******************************************************************************
 
-Menu_FIRSTBOOT
-{
-	OnFirstBoot
-}
 
 //---- 何か話して
 Menu_AITALK
@@ -197,6 +193,84 @@ OnStampMenuExec
 		マック朗スタンプ,/
 		マック朗が押したスタンプ。黒林檎。見た目に反して毒はない…と信じたい。]'
 	}
+}
+
+
+//******************************************************************************
+// デバッグモード
+//******************************************************************************
+
+Debug_TopMenu
+{
+	Init
+	--
+	'\0[[0]]はい。デバッグモード、実行中です。/
+	\1[[1006]]もし万が一迷い込んだ場合は、「デバッグモード終了」を選べば元に戻るわよ。\0'
+	--
+	AYATEMPLATE.MenuItem('各種イベント', 'Debug_EventTest', 150)
+	--
+	AYATEMPLATE.MenuItem('スクリーンショット用テキスト', 'Debug_ForPrintScreen')
+	--
+	AYATEMPLATE.MenuItem('デバッグモード終了', 'Debug_SwitchDebugModeOff')
+	--
+	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
+}
+
+Debug_EventTest
+{
+	Init
+	--
+	'\0[[16]]各種イベントにジャンプできます。'
+	--
+	AYATEMPLATE.MenuItem('初回起動', 'FirstBootTalk', 150)
+	--
+	AYATEMPLATE.MenuItem('誕生日イベント', 'BootOnUserBirthDay')
+	--
+	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
+}
+
+Debug_UserBirthDayTest
+{
+	Init
+	--
+	'\0[[0]]誕生日イベントです。\nどの条件ではじめましょうか？'
+	--
+	AYATEMPLATE.MenuItem('誕生日初回', 'Debug_BirthDayEvent', 'First')
+	--
+	AYATEMPLATE.MenuItem('去年以前に祝われ済み', 'Debug_BirthDayEvent', '2000')
+	--
+	AYATEMPLATE.MenuItem('2回目以降の起動', 'Debug_BirthDayEvent', 'ThisYear')
+	--
+	AYATEMPLATE.MenuItem('メニューからスペシャル猫パフェを選択', 'ChooseBirthDayParfait')
+	--
+	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
+}
+
+Debug_BirthDayEvent
+{
+	case temp_ChoiseExRef{
+		when 'First'{
+			ERASEVAR('lastYearOnCelebrateBirthDay')
+		}
+		when '2000'{
+			lastYearOnCelebrateBirthDay = 2000
+		}
+		when 'ThisYear'{
+			lastYearOnCelebrateBirthDay = year
+		}
+	}
+
+	BootOnUserBirthDay
+}
+
+Debug_SwitchDebugModeOff
+{
+	isDebugMode = 0
+
+	Init
+	--
+	'\0[[6]]デバッグモード終了。\n/
+	[[0]]システム、通常モードに移行します。\e'
 }
 
 Debug_ForPrintScreen

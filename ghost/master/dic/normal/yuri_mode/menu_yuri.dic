@@ -55,8 +55,6 @@ YuriMenuList
 	--
 	AYATEMPLATE.MenuItem('バージョン情報', 'Menu_Version')
 	--
-	// AYATEMPLATE.MenuItem('スクリーンショット用トーク','Debug_ForPrintScreen',150)
-	--
 	/*
 	if dicMode != MODE_SUZU
 		AYATEMPLATE.MenuItem('他のゴーストと話す', 'Menu_GHOSTCOMSTART')
@@ -73,10 +71,14 @@ YuriMenuList
 		when MODE_NORMAL
 			AYATEMPLATE.MenuItem('悠梨と二人で話す', 'Menu_ChangeYuriMode', 150)
 		when MODE_YURI {
-			AYATEMPLATE.MenuItem('三人モードに戻る', 'Menu_ChangeNormalMode', 150) + /
-				AYATEMPLATE.MenuItem('鈴と二人で話す', 'Menu_ChangeSuzuMode')
+			AYATEMPLATE.MenuItem('三人モードに戻る', 'Menu_ChangeNormalMode', 150)
+			--
+			AYATEMPLATE.MenuItem('鈴と二人で話す', 'Menu_ChangeSuzuMode')
 		}
 	}
+	--
+	if isDebugMode
+		AYATEMPLATE.MenuItem('【デバッグ】各種テスト', 'Debug_TopMenu', 150)
 	--
 	AYATEMPLATE.MenuItem('なんでもない', 'YuriMenu_CANCEL', 150)
 }
