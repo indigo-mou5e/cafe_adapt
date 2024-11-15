@@ -224,7 +224,7 @@ Debug_EventTest
 	--
 	AYATEMPLATE.MenuItem('初回起動', 'FirstBootTalk', 150)
 	--
-	AYATEMPLATE.MenuItem('誕生日イベント', 'BootOnUserBirthDay')
+	AYATEMPLATE.MenuItem('誕生日イベント', 'Debug_UserBirthDayTest')
 	--
 	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
 }
