@@ -46,7 +46,7 @@ RevertFoodMenu
 FoodMenuTop
 {
     if month == userBirthMonth && day == userBirthDay && !isReceivedBirthDayParfait{
-        AYATEMPLATE.MenuItem('スペシャル猫パフェ', ChooseBirthDayParfait)
+        AYATEMPLATE.MenuItem('スペシャル猫パフェ', 'ChooseBirthDayParfait', 0)
         --
         NewLine(3,0)
     }

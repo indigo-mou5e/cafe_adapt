@@ -67,11 +67,11 @@ ChooseBirthDayParfait
 {
 	Init
 	--
-	"\2\_q【スペシャル猫パフェ】\_q\w[1600]/
+	"\2\_q【スペシャル猫パフェ】\_q/
 	\0[[25]]お誕生日のお客さん限定の猫パフェだよ。/
 	\1[[1015]]今日の間しか頼めないから、忘れずに頼んでみてね。\2"
 	--
-    AYATEMPLATE.MenuItem('オーダーする', 'ReceiveBirthDayParfait', 150)
+    AYATEMPLATE.MenuItem('オーダーする', 'ReceiveBirthDayParfait', 0)
     --
     AYATEMPLATE.MenuItem('他のメニューも見てみる', 'OpenFoodMenu')
 }
@@ -91,7 +91,7 @@ EatBirthDayParfait
 {
     Init
     --
-	"\2（猫の顔の形にデコレーションされたアイスが乗った猫パフェだ。\n/
+	"\h[[0]]\u[[1000]]\2（猫の顔の形にデコレーションされたアイスが乗った猫パフェだ。\n/
 	いつもの2倍、猫アイスが盛られている。）\x[noclear]"
 	--
 	"\1[[1020]]上に乗ってる猫アイスが全種類載せてあるの。\n/
@@ -123,7 +123,7 @@ EatBirthDayParfaitAfter
 	--
 	case temp_ChoiseExRef{
 		when '0'{
-			"\0[[55]]いえいえ、それはこっちのセリフですよ。\n/
+			"\0[[55]]いえいえ、それはこっちのセリフですよ。/
 			\1[[1055]]大事な日をわたしたちと過ごしてくれて、わたしたちもうれしいよ。\n/
 			[[1020]]ありがとうね？"
 		}
@@ -138,7 +138,7 @@ EatBirthDayParfaitAfter
 		}
 	}
 	--
-	"%(NewLine(3,0))\0[[0]]改めまして、%(username)。\n[[5]]誕生日おめでとうございます。/
+	"%(NewLine(3,0))\h[[0]]改めまして、%(username)。\n[[5]]誕生日おめでとうございます。/
 	\1[[1015]]おめでとう、%(username)。\n[[1000]]今日という素敵な日をゆっくり楽しんでね。\e"
 }
 

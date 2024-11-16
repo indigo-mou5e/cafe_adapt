@@ -209,6 +209,7 @@ FinishInputUserBirthDay
 	--
 	if month == userBirthMonth && day == userBirthDay{
 		lastYearOnCelebrateBirthDay = year
+		isReceivedBirthDayParfait = 1
 
 		"\0[[5]]%(userBirthMonth)月%(userBirthDay)日ですね………って、[[2]]今日じゃないですか！？%(NewLine(3))/
 		\1[[1015]]お誕生日おめでとう！！%(NewLine(2))[[1000]]来年はちゃんとお祝いするから、待っててね。%(NewLine(3))/
@@ -221,7 +222,6 @@ FinishInputUserBirthDay
 }
 
 // 膨大な数になる月の選択肢をできるだけ簡単に。
-// SetBirthMonth_XX, SetBirthDay_XX は膨大になるのでこのソースコードの一番下に。
 GetBirthMonthSelections
 {
 	_selections = ''
@@ -248,7 +248,14 @@ GetBirthMonthSelection
 		_month = HAN2ZEN(_month, 'number')
 	}
 
-	"\q[%(_month),SetBirthMonth_%(_argv[0])]"
+	"\q[%(_month),SetBirthMonth,%(_argv[0])]"
+}
+
+SetBirthMonth
+{
+	temp_BirthMonth = TOINT(temp_ChoiseExRef)
+
+	InputUserBirthDay
 }
 
 GetBirthDaySelections
@@ -277,9 +284,14 @@ GetBirthDaySelection
 		_day = HAN2ZEN(_day, 'number')
 	}
 
-	"\q[%(_day),SetBirthDay_%(_argv[0])]"
+	"\q[%(_day),SetBirthDay,%(_argv[0])]"
 }
 
+SetBirthDay
+{
+	userBirthDay = TOINT(temp_ChoiseExRef)
+	FinishInputUserBirthDay
+}
 
 //******************************************************************************
 // 一人称変更
@@ -372,281 +384,4 @@ Menu_CancelMyself
 	Init
 	--
 	"\1[[1000]]それじゃあ、今のままの%(GetSuzuMyself)でいるね。%(NewLine(2))[[1005]]また気が向いたらいつでも言ってね？？\e"
-}
-
-
-//******************************************************************************
-// 誕生日の月日選択肢
-// 激長なのでここに
-//******************************************************************************
-
-
-SetBirthMonth_1
-{
-	temp_BirthMonth = 1
-
-	InputUserBirthDay
-}
-
-SetBirthMonth_2
-{
-	temp_BirthMonth = 2
-
-	InputUserBirthDay
-}
-
-SetBirthMonth_3
-{
-	temp_BirthMonth = 3
-
-	InputUserBirthDay
-}
-
-SetBirthMonth_4
-{
-	temp_BirthMonth = 4
-
-	InputUserBirthDay
-}
-
-SetBirthMonth_5
-{
-	temp_BirthMonth = 5
-
-	InputUserBirthDay
-}
-
-SetBirthMonth_6
-{
-	temp_BirthMonth = 6
-
-	InputUserBirthDay
-}
-
-SetBirthMonth_7
-{
-	temp_BirthMonth = 7
-
-	InputUserBirthDay
-}
-
-SetBirthMonth_8
-{
-	temp_BirthMonth = 8
-
-	InputUserBirthDay
-}
-
-SetBirthMonth_9
-{
-	temp_BirthMonth = 9
-
-	InputUserBirthDay
-}
-
-SetBirthMonth_10
-{
-	temp_BirthMonth = 10
-
-	InputUserBirthDay
-}
-
-SetBirthMonth_11
-{
-	temp_BirthMonth = 11
-
-	InputUserBirthDay
-}
-
-SetBirthMonth_12
-{
-	temp_BirthMonth = 12
-
-	InputUserBirthDay
-}
-
-SetBirthDay_1
-{
-	userBirthDay = 1
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_2
-{
-	userBirthDay = 2
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_3
-{
-	userBirthDay = 3
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_4
-{
-	userBirthDay = 4
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_5
-{
-	userBirthDay = 5
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_6
-{
-	userBirthDay = 6
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_7
-{
-	userBirthDay = 7
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_8
-{
-	userBirthDay = 8
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_9
-{
-	userBirthDay = 9
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_10
-{
-	userBirthDay = 10
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_11
-{
-	userBirthDay = 11
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_12
-{
-	userBirthDay = 12
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_13
-{
-	userBirthDay = 13
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_14
-{
-	userBirthDay = 14
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_15
-{
-	userBirthDay = 15
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_16
-{
-	userBirthDay = 16
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_17
-{
-	userBirthDay = 17
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_18
-{
-	userBirthDay = 18
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_19
-{
-	userBirthDay = 19
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_20
-{
-	userBirthDay = 20
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_21
-{
-	userBirthDay = 21
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_22
-{
-	userBirthDay = 22
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_23
-{
-	userBirthDay = 23
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_24
-{
-	userBirthDay = 24
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_25
-{
-	userBirthDay = 25
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_26
-{
-	userBirthDay = 26
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_27
-{
-	userBirthDay = 27
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_28
-{
-	userBirthDay = 28
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_29
-{
-	userBirthDay = 29
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_30
-{
-	userBirthDay = 30
-	FinishInputUserBirthDay
-}
-
-SetBirthDay_31
-{
-	userBirthDay = 31
-	FinishInputUserBirthDay
 }
