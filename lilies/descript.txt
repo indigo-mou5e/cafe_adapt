@@ -127,4 +127,4 @@ communicatebox.height,20
 
 craftman,suminezu
 craftmanw,墨鼠
-craftmanurl,https://x.com/prayfortiny
+craftmanurl,https://prayfortiny.net/

@@ -42,7 +42,7 @@ On_recommendrootbutton.caption
 On_sakura.recommendsites_EX : array
 {
 	'写真(Instagram)  | https://www.instagram.com/pray_fortiny | '
-	'イラスト(Pixiv)  | https://www.pixiv.net/users/2538606                       | '
+	'イラスト(Pixiv)  | https://www.pixiv.net/users/2538606 | '
 }
 
 //------------------------------------------------------------------------------
@@ -58,7 +58,9 @@ On_kero.recommendbuttoncaption
 //------------------------------------------------------------------------------
 On_kero.recommendsites_EX : array
 {
+	'作者ホームページ			| https://prayfortiny.net | '
 	'作者Twitter               | https://x.com/prayfortiny | '
+	'メッセージフォーム			| https://prayfortiny.net/message.html | '
 }
 
 //------------------------------------------------------------------------------
