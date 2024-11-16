@@ -17,4 +17,4 @@
 #globaldefine   FOOD_GET_FAV_YURI 4004
 #globaldefine   FOOD_GET_FAV_SUZU 4005
 
-#globaldefine	\2 \p[2]\s[-1]
+#globaldefine	\2 \p[2]\s[-1]\b[4]
