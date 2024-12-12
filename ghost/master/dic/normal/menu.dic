@@ -195,6 +195,28 @@ OnStampMenuExec
 	}
 }
 
+//******************************************************************************
+// イベントメニュー
+//******************************************************************************
+
+SpecialEventMenu
+{
+	_events = ''
+
+	if month == 12 && day == 25 && !isAlreadyMerryChristmas {
+		_events += AYATEMPLATE.MenuItem('メリークリスマス！', 'MerryChristmas')
+	}
+
+	if (month == 1 && day == 1) || (month == 12 && day == 31){
+		_event += AYATEMPLATE.MenuItem('何か訊いてみる', 'NewYearAsking')
+	}
+
+	if _event == '' {
+		return
+	}
+
+	"\2%(_event)\0"
+}
 
 //******************************************************************************
 // デバッグモード
@@ -226,6 +248,8 @@ Debug_EventTest
 	--
 	AYATEMPLATE.MenuItem('誕生日イベント', 'Debug_UserBirthDayTest')
 	--
+	AYATEMPLATE.MenuItem('クリスマスイベント', 'Debug_ChristmasTest')
+	--
 	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
 }
 
@@ -242,6 +266,17 @@ Debug_UserBirthDayTest
 	AYATEMPLATE.MenuItem('2回目以降の起動', 'Debug_BirthDayEvent', 'ThisYear')
 	--
 	AYATEMPLATE.MenuItem('メニューからスペシャル猫パフェを選択', 'ChooseBirthDayParfait')
+	--
+	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
+}
+
+Debug_ChristmasTest
+{
+	Init
+	--
+	'\0[[0]]クリスマスイベントです。\nどの条件ではじめましょうか？'
+	--
+	AYATEMPLATE.MenuItem('25日に起動', 'BootOnChristmas')
 	--
 	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
 }
