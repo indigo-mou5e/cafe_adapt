@@ -177,12 +177,164 @@ MerryChristmas
 //******************************************************************************
 // 年末年始イベント
 //******************************************************************************
+
+// progressOnNewYear について
+// 整数型の変数。年末イベントの進行度を保存する
+// NEWYEAR_INIT  : 初期状態
+// NEWYEAR_ASKED : 年末年始の営業日を聞いている状態
+// NEWYEAR_BOOTED_EVE : 大晦日に起動済
+// NEWYEAR_BOOTED_NEWYEAR : 元日に起動済
+
+#define NEWYEAR_INIT 0
+#define NEWYEAR_ASKED 10
+#define NEWYEAR_BOOTED_EVE 20
+#define NEWYEAR_BOOTED_NEWYEAR 30
+
+// lastYearOnNewYear について
+// 整数型。最後に新年イベントを行った年。
+// 注意点として、その期間の新年側を値とする。
+// 例）2024年12月から2025年1月のイベント中は lastYearOnNewYear の値は2025になる。
+
+AskNewYearSchedule
+{
+	if progressOnNewYear <= NEWYEAR_INIT {
+		lastYearOnNewYear = year + 1
+		progressOnNewYear = NEWYEAR_INIT
+	}
+
+	Init
+	--
+	"\0年末年始ですか？\n/
+	12/31と1/1の二日間はお休みをいただきます。\n\n[half]/
+	もし来てくれても誰もいませんからね？/
+	\1大丈夫だよ、%(username)。\n/
+	悠梨はいるから。/
+	\0……いますケド。猫のお世話のためですから。\n/
+	お店は閉まってるからおんなじですよ。/
+	\1悠梨が困っちゃうから大晦日と元日は来ちゃだめだよ？\n/
+	ぜったい、だめだからね？？？/
+	\0………あなた、何か誘導しようとしてません？？\e"
+}
+
 BootOnNewYearsDayEve
 {
+	dicMode = MODE_YURI
 
+	Init
+	--
+	"\t\2（いつものように保護猫カフェを訪ねる）\w9\n\n[half]
+	（………外から見える店内が暗い。\n/
+	　定休日なのだろうか）\x/
+
+	\2\_q\f[align,center]「保護猫カフェ「アダプト」は\n/
+	\f[align,center]12/31、1/1はお休みいただきます\n/
+	\f[align,center]1/2から通常営業です！」\_q\x"
+	--
+	if progressOnNewYear == NEWYEAR_ASKED {
+		"\2（………休みのようだ。\n　/
+		そういえば、年末年始の休みについて聞いた気がする。\n　/
+		悠梨はいるとのことだったが、どうしようか？）"
+	}
+	else{
+		"\2（………休みのようだ。\n　/
+		でも、お店の窓の中に猫が見える。\n　/
+		世話をする誰かがいるのかもしれない。）"
+	}
+	--
+	"\_q%(NewYear(3,0))\*\![*]\q[ノックしてみる,NewYearEve_2,Knock]/
+	%(NewYear(2,0))\![*]\q[その場をあとにする,NewYearEve_2,Leave]\_q"
+}
+
+NewYearEve_2
+{
+	Init
+	--
+	if temp_ChoiseExRef == 'Knock' {
+		"\2\t（扉をノックしようとした、そのとき。\n　/
+		不意にうしろから声を掛けられた。）\x"
+	}
+	else{
+		"\2\t（諦めて今日は家でゆっくり過ごそうと思った、そのとき。\n　/
+		不意にうしろから声を掛けられた。）\x"
+	}
+	--
+	"\0すみません、今日はお休みいただいてるんですよー。/
+	\0………って、%(username)じゃないですか。\n"
+	--
+	if progressOnNewYear >= NEWYEAR_ASKED {
+		"お伝えしてませんでしたっけ。\n/
+		今日と明日はお休みなんです。ごめんなさいね。"
+	}
+	else{
+		"見ての通り、今日と明日はお店お休みなんですよ。\n/
+		ごめんね、来てくれたのに残念なんですけど。"
+	}
+	--
+	"\2%(NewLine(3,0))\_q\*\![*]\q[お店でまったり過ごせたらと思って,NewYearEve_3,ToChillOut]/
+	%(NewYear(2,0))\![*]\q[悠梨はどうしてお店に？,NewYearEve_3,WhyAreYou]/
+	%(NewYear(2,0))\![*]\q[悠梨に会いに来た,NewYearEve_3,ToSeeYou]\_q"
+}
+
+NewYearEve_3
+{
+	Init
+	--
+	case temp_ChoiseExRef {
+		when 'ToChillOut'{
+			"\0\tありゃ、それは申し訳ない。\n/
+			うれしいですけど、ウチのみんなにもお休みが必要ですからね。/
+			\0私ですか？　猫たちの世話をする人も必要ですから。\n/
+			鈴と違ってご主人様もいませんしねえ。"
+		}
+		when 'WhyAreYou'{
+			"\0\tまあ、猫たちのお世話ですね。\n/
+			鈴みたいにご主人がいる猫はお家で過ごしてますけど、私はほら、ヒマですから。/
+			\0こう見えても、ここが一番落ち着くんですよ。\n/
+			猫たちもいてくれますしね。"
+		}
+		when 'ToSeeYou'{
+			"\0\t………。私、冗談は本気にしちゃうタチなんですよ。\n/
+			でも、ありがとうございます。/
+			\0そうそう、鈴ならいませんよ。\n/
+			いまごろお家でご主人とゆっくり休んでるんじゃないですかね。"
+		}
+	}
+	--
+	"……………。寒いデスね。\n/
+	あの。せっかく来てもらったことですし、入りますか？/
+	\0食べ物もないし鈴たちもいませんけど、よかったらゆっくりしていってもいいですよ。"
+	--
+	"\2%(NewLine(3,0))\_q\*\![*]\q[お言葉に甘えて,NewYearEve_4,AcceptOffer]/
+	%(NewYear(2,0))\![*]\q[いいの？,NewYearEve_4,Really]\_q"
+}
+
+NewYearEve_4
+{
+	Init
+	--
+	case temp_ChoiseExRef {
+		when 'AcceptOffer'{
+			'\0\tよかった。猫とのおしゃべりも飽きてきたところだったんですよ。'
+		}
+		when 'Really'{
+			"\0\tこのまま帰らせるのも悪いですし。\n/
+			と言いつつ、私も話相手が欲しかったところなんですけどね。"
+		}
+	}
+	--
+	"\n\n[half]……………。\n\n[half]/
+	はい、どうぞ。適当に座ってください。\n/
+	お話しくらいしかできませんけど、くつろいでいってくれれば。\n\n[half]/
+	せっかくなので、なにか気になっていることがあれば訊いてくれてもいいですよ。\n/
+	ま、ごゆるりと。\e"
 }
 
 BootOnNewYearsDay
 {
 	
+}
+
+NewYearAskingTop
+{
+
 }

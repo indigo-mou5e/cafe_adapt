@@ -208,14 +208,17 @@ SpecialEventMenu
 	}
 
 	if (month == 1 && day == 1) || (month == 12 && day == 31){
-		_event += AYATEMPLATE.MenuItem('何か訊いてみる', 'NewYearAsking')
+		_events += AYATEMPLATE.MenuItem('何か訊いてみる', 'NewYearAskingTop')
+	}
+	elseif month == 12 && day > 25 {
+		_events += AYATEMPLATE.MenuItem('年末年始の営業日を聞く', 'AskNewYearSchedule')
 	}
 
-	if _event == '' {
+	if _events == '' {
 		return
 	}
 
-	"\2%(_event)\0"
+	"\2%(_events)\0"
 }
 
 //******************************************************************************

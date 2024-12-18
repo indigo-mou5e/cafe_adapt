@@ -101,11 +101,36 @@ OnBoot
 	// ToDo: イベントなどの特別な起動があるとき
 	if month == userBirthMonth && day == userBirthDay{
 		BootOnUserBirthDay
+		return
 	}
-	else{
-		// 通常の起動
-		NormalBootTalk
+
+	_day = month * 100 + day
+
+	case _day{
+		when 101 {
+			// 正月イベント
+			BootOnNewYearsDay
+			return
+		}
+		when 1224 {
+			// クリスマスイブイベント
+			BootOnChristmasEve
+			return
+		}
+		when 1225 {
+			// クリスマスイベント
+			BootOnChristmas
+			return
+		}
+		when 1231 {
+			// 大晦日イベント
+			BootOnNewYearsDayEve
+			return
+		}
 	}
+
+	// 通常の起動
+	NormalBootTalk
 }
 
 // 起動時の諸変数設定
