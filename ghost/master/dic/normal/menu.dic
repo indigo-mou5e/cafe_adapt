@@ -203,17 +203,25 @@ SpecialEventMenu
 {
 	_events = ''
 
-	if month == 12 && day == 25 && !isAlreadyMerryChristmas {
-		_events += AYATEMPLATE.MenuItem('メリークリスマス！', 'MerryChristmas')
-	}
+	_day = month * 100 + day
 
-	if (month == 1 && day == 1) || (month == 12 && day == 31){
-		_events += AYATEMPLATE.MenuItem('何か訊いてみる', 'NewYearAskingTop')
-	}
-	elseif month == 12 && day > 25 {
-		_events += AYATEMPLATE.MenuItem('年末年始の営業日を聞く', 'AskNewYearSchedule')
-	}
+	case _day {
+		when 1225 {
+			if year == lastYearOnMerryChristmasYuri
+				_events += AYATEMPLATE.MenuItem('悠梨、メリークリスマス！', 'MerryChristmas_Yuri')
+			
+			if year == lastYearOnMerryChristmasSuzu
+				_events += AYATEMPLATE.MenuItem('鈴、メリークリスマス！', 'MerryChristmas_Suzu')
+		}
 
+		when 1226-1230{		
+			_events += AYATEMPLATE.MenuItem('年末年始の営業日を聞く', 'AskNewYearSchedule')
+		}
+
+		when 101, 1231 {
+			_events += AYATEMPLATE.MenuItem('なにか訊いてみる', 'NewYearAskingTop')
+		}
+	}
 	if _events == '' {
 		return
 	}

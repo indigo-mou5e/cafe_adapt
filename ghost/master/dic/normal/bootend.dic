@@ -142,6 +142,11 @@ InitializeVariableOnBoot : void
 
 		isGivenFoodToYuri = 0
 		isGivenFoodToSuzu = 0
+
+		isFirstBootOnTheDay = 1
+	}
+	else{
+		isFirstBootOnTheDay = 0
 	}
 
 	dicMode = MODE_NORMAL
@@ -189,7 +194,20 @@ OnClose
 	// 終了時の処理（Unload関数でいいかも）
 	dicMode = MODE_NORMAL
 
-	// ToDo: イベント終了トークなどあれば
+	// イベント終了トークなど
+	_day = month * 100 + day
+	case _day {
+		when 101 {
+			dicMode = MODE_YURI
+			NewYearClose
+			return
+		}
+		when 1231 {
+			dicMode = MODE_YURI
+			NewYearEveClose
+			return
+		}
+	}
 	if currentOperationSecond < 600
 	{
 		EarlyCloseTalk

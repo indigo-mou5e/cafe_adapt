@@ -42,7 +42,7 @@ BootOnUserBirthDay
 		\2\_q\t\*\![*]\q[ぜひ！,ReceiveBirthDayParfait]%(NewLine(2,0))/
 		\![*]\q[後でもらう,ReceiveBirthDayParfaitLater]\_q"
 	}
-	elseif year == lastYearOnCelebrateBirthDay{
+	elseif isFirstBootOnTheDay == 0 {
 		"\0[[8]]いらっしゃいませ、\w4誕生日さん。/
 		\1[[1015]]ふふ、お誕生日おめでとう。/
 		\0[[84]]それはさっき言ったじゃないですか。/
@@ -159,19 +159,93 @@ ReceiveBirthDayParfaitLater
 
 BootOnChristmasEve
 {
-
+	Init
+	--
+	if isFirstBootOnTheDay{
+		"\0あら、%(username)。いらっしゃいませ。/
+		\1クリスマスイブだね。来てくれてうれしいな。/
+		\0とはいえ、今日はいつも通りですけどね。/
+		\1明日はわたしがケーキを焼くから、来てくれるとうれしいな。/
+		\0もしプレゼントを持ってきたらプレゼント交換してあげますよ。\e"
+	}
+	else{
+		""
+	}
 }
 
 BootOnChristmas
 {
 	Init
 	--
-	"\u[[1015]]\h[[15]]\_sメリークリスマス！！！\_s"
+	if isFirstBootOnTheDay{
+		"\u[[1015]]\h[[15]]\_sメリークリスマス！！！%(NewLine(3))\_s
+		\hよく来てくれましたね、今日はクリスマスの特別イベントですよ。/
+		\1わたしが焼いたケーキがあって、プレゼント交換もできるの。/
+		\0ぜひぜひ楽しんでいってくださいね。\e"
+	}
+	else{
+		""
+	}
 }
 
-MerryChristmas
+CloseOnChristmasEve
 {
-	
+	Init
+	--
+	"\0ありがとうございました、お気をつけて。/
+	\1明日のクリスマス、きっと来てね？\n待ってるよ。/
+	\0ん。よかったら、ぜひ。\w9\w9\-\e"
+}
+
+CloseOnChristmas
+{
+	Init
+	--
+	if year == lastYearOnMerryChristmasSuzu && year == lastYearOnMerryChristmasYuri {
+		"\0はーい。ありがとうございました！/
+		\1プレゼントありがとうね？　また来年もお祝いしようね。/
+		\0私からも。プレゼントありがとうございます。\n良いクリスマスをお過ごしくださいませ。\w9\w9\-\e"
+	}
+	else{
+		"\0ん、お気をつけて。/
+		\1よいクリスマスを楽しんでね？？\w9\w9\-\e"
+	}
+}
+
+MerryChristmas_Yuri
+{
+	Init
+	--
+	"\0はい、メリークリスマス。\n/
+	クリスマスのことはよく分かってないですけど、みんなが楽しいこのイベントは大好きですよ。/
+	\0ところで。プレゼント交換、しますか？？/
+	\_q%(NewYear(3,0))\*\![*]\q[フィナンシェを渡す,GiveYuriChristmasPresent,Financier]/
+	%(NewYear(2,0))\![*]\q[猫の形の小物を渡す,GiveYuriChristmasPresent,CatItem]/
+	%(NewYear(2,0))\![*]\q[単三電池を渡す,GiveYuriChristmasPresent,Battery]/
+	%(NewYear(3,0))\![*]\q[あとで,GiveYuriChristmasPresent,After]\_q"
+}
+
+MerryChristmas_Suzu
+{
+	Init
+	--
+	"\1メリークリスマス！！\n/
+	ふわふわで華やかで、クリスマスってとってもすてきだよね。/
+	\1ねえ、プレゼント持ってきたなら交換しよう？
+	\_q%(NewYear(3,0))\*\![*]\q[高級チョコを渡す,GiveSuzuChristmasPresent,Chocolate]/
+	%(NewYear(2,0))\![*]\q[鈴カステラを渡す,GiveSuzuChristmasPresent,Castella]/
+	%(NewYear(2,0))\![*]\q[泡盛を渡す,GiveSuzuChristmasPresent,Sake]/
+	%(NewYear(3,0))\![*]\q[あとで,GiveSuzuChristmasPresent,After]\_q"
+}
+
+GiveYuriChristmasPresent
+{
+
+}
+
+GiveSuzuChristmasPresent
+{
+
 }
 
 //******************************************************************************
@@ -198,8 +272,7 @@ MerryChristmas
 AskNewYearSchedule
 {
 	if progressOnNewYear <= NEWYEAR_INIT {
-		lastYearOnNewYear = year + 1
-		progressOnNewYear = NEWYEAR_INIT
+		progressOnNewYear = NEWYEAR_ASKED
 	}
 
 	Init
@@ -220,6 +293,43 @@ BootOnNewYearsDayEve
 {
 	dicMode = MODE_YURI
 
+	if isFirstBootOnTheDay {
+		NewYearBootFirst_1
+	}
+	else{
+		NewYearBootAgain
+	}
+}
+
+NewYearEveClose
+{
+	Init
+	--
+	"お帰りですか？\n/
+	暇つぶしにお付き合いいただきありがとうございます。\n/
+	また来年もよろしくお願いしますね。\n良いお年を！！\w9\w9\-\e"
+}
+
+NewYearClose
+{
+	Init
+	--
+	"はーい。お忘れ物はないですか？\n/
+	改めて、あけましておめでとうございます。\n/
+	今年もよろしくお願いしますね。\nでは、また。\w9\w9\-\e"
+}
+
+NewYearBootAgain
+{
+	Init
+	--
+	"\0はい。おかえりなさい。\n/
+	相変わらず私と猫たちだけですよ。/
+	\0何もないところですが、ゆっくりしていってくださいな。\e"
+}
+
+NewYearBootFirst_1
+{
 	Init
 	--
 	"\t\2（いつものように保護猫カフェを訪ねる）\w9\n\n[half]
@@ -230,7 +340,7 @@ BootOnNewYearsDayEve
 	\f[align,center]12/31、1/1はお休みいただきます\n/
 	\f[align,center]1/2から通常営業です！」\_q\x"
 	--
-	if progressOnNewYear == NEWYEAR_ASKED {
+	if progressOnNewYear >= NEWYEAR_ASKED {
 		"\2（………休みのようだ。\n　/
 		そういえば、年末年始の休みについて聞いた気がする。\n　/
 		悠梨はいるとのことだったが、どうしようか？）"
@@ -241,11 +351,11 @@ BootOnNewYearsDayEve
 		世話をする誰かがいるのかもしれない。）"
 	}
 	--
-	"\_q%(NewYear(3,0))\*\![*]\q[ノックしてみる,NewYearEve_2,Knock]/
-	%(NewYear(2,0))\![*]\q[その場をあとにする,NewYearEve_2,Leave]\_q"
+	"\_q%(NewYear(3,0))\*\![*]\q[ノックしてみる,NewYearBootFirst_2,Knock]/
+	%(NewYear(2,0))\![*]\q[その場をあとにする,NewYearBootFirst_2,Leave]\_q"
 }
 
-NewYearEve_2
+NewYearBootFirst_2
 {
 	Init
 	--
@@ -261,21 +371,34 @@ NewYearEve_2
 	"\0すみません、今日はお休みいただいてるんですよー。/
 	\0………って、%(username)じゃないですか。\n"
 	--
-	if progressOnNewYear >= NEWYEAR_ASKED {
-		"お伝えしてませんでしたっけ。\n/
-		今日と明日はお休みなんです。ごめんなさいね。"
-	}
-	else{
-		"見ての通り、今日と明日はお店お休みなんですよ。\n/
-		ごめんね、来てくれたのに残念なんですけど。"
-	}
+	if month == 1
+		"あけましておめでとうございます。\n"
 	--
-	"\2%(NewLine(3,0))\_q\*\![*]\q[お店でまったり過ごせたらと思って,NewYearEve_3,ToChillOut]/
-	%(NewYear(2,0))\![*]\q[悠梨はどうしてお店に？,NewYearEve_3,WhyAreYou]/
-	%(NewYear(2,0))\![*]\q[悠梨に会いに来た,NewYearEve_3,ToSeeYou]\_q"
+	if lastYearOnNewYear != undefined {
+		"\n[half]見ての通りですよ。年末年始のお休みです。\n/
+		今年も来たということは、もしかして………/
+		\2\_q\*\![*]\q[暇してるかなと思って,NewYearBootFirst_3_Again,WonderBeBored]/
+		%(NewYear(2,0))\![*]\q[お邪魔だったかな,NewYearBootFirst_3_Again,IsNotOkay]/
+		%(NewYear(2,0))\![*]\q[悠梨に会いに来た,NewYearBootFirst_3_Again,ToSeeYou]\_q"
+	}
+	else
+	{
+		if progressOnNewYear >= NEWYEAR_ASKED {
+			"\n[half]お伝えしてませんでしたっけ。\n/
+			年末年始はお休みしてるんです。ごめんなさいね。"
+		}
+		else{
+			"\n[half]見ての通り、大晦日と元日はお店お休みなんですよ。\n/
+			ごめんね、来てくれたのに残念なんですけど。"
+		}
+		--
+		"\2\_q\*\![*]\q[お店でまったり過ごせたらと思って,NewYearBootFirst_3,ToChillOut]/
+		%(NewYear(2,0))\![*]\q[悠梨はどうしてお店に？,NewYearBootFirst_3,WhyAreYou]/
+		%(NewYear(2,0))\![*]\q[悠梨に会いに来た,NewYearBootFirst_3,ToSeeYou]\_q"
+	}
 }
 
-NewYearEve_3
+NewYearBootFirst_3
 {
 	Init
 	--
@@ -304,12 +427,21 @@ NewYearEve_3
 	あの。せっかく来てもらったことですし、入りますか？/
 	\0食べ物もないし鈴たちもいませんけど、よかったらゆっくりしていってもいいですよ。"
 	--
-	"\2%(NewLine(3,0))\_q\*\![*]\q[お言葉に甘えて,NewYearEve_4,AcceptOffer]/
-	%(NewYear(2,0))\![*]\q[いいの？,NewYearEve_4,Really]\_q"
+	"\2\_q\*\![*]\q[お言葉に甘えて,NewYearBootFirst_4,AcceptOffer]/
+	%(NewYear(2,0))\![*]\q[いいの？,NewYearBootFirst_4,Really]\_q"
 }
 
-NewYearEve_4
+NewYearBootFirst_4
 {
+	if month == 12 {
+		lastYearOnNewYear = year + 1
+		progressOnNewYear = NEWYEAR_BOOTED_EVE
+	}
+	else{
+		lastYearOnNewYear = year
+		progressOnNewYear = NEWYEAR_BOOTED_NEWYEAR
+	}
+
 	Init
 	--
 	case temp_ChoiseExRef {
@@ -329,12 +461,115 @@ NewYearEve_4
 	ま、ごゆるりと。\e"
 }
 
+NewYearBootFirst_3_Again
+{
+	if month == 12 {
+		lastYearOnNewYear = year + 1
+		progressOnNewYear = NEWYEAR_BOOTED_EVE
+	}
+	else{
+		lastYearOnNewYear = year
+		progressOnNewYear = NEWYEAR_BOOTED_NEWYEAR
+	}
+
+	Init
+	--
+	case temp_ChoiseExRef {
+		when 'WonderBeBored'{
+			"\0\t………ま、今年も退屈はしてましたけどね。\n/
+			でも、また来てくれるとは思ってなかったですよ。"
+		}
+		when 'IsNotOkay'{
+			"\0\t大丈夫かというとビミョーなんですけど。/
+			今年はダメっていうのも申し訳ないですしね。"
+		}
+		when 'ToSeeYou'{
+			"\0\tそうデスか。ありがとうございます。\n/
+			なんだかもう慣れてきましたよ。"
+		}
+	}
+	--
+	"\nま、入ってくださいな。\n何もないところですが。/
+	\n\n[half]……………。\n\n[half]/
+	はい、どうぞ。適当に座ってください。\n/
+	今年もテキトーにくつろいでいってくれれば。\n\n[half]/
+	せっかくなので、なにか気になっていることがあれば訊いてくれてもいいですよ。\n/
+	ま、ごゆるりと。\e"
+}
+
 BootOnNewYearsDay
 {
-	
+	dicMode = MODE_YURI
+
+	if lastYearOnNewYear == year {
+		if isFirstBootOnTheDay {
+			NewYearBootInRow
+		}
+		else{
+			NewYearBootAgain
+		}
+	}
+	else{
+		NewYearBootFirst_1
+	}
+}
+
+NewYearBootInRow
+{
+	Init
+	--
+	"\t\2（昨日に引き続き保護猫カフェを訪ねる）\w9\n\n[half]
+	（今日もお店は休みのようだが、店内の奥に悠梨の姿が見える。）/
+	\_q%(NewYear(3,0))\*\![*]\q[ノックしてみる,NewYearBootInRow_2]\_q"
+}
+
+NewYearBootInRow_2
+{
+	Init
+	--
+	"\0\tはーい。\n/
+	すみません、今日はお店お休みなんですー。\n/
+	って、%(username)じゃないですか。あけましておめでとうございます。/
+	昨日言ったでしょう、今日もお休みですよ。/
+	\2\_q\*\![*]\q[新年のあいさつをしたくて,NewYearBootInRow_3,HappyNewYear]/
+	%(NewYear(2,0))\![*]\q[猫と触れ合っちゃダメ？,NewYearBootInRow_3,ToPetCat]/
+	%(NewYear(2,0))\![*]\q[悠梨に会いに来た,NewYearBootInRow_3,ToSeeYou]\_q"
+}
+
+NewYearBootInRow_3
+{
+	progressOnNewYear = NEWYEAR_BOOTED_NEWYEAR
+
+	Init
+	--
+	case temp_ChoiseExRef {
+		when HappyNewYear{
+			"\0\tん、今年もよろしくお願いします。それじゃ。\n/
+			………そんな目をしないでください。\n/
+			いいですよ。上がってくださいな。"
+		}
+		when ToPetCat{
+			"\0\t猫を理由にされると弱りますね………\n/
+			ん、いいですよ。今日もヒマですし。\n/
+			猫しかいないですが、よかったら上がってください。"
+		}
+		when ToSeeYou{
+			"\0\tはーい。ありがとうございまーす。\n/
+			そんな冗談繰り返してたら本当に締め出しますよ？\n/
+			………反省するなら入ってもいいですよ。"
+		}
+	}
+	--
+	"\n\n[half]……………。\n\n[half]/
+	はい、どうぞ。また適当にゆっくりしていってください。\n/
+	今日もなにか気になっていることがあれば訊いてください。\n/
+	大したことは答えられないですけどね。\e"
 }
 
 NewYearAskingTop
 {
-
+	Init
+	--
+	"\0はい。\n/
+	なんでもなんなりと。"
 }
