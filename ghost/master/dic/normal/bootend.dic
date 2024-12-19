@@ -171,6 +171,22 @@ NormalBootTalk
 	}
 }
 
+// その日2回目の起動
+BootAgain
+{
+	Init
+	--
+	case dicMode
+	{
+		when MODE_NORMAL
+			TOSTR(EVAL(CHR(0x22)+BootTalkBasicAgain()+CHR(0x22)))
+		when MODE_YURI
+			TOSTR(EVAL(CHR(0x22)+BootTalkYuri()+CHR(0x22)))
+		when MODE_SUZU
+			TOSTR(EVAL(CHR(0x22)+BootTalkSuzu()+CHR(0x22)))
+	}
+}
+
 //------------------------------------------------------------------------------
 //朝/昼/夜などをおおざっぱに調べる関数
 //------------------------------------------------------------------------------

@@ -169,7 +169,7 @@ BootOnChristmasEve
 		\0もしプレゼントを持ってきたらプレゼント交換してあげますよ。\e"
 	}
 	else{
-		""
+		BootAgain
 	}
 }
 
@@ -184,7 +184,7 @@ BootOnChristmas
 		\0ぜひぜひ楽しんでいってくださいね。\e"
 	}
 	else{
-		""
+		BootAgain
 	}
 }
 
