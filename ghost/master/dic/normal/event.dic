@@ -555,14 +555,14 @@ NewYearBootInRow_3
 		}
 		when ToSeeYou{
 			"\0\tはーい。ありがとうございまーす。\n/
-			そんな冗談繰り返してたら本当に締め出しますよ？\n/
-			………反省するなら入ってもいいですよ。"
+			……そんな冗談繰り返してたら本当に締め出しますよ？\n/
+			反省するのなら入ってもいいですよ。"
 		}
 	}
 	--
 	"\n\n[half]……………。\n\n[half]/
 	はい、どうぞ。また適当にゆっくりしていってください。\n/
-	今日もなにか気になっていることがあれば訊いてください。\n/
+	今日もなにか気になっていることがあれば訊いていいですよ。\n/
 	大したことは答えられないですけどね。\e"
 }
 
@@ -571,5 +571,16 @@ NewYearAskingTop
 	Init
 	--
 	"\0はい。\n/
-	なんでもなんなりと。"
+	なんでもなんなりと。/
+	\_q%(NewLine(3,0))\![*]\q[誕生日はいつ？,NewYearAsk,YuriBirthDay]/
+	%(NewLine(2,0))\![*]\q[人間になったときについて,NewYearAsk,WhenBecomeHuman]/
+	%(NewLine(2,0))\![*]\q[悠梨をお迎えしたい,NewYearAsk,WantLiveTogether]/
+	%(NewLine(2,0))\![*]\q[他の店員さんについて,NewYearAsk,AboutOtherWaiters]/
+	%(NewLine(2,0))\![*]\q[好きな音楽は？,NewYearAsk,FavoriteMusic]/
+	%(NewLine(2,0))\![*]\q[最近のマイブームは？,NewYearAsk,WhatLikeNow]/
+	%(NewLine(2,0))\![*]\q[今年の抱負,NewYearAsk,WhatYuriGoal]/
+	%(NewLine(2,0))\![*]\q[好きなお餅の食べ方,NewYearAsk,WhatLikeNow]/
+	%(NewLine(2,0))\![*]\q[ジェットコースター乗れる？,NewYearAsk,WhatLikeNow]/
+	%(NewLine(2,0))\![*]\q[チョコと苺どっちが好き？,NewYearAsk,WhatLikeNow]/
+	"
 }
