@@ -232,7 +232,7 @@ MerryChristmas_Suzu
 	"\1メリークリスマス！！\n/
 	ふわふわで華やかで、クリスマスってとってもすてきだよね。/
 	\1ねえ、プレゼント持ってきたなら交換しよう？
-	\_q%(NewYear(3,0))\*\![*]\q[高級チョコを渡す,GiveSuzuChristmasPresent,Chocolate]/
+	\_q%(NewYear(3,0))\*\![*]\q[ホワイトチョコレートを渡す,GiveSuzuChristmasPresent,Chocolate]/
 	%(NewYear(2,0))\![*]\q[鈴カステラを渡す,GiveSuzuChristmasPresent,Castella]/
 	%(NewYear(2,0))\![*]\q[泡盛を渡す,GiveSuzuChristmasPresent,Sake]/
 	%(NewYear(3,0))\![*]\q[あとで,GiveSuzuChristmasPresent,After]\_q"
@@ -240,12 +240,72 @@ MerryChristmas_Suzu
 
 GiveYuriChristmasPresent
 {
+	Init
+	--
+	// 悠梨へのプレゼント
+	case temp_ChoiseExRef{
+		when 'Financier'{
+			lastYearOnMerryChristmasYuri = year
+			fav_Yuri += 4
 
+			'\0ありがとう、何が入ってるのかな。\n/
+			………わ、フィナンシェだ！！/
+			\1よかったわね、あなたが大好きなお菓子じゃない。/
+			\0うれしいです、好きだって覚えててくれたんですね。\n/
+			またゆっくりいただきますね、ありがとうございます。'
+		}
+		when 'CatItem'{
+			lastYearOnMerryChristmasYuri = year
+			fav_Yuri += 2
+
+			'\0おや、ちょっとずっしりしてますね。\n/
+			………なんだろ？　あ、ねこちゃんの置きものだ。/
+			\1あら、ユニークでとってもかわいらしいわね。/
+			\0お顔が少しぶさいくでキュートですね。こういう感じ、好きですよ。\n/
+			ありがとうございます、お店のどこかに飾らせていただきますね。'
+		}
+		when 'Battery'{
+			lastYearOnMerryChristmasYuri = year
+			fav_Yuri += -1
+
+			'\0さてさて、なんでしょう……。\n/
+			………電池？？　え、電池？？？/
+			\1とっても実用的なプレゼントね。/
+			たしかに使えはするんですけど………\n/
+			これ、レジの横に置いてある電池を見て思いつきましたよね？？\n/
+			まあ、ありがたく受け取っておきます。\n/
+			………え、電池？？？'
+		}
+		when 'After'{
+			'\0ん。\w9楽しみにしていますね。\e'
+			return
+		}
+
+		// 悠梨からのプレゼント
+
+		// アフタートーク
+	}
 }
 
 GiveSuzuChristmasPresent
 {
+	Init
+	--
+	case temp_ChoiseExRef{
+		when 'Chocolate'{
 
+		}
+		when 'Castella'{
+
+		}
+		when 'Sake'{
+
+		}
+		when 'After'{
+			'\1そう？\w9　待ってるからね。\e'
+			return
+		}
+	}
 }
 
 //******************************************************************************
@@ -583,4 +643,80 @@ NewYearAskingTop
 	%(NewLine(2,0))\![*]\q[ジェットコースター乗れる？,NewYearAsk,WhatLikeNow]/
 	%(NewLine(2,0))\![*]\q[チョコと苺どっちが好き？,NewYearAsk,WhatLikeNow]/
 	"
+}
+
+
+//******************************************************************************
+// ゴーストからのプレゼント周り
+//******************************************************************************
+
+#define PRESENT_FOUNTAIN '万年筆'
+#define PRESENT_ASSAM 'アッサムティー'
+#define PRESENT_CHOCOLATE 'チョコレート'
+#define PRESENT_COFFEE_BEANS 'コーヒー豆'
+#define PRESENT_KEY_RING 'キーホルダー'
+
+#define PRESENT_AQUAMARINE 'アクアマリンの原石'
+#define PRESENT_STUFFED_CAT '白猫のぬいぐるみ'
+#define PRESENT_BROACH 'ブローチ'
+#define PRESENT_BROWNIE 'ブラウニー'
+#define PRESENT_PIERCED '真鍮のピアス'
+
+PresentTable_Yuri
+{
+	PRESENT_FOUNTAIN
+	PRESENT_ASSAM
+	PRESENT_CHOCOLATE
+	PRESENT_COFFEE_BEANS
+	PRESENT_KEY_RING
+}
+
+PresentTable_Suzu
+{
+	PRESENT_AQUAMARINE
+	PRESENT_STUFFED_CAT
+	PRESENT_BROACH
+	PRESENT_BROWNIE
+	PRESENT_PIERCED
+}
+
+GetPresentComment
+{
+	TOSTR(EVAL(CHR(0x22)+PresentCommentTable(_argv)+CHR(0x22)))
+}
+
+PresentCommentTable
+{
+	case _argv[0]{
+		when PRESENT_FOUNTAIN{
+
+		}
+		when PRESENT_ASSAM{
+
+		}
+		when PRESENT_CHOCOLATE{
+
+		}
+		when PRESENT_COFFEE_BEANS{
+
+		}
+		when PRESENT_KEY_RING{
+
+		}
+		when PRESENT_AQUAMARINE{
+
+		}
+		when PRESENT_STUFFED_CAT{
+
+		}
+		when PRESENT_BROACH{
+
+		}
+		when PRESENT_BROWNIE{
+
+		}
+		when PRESENT_PIERCED{
+			
+		}
+	}
 }
