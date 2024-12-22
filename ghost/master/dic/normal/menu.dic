@@ -249,6 +249,21 @@ Debug_TopMenu
 	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
 }
 
+Debug_SwitchIsFirstBoot
+{
+	if isFirstBootOnTheDay == 0 {
+		isFirstBootOnTheDay = 1
+		'\0[[16]]ん。初回起動かどうかを切り替えましたよ。\n/
+		[[0]]今は「その日初回の起動」です。\e'
+	}
+	else{
+		isFirstBootOnTheDay = 0
+		'\0[[16]]ん。初回起動かどうかを切り替えましたよ。\n/
+		[[0]]今は「その日2回目以降の起動」です。\e'
+	}
+
+}
+
 Debug_EventTest
 {
 	Init
@@ -261,6 +276,8 @@ Debug_EventTest
 	--
 	AYATEMPLATE.MenuItem('クリスマスイベント', 'Debug_ChristmasTest')
 	--
+	AYATEMPLATE.MenuItem('年末年始イベント', 'Debug_NewYearTest')
+	--
 	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
 }
 
@@ -270,6 +287,13 @@ Debug_UserBirthDayTest
 	--
 	'\0[[0]]誕生日イベントです。\nどの条件ではじめましょうか？'
 	--
+	if isFirstBootOnTheDay == 0 {
+		"\_q%(NewLine(2,0))　その日初回起動かどうか：false\_q"
+	}
+	else{
+		"\_q%(NewLine(2,0))　その日初回起動かどうか：true\_q"
+	}
+	--
 	AYATEMPLATE.MenuItem('誕生日初回', 'Debug_BirthDayEvent', 'First')
 	--
 	AYATEMPLATE.MenuItem('去年以前に祝われ済み', 'Debug_BirthDayEvent', '2000')
@@ -277,6 +301,8 @@ Debug_UserBirthDayTest
 	AYATEMPLATE.MenuItem('2回目以降の起動', 'Debug_BirthDayEvent', 'ThisYear')
 	--
 	AYATEMPLATE.MenuItem('メニューからスペシャル猫パフェを選択', 'ChooseBirthDayParfait')
+	--
+	AYATEMPLATE.MenuItem('初回起動かどうかを切り替え', 'Debug_SwitchIsFirstBoot', 150)
 	--
 	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
 }
@@ -287,9 +313,130 @@ Debug_ChristmasTest
 	--
 	'\0[[0]]クリスマスイベントです。\nどの条件ではじめましょうか？'
 	--
+	if isFirstBootOnTheDay == 0 {
+		"\_q%(NewLine(2,0))　その日初回起動かどうか：false\_q"
+	}
+	else{
+		"\_q%(NewLine(2,0))　その日初回起動かどうか：true\_q"
+	}
+	--
+	AYATEMPLATE.MenuItem('24日に起動', 'BootOnChristmasEve')
+	--
 	AYATEMPLATE.MenuItem('25日に起動', 'BootOnChristmas')
 	--
+	AYATEMPLATE.MenuItem('「悠梨、メリークリスマス！」', 'MerryChristmas_Yuri')
+	--
+	AYATEMPLATE.MenuItem('「鈴、メリークリスマス！」', 'MerryChristmas_Suzu')
+	--
+	AYATEMPLATE.MenuItem('クリスマス祝い履歴をリセット', 'Debug_ResetLastChristmas')
+	--
+	AYATEMPLATE.MenuItem('初回起動かどうかを切り替え', 'Debug_SwitchIsFirstBoot', 150)
+	--
 	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
+}
+
+Debug_ResetLastChristmas
+{
+	lastYearOnMerryChristmasYuri = 0
+	lastYearOnMerryChristmasSuzu = 0
+
+	'\0[[0]]ん。またプレゼントをあげられるようになりましたよ。\e'
+}
+
+Debug_NewYearTest
+{
+	Init
+	--
+	'\0[[0]]年末年始イベントです。\nどの条件ではじめましょうか？'
+	--
+	if isFirstBootOnTheDay == 0 {
+		"\_q%(NewLine(2,0))　その日初回起動かどうか：false"
+	}
+	else{
+		"\_q%(NewLine(2,0))　その日初回起動かどうか：true"
+	}
+	--
+	case progressOnNewYear{
+		when 0 {
+			"%(NewLine(2,0))　進捗フラグ：（初期状態）"
+		}
+		when 10 {
+			"%(NewLine(2,0))　進捗フラグ：（営業日を聞いた）"
+		}
+		when 20 {
+			"%(NewLine(2,0))　進捗フラグ：（大晦日に訪問済）"
+		}
+		when 30 {
+			"%(NewLine(2,0))　進捗フラグ：（元日に訪問済）"
+		}
+		others {
+			"%(NewLine(2,0))　進捗フラグ：（エラー。なんかヘンかも）"
+		}
+	}
+	--
+	"%(NewLine(2,0))　最後の新年：%(lastYearOnNewYear)\_q"
+	--
+	AYATEMPLATE.MenuItem('大晦日に起動', 'BootOnNewYearsDayEve', 150)
+	--
+	AYATEMPLATE.MenuItem('元日に起動', 'BootOnNewYearsDay')
+	--
+	AYATEMPLATE.MenuItem('悠梨に何か訊く', 'NewYearAskingTop')
+	--
+	AYATEMPLATE.MenuItem('フラグ変更', 'Debug_ChangeNewYearProgress')
+	--
+	AYATEMPLATE.MenuItem('初回起動かどうかを切り替え', 'Debug_SwitchIsFirstBoot', 150)
+	--
+	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
+}
+
+Debug_ChangeNewYearProgress
+{
+	Init
+	--
+	'\0[[0]]はーい。\nどうしましょうか？？'
+	--
+	AYATEMPLATE.MenuItem('初期状態にする', 'Debug_SetNewYearProgress', 'Init')
+	--	
+	AYATEMPLATE.MenuItem('営業時間を聞いた', 'Debug_SetNewYearProgress', 'Asked')
+	--
+	AYATEMPLATE.MenuItem('大晦日に訪れている', 'Debug_SetNewYearProgress', 'BootEve')
+	--
+	AYATEMPLATE.MenuItem('元日に訪れている', 'Debug_SetNewYearProgress', 'BootNewYear')
+	--
+	AYATEMPLATE.MenuItem('去年訪れた', 'Debug_SetNewYearProgress', 'LastYear', 150)
+	--
+	AYATEMPLATE.MenuItem('10年前訪れた', 'Debug_SetNewYearProgress', 'TenYearsAgo')
+	--
+	AYATEMPLATE.MenuItem('もどる', 'Debug_NewYearTest', 150)
+}
+
+Debug_SetNewYearProgress
+{
+	case temp_ChoiseExRef{
+		when 'Init'{
+			lastYearOnNewYear = 0
+			progressOnNewYear = 0
+		}
+		when 'Asked'{
+			progressOnNewYear = 10
+		}
+		when 'BootEve'{
+			progressOnNewYear = 20
+		}
+		when 'BootNewYear'{
+			progressOnNewYear = 30
+		}
+		when 'LastYear'{
+			lastYearOnNewYear = year
+			progressOnNewYear = 20
+		}
+		when 'TenYearsAgo'{
+			lastYearOnNewYear = year - 10
+			progressOnNewYear = 20
+		}
+	}
+
+	Debug_NewYearTest
 }
 
 Debug_BirthDayEvent

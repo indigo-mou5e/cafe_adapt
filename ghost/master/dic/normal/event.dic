@@ -7,10 +7,10 @@
 #define \n %(NewLine(2))
 
 // 最初のスコープ変更以外に改行とウェイトを追加
-#define '\0 '\u\s[1000]\h
-#define '\1 '\h\s[0]\u
-#define "\0 "\u\s[1000]\h
-#define "\1 "\h\s[0]\u
+#define '\0 '\h
+#define '\1 '\u
+#define "\0 "\h
+#define "\1 "\u
 #define \0 %(NewLine(3))\0
 #define \1 %(NewLine(3))\1
 
@@ -166,7 +166,8 @@ BootOnChristmasEve
 		\1クリスマスイブだね。来てくれてうれしいな。/
 		\0とはいえ、今日はいつも通りですけどね。/
 		\1明日はわたしがケーキを焼くから、来てくれるとうれしいな。/
-		\0もしプレゼントを持ってきたらプレゼント交換してあげますよ。\e"
+		\0もしプレゼントを持ってきたらプレゼント交換してあげますよ。\n/
+		よかったらぜひいらしてくださいね。\e"
 	}
 	else{
 		BootAgain
@@ -178,7 +179,7 @@ BootOnChristmas
 	Init
 	--
 	if isFirstBootOnTheDay{
-		"\u[[1015]]\h[[15]]\_sメリークリスマス！！！%(NewLine(3))\_s
+		"\u[[1015]]\h[[15]]\_sメリークリスマス！！！%(NewLine(3))\_s/
 		\hよく来てくれましたね、今日はクリスマスの特別イベントですよ。/
 		\1わたしが焼いたケーキがあって、プレゼント交換もできるの。/
 		\0ぜひぜひ楽しんでいってくださいね。\e"
@@ -216,13 +217,13 @@ MerryChristmas_Yuri
 {
 	Init
 	--
-	"\0はい、メリークリスマス。\n/
+	"\0ん、メリークリスマス！\n/
 	クリスマスのことはよく分かってないですけど、みんなが楽しいこのイベントは大好きですよ。/
 	\0ところで。プレゼント交換、しますか？？/
-	\_q%(NewYear(3,0))\*\![*]\q[フィナンシェを渡す,GiveYuriChristmasPresent,Financier]/
-	%(NewYear(2,0))\![*]\q[猫の形の小物を渡す,GiveYuriChristmasPresent,CatItem]/
-	%(NewYear(2,0))\![*]\q[単三電池を渡す,GiveYuriChristmasPresent,Battery]/
-	%(NewYear(3,0))\![*]\q[あとで,GiveYuriChristmasPresent,After]\_q"
+	\_q%(NewLine(3,0))\*\![*]\q[フィナンシェを渡す,GiveYuriChristmasPresent,Financier]/
+	%(NewLine(2,0))\![*]\q[猫の形の小物を渡す,GiveYuriChristmasPresent,CatItem]/
+	%(NewLine(2,0))\![*]\q[単三電池を渡す,GiveYuriChristmasPresent,Battery]/
+	%(NewLine(3,0))\![*]\q[あとで,GiveYuriChristmasPresent,After]\_q"
 }
 
 MerryChristmas_Suzu
@@ -231,11 +232,11 @@ MerryChristmas_Suzu
 	--
 	"\1メリークリスマス！！\n/
 	ふわふわで華やかで、クリスマスってとってもすてきだよね。/
-	\1ねえ、プレゼント持ってきたなら交換しよう？
-	\_q%(NewYear(3,0))\*\![*]\q[ホワイトチョコレートを渡す,GiveSuzuChristmasPresent,Chocolate]/
-	%(NewYear(2,0))\![*]\q[鈴カステラを渡す,GiveSuzuChristmasPresent,Castella]/
-	%(NewYear(2,0))\![*]\q[泡盛を渡す,GiveSuzuChristmasPresent,Sake]/
-	%(NewYear(3,0))\![*]\q[あとで,GiveSuzuChristmasPresent,After]\_q"
+	\1ねえ、プレゼント持ってきたなら交換しよう？/
+	\_q%(NewLine(3,0))\*\![*]\q[ホワイトチョコレートを渡す,GiveSuzuChristmasPresent,Chocolate]/
+	%(NewLine(2,0))\![*]\q[鈴カステラを渡す,GiveSuzuChristmasPresent,Castella]/
+	%(NewLine(2,0))\![*]\q[泡盛を渡す,GiveSuzuChristmasPresent,Sake]/
+	%(NewLine(3,0))\![*]\q[あとで,GiveSuzuChristmasPresent,After]\_q"
 }
 
 GiveYuriChristmasPresent
@@ -248,43 +249,72 @@ GiveYuriChristmasPresent
 			lastYearOnMerryChristmasYuri = year
 			fav_Yuri += 4
 
-			'\0ありがとう、何が入ってるのかな。\n/
+			"\0\tありがとう、何が入ってるのかな。\n/
 			………わ、フィナンシェだ！！/
 			\1よかったわね、あなたが大好きなお菓子じゃない。/
 			\0うれしいです、好きだって覚えててくれたんですね。\n/
-			またゆっくりいただきますね、ありがとうございます。'
+			またゆっくりいただきますね、ありがとうございます。"
 		}
 		when 'CatItem'{
 			lastYearOnMerryChristmasYuri = year
 			fav_Yuri += 2
 
-			'\0おや、ちょっとずっしりしてますね。\n/
-			………なんだろ？　あ、ねこちゃんの置きものだ。/
+			"\0\tおや、ちょっとずっしりしてますね。\n/
+			………なんだろ？　\w8あ、ねこちゃんの置きものだ。/
 			\1あら、ユニークでとってもかわいらしいわね。/
 			\0お顔が少しぶさいくでキュートですね。こういう感じ、好きですよ。\n/
-			ありがとうございます、お店のどこかに飾らせていただきますね。'
+			ありがとうございます、お店のどこかに飾らせていただきますね。"
 		}
 		when 'Battery'{
 			lastYearOnMerryChristmasYuri = year
-			fav_Yuri += -1
+			fav_Yuri -= 1
 
-			'\0さてさて、なんでしょう……。\n/
-			………電池？？　え、電池？？？/
+			"\0\tさてさて、なんでしょう……。\n/
+			………電池？　\w9え、電池？？？/
 			\1とっても実用的なプレゼントね。/
-			たしかに使えはするんですけど………\n/
-			これ、レジの横に置いてある電池を見て思いつきましたよね？？\n/
-			まあ、ありがたく受け取っておきます。\n/
-			………え、電池？？？'
+			\0たしかに使えはするんですけど。\n/
+			%(username)。これ、レジの横に置いてある電池を見て思いついてません？？　\w9\w4絶対そうですよね……？？/
+			\1ケチをつけるのかしら？/
+			\0………ハイ。\n/
+			うん、ありがたく受け取っておきます。/
+			\0………。電池………？？？"
 		}
 		when 'After'{
 			'\0ん。\w9楽しみにしていますね。\e'
 			return
 		}
-
-		// 悠梨からのプレゼント
-
-		// アフタートーク
 	}
+
+	// 悠梨からのプレゼント
+	--
+	"\0\w9\w9\w9%(NewLine(4))………それじゃ、わたしからもお返しを。\n/
+	さ、こちらをどうぞ。\x"
+	--
+	_presentFromYuri = PresentTable_Yuri()
+	if _presentFromYuri == lastPresentFromYuri {
+		lastPresentFromYuri = GetNextPresent(_presentFromYuri)
+	}
+	else{
+		lastPresentFromYuri = _presentFromYuri
+	}
+
+	// プレゼントのトークはここ
+	GetPresentComment(lastPresentFromYuri)
+	--
+	// アフタートーク
+	"\0………さて。\w7やっぱりいいですね、クリスマス。\n/
+	私、プレゼントって大好きなんですよ。\n/
+	誕生日みたいなちゃんとした理由があるのもいいけれど、なんとなく贈り物をしたりされたりするのがなんだかとっても好きで。\n/
+	クリスマスはその恰好の機会なので、乗っかっていろんな人に渡したりしてるんです。/
+	\1わたしにも気味の悪いペンをくれたものね。/
+	\0あれはカワイイの！　カワイイんです！！\x"
+	--
+	Init
+	--
+	"\0……とにかく。信仰もなにもないけれど、みんなでちょっとずつ幸せを分け合えるから、クリスマスは好きなんです。/
+	\0%(username)にも、なにか幸せを与えられてるのかな。\nそうだったらいいと、私は思うよ。/
+	\0改めて。%(username)、メリークリスマス。\x\e"
+	
 }
 
 GiveSuzuChristmasPresent
@@ -293,19 +323,140 @@ GiveSuzuChristmasPresent
 	--
 	case temp_ChoiseExRef{
 		when 'Chocolate'{
-
+			lastYearOnMerryChristmasSuzu = year
+			fav_Suzu += 4
+			"\1かわいい袋だね。開けてもいい？？/
+			\1………わ、チョコレート！！/
+			\0しかも良いお店のじゃないですか。\n/
+			ホワイトチョコばっかりだから、好みなんじゃないですか？/
+			\1もちろん。\n/
+			ただただひたすらにミルキーな甘さが大好きなの。/
+			\1うれしいな、うん、うれしい。ありがとうね、%(username)！"
 		}
 		when 'Castella'{
-
+			lastYearOnMerryChristmasSuzu = year
+			fav_Suzu += 2
+			"\1ありがとう、開けるね？/
+			\1………鈴カステラ！！\n/
+			しかもこれ美味しいカステラだ、うれしい！/
+			\0知ってるんですか？/
+			\1うん。みんないろんな鈴カステラをくれるもの。/
+			\0たしかに。覚えるくらいもらってますものね……/
+			\1大好きだからいいの。%(username)、ありがとうね？"
 		}
 		when 'Sake'{
-
+			lastYearOnMerryChristmasSuzu = year
+			fav_Suzu -= 2
+			"\1ずっしりしてる、なにかな。/
+			\1………………？？/
+			\0……お酒ですね。\n/
+			でも、あなた……/
+			\1そうね。下戸よ。\n/
+			だからきっと………/
+			\1%(username)はわたしに軽蔑してほしかったのね。\n/
+			こんなものまで用意して。/
+			\1もちろん構わないわよ。鈴ちゃんはあなたのものですもの。/
+			だから全然嫌じゃないわよ。%(username)のお馬鹿さん。\n/
+			ふふ、ふふふふ………/
+			\0………%(username)、私は知りませんからね。\u"
 		}
 		when 'After'{
 			'\1そう？\w9　待ってるからね。\e'
 			return
 		}
 	}
+
+	// 鈴からのプレゼント
+	--
+	"\1\w9\w9%(NewLine(4))………それじゃ、わたしからもプレゼントするね。/
+	はい、どうぞ。開けて開けて？？\x"
+	--
+	_presentFromSuzu = PresentTable_Suzu()
+	if _presentFromSuzu == lastPresentFromSuzu {
+		lastPresentFromSuzu = GetNextPresent(_presentFromSuzu)
+	}
+	else{
+		lastPresentFromSuzu = _presentFromSuzu
+	}
+
+	// プレゼントのトークはここ
+	GetPresentComment(lastPresentFromSuzu)
+	--
+	Init
+	--
+	// アフタートーク
+	"\1ふう。\w9ありがとうね、%(username)。\n/
+	プレゼント交換もそうだし、今日来てくれたのもうれしいの。/
+	\1一年で一度しかないクリスマスに、あなたがここに来てくれたこと。\n/
+	その理由は知らないけれど。そうしてくれたのなら、わたしは全力であなたの鈴ちゃんになれる。\x"
+	--
+	Init
+	--
+	"\1どういうことかっていうとね。\n/
+	あなたがここにいるから、わたしはわたしでいられるの。\n/
+	ありがとうね、%(username)。/
+	\0………いい話をしているところ、恐縮ですが。\n/
+	%(username)。ほだされたりしないでくださいね。\n/
+	あちらの席に朔さん、鈴のご主人様もいるんですから。/
+	\0………というか、こんな話をして朔さんは大丈夫なんですか。/
+	\1もちろん。\w9ご主人はわたしがいろんな顔をしてるのが好きなんだそうよ。\n/
+	だから%(username)も気にしないで、わたしをわたしにしてね？/
+	\0はあ。\w7変わった人たちデスね………\w9\w9\n[half]/
+	\1とにかく。ありがとう、%(username)。\n/
+	たのしいクリスマスにしようね？\x\e"
+}
+
+// ToDo: テキストが誕生日ケーキのままだから変えようね
+ChooseBushDeNoel
+{
+	Init
+	--
+	"\2\_q【スペシャル猫パフェ】\_q/
+	\0[[25]]お誕生日のお客さん限定の猫パフェだよ。/
+	\1[[1015]]今日の間しか頼めないから、忘れずに頼んでみてね。\2"
+	--
+    AYATEMPLATE.MenuItem('オーダーする', 'ReceiveBushDeNoel', 0)
+    --
+    AYATEMPLATE.MenuItem('他のメニューも見てみる', 'OpenFoodMenu')
+}
+
+ReceiveBushDeNoel
+{
+    Init
+    --
+	"\u[[1016]]\h[[55]]オッケー！\n\w8[[16]]じゃあ、さっそく作ってくるね。/
+    [[999]]\0…\w9\w9\w9…\w9\w9\w9…/
+	\0[[25]]お待たせ！\n\w5[[0]]アダプト謹製猫パフェ、\w4[[15]]スペシャルバージョンだよ！！\2\t"
+    --
+    AYATEMPLATE.MenuItem('いただく', 'EatBushDeNoel', 0)
+}
+
+EatBushDeNoel
+{
+    Init
+    --
+	"\h[[0]]\u[[1000]]\2（猫の顔の形にデコレーションされたアイスが乗った猫パフェだ。\n/
+	いつもの2倍、猫アイスが盛られている。）\x[noclear]"
+	--
+	"\1[[1020]]上に乗ってる猫アイスが全種類載せてあるの。\n/
+	[[1016]]わたしと悠梨、アンジェと桃の4つとなっております。/
+	\0[[26]]みんなからのお祝いということで。\n/
+	[[0]]崩れないうちに召し上がってくださいね。\n/
+	\1[[1015]]わたしだと思って大事に食べていいんだよ？？\x"
+	--
+	"\2（バニラ、チョコレート、紅茶、ストロベリーの4つのアイスクリームが代わる代わるその表情を見せる。\n/
+	添えられたクッキーや焼き菓子のかけら、アーモンドたちとそれぞれ絡み合い、舌の上でさまざまに踊るようだ。）\x[noclear]"
+	--
+	"\0[[26]]ふふん、どうですか？\n/
+	[[38]]誕生日特別、スペシャル猫パフェのお味は。/
+	\1\b[2][[1020]]ねこちゃんたちが元気にはしゃぎまわる、このお店みたいに楽しいパフェにしてみたの。/
+	\0[[16]]大変でしたよ、いろんな味を調和させるのは。\n[[33]]もう慣れっこですけどね。/
+	\1[[1016]]そんなわたしたちも貴方のおかげでここにいることができるの。\n/
+	[[1095]]いつも遊んでくれてありがとうね、%(username)。\2"
+	--
+	"%(NewLine(3,0))\_q\![*]\q[こちらこそいつもありがとう,EatBirthDayParfaitAfter,0]%(NewLine(2,0))/
+	\![*]\q[とても楽しいパフェだったよ,EatBirthDayParfaitAfter,1]%(NewLine(2,0))/
+	\![*]\q[また来年も祝ってほしいな,EatBirthDayParfaitAfter,2]\_q"
 }
 
 //******************************************************************************
@@ -346,7 +497,7 @@ AskNewYearSchedule
 	お店は閉まってるからおんなじですよ。/
 	\1悠梨が困っちゃうから大晦日と元日は来ちゃだめだよ？\n/
 	ぜったい、だめだからね？？？/
-	\0………あなた、何か誘導しようとしてません？？\e"
+	\0………あなた、何か誘導しようとしてません？？\x\e"
 }
 
 BootOnNewYearsDayEve
@@ -361,11 +512,28 @@ BootOnNewYearsDayEve
 	}
 }
 
+BootOnNewYearsDay
+{
+	dicMode = MODE_YURI
+
+	if lastYearOnNewYear == year {
+		if isFirstBootOnTheDay {
+			NewYearBootInRow
+		}
+		else{
+			NewYearBootAgain
+		}
+	}
+	else{
+		NewYearBootFirst_1
+	}
+}
+
 NewYearEveClose
 {
 	Init
 	--
-	"お帰りですか？\n/
+	"\0お帰りですか？\n/
 	暇つぶしにお付き合いいただきありがとうございます。\n/
 	また来年もよろしくお願いしますね。\n良いお年を！！\w9\w9\-\e"
 }
@@ -374,7 +542,7 @@ NewYearClose
 {
 	Init
 	--
-	"はーい。お忘れ物はないですか？\n/
+	"\0はーい。お忘れ物はないですか？\n/
 	改めて、あけましておめでとうございます。\n/
 	今年もよろしくお願いしますね。\nでは、また。\w9\w9\-\e"
 }
@@ -392,12 +560,12 @@ NewYearBootFirst_1
 {
 	Init
 	--
-	"\t\2（いつものように保護猫カフェを訪ねる）\w9\n\n[half]
+	"\t\2（いつものように保護猫カフェを訪ねる）\w9\n\n[half]/
 	（………外から見える店内が暗い。\n/
 	　定休日なのだろうか）\x/
 
-	\2\_q\f[align,center]「保護猫カフェ「アダプト」は\n/
-	\f[align,center]12/31、1/1はお休みいただきます\n/
+	\2\_q\f[align,center]「保護猫カフェ「アダプト」は%(NewLine(2,0))/
+	\f[align,center]12/31、1/1はお休みいただきます%(NewLine(2,0))/
 	\f[align,center]1/2から通常営業です！」\_q\x"
 	--
 	if progressOnNewYear >= NEWYEAR_ASKED {
@@ -411,8 +579,8 @@ NewYearBootFirst_1
 		世話をする誰かがいるのかもしれない。）"
 	}
 	--
-	"\_q%(NewYear(3,0))\*\![*]\q[ノックしてみる,NewYearBootFirst_2,Knock]/
-	%(NewYear(2,0))\![*]\q[その場をあとにする,NewYearBootFirst_2,Leave]\_q"
+	"\_q%(NewLine(3,0))\*\![*]\q[ノックしてみる,NewYearBootFirst_2,Knock]/
+	%(NewLine(2,0))\![*]\q[その場をあとにする,NewYearBootFirst_2,Leave]\_q"
 }
 
 NewYearBootFirst_2
@@ -428,6 +596,8 @@ NewYearBootFirst_2
 		不意にうしろから声を掛けられた。）\x"
 	}
 	--
+	Init
+	--
 	"\0すみません、今日はお休みいただいてるんですよー。/
 	\0………って、%(username)じゃないですか。\n"
 	--
@@ -438,8 +608,8 @@ NewYearBootFirst_2
 		"\n[half]見ての通りですよ。年末年始のお休みです。\n/
 		今年も来たということは、もしかして………/
 		\2\_q\*\![*]\q[暇してるかなと思って,NewYearBootFirst_3_Again,WonderBeBored]/
-		%(NewYear(2,0))\![*]\q[お邪魔だったかな,NewYearBootFirst_3_Again,IsNotOkay]/
-		%(NewYear(2,0))\![*]\q[悠梨に会いに来た,NewYearBootFirst_3_Again,ToSeeYou]\_q"
+		%(NewLine(2,0))\![*]\q[お邪魔だったかな,NewYearBootFirst_3_Again,IsNotOkay]/
+		%(NewLine(2,0))\![*]\q[悠梨に会いに来た,NewYearBootFirst_3_Again,ToSeeYou]\_q"
 	}
 	else
 	{
@@ -453,8 +623,8 @@ NewYearBootFirst_2
 		}
 		--
 		"\2\_q\*\![*]\q[お店でまったり過ごせたらと思って,NewYearBootFirst_3,ToChillOut]/
-		%(NewYear(2,0))\![*]\q[悠梨はどうしてお店に？,NewYearBootFirst_3,WhyAreYou]/
-		%(NewYear(2,0))\![*]\q[悠梨に会いに来た,NewYearBootFirst_3,ToSeeYou]\_q"
+		%(NewLine(2,0))\![*]\q[悠梨はどうしてお店に？,NewYearBootFirst_3,WhyAreYou]/
+		%(NewLine(2,0))\![*]\q[悠梨に会いに来た,NewYearBootFirst_3,ToSeeYou]\_q"
 	}
 }
 
@@ -467,28 +637,28 @@ NewYearBootFirst_3
 			"\0\tありゃ、それは申し訳ない。\n/
 			うれしいですけど、ウチのみんなにもお休みが必要ですからね。/
 			\0私ですか？　猫たちの世話をする人も必要ですから。\n/
-			鈴と違ってご主人様もいませんしねえ。"
+			鈴と違ってご主人様もいませんしねえ。\x"
 		}
 		when 'WhyAreYou'{
 			"\0\tまあ、猫たちのお世話ですね。\n/
-			鈴みたいにご主人がいる猫はお家で過ごしてますけど、私はほら、ヒマですから。/
+			鈴みたいにご主人がいる猫はお家で過ごしてますけど、私はほら、ヒマですから。お留守番ですね。/
 			\0こう見えても、ここが一番落ち着くんですよ。\n/
-			猫たちもいてくれますしね。"
+			猫たちもいてくれますしね。\x"
 		}
 		when 'ToSeeYou'{
 			"\0\t………。私、冗談は本気にしちゃうタチなんですよ。\n/
 			でも、ありがとうございます。/
 			\0そうそう、鈴ならいませんよ。\n/
-			いまごろお家でご主人とゆっくり休んでるんじゃないですかね。"
+			いまごろお家でご主人とゆっくり休んでるんじゃないですかね。\x"
 		}
 	}
 	--
-	"……………。寒いデスね。\n/
-	あの。せっかく来てもらったことですし、入りますか？/
+	"……………。\n寒いデスね。/
+	\0あの。せっかく来てもらったことですし、入りますか？/
 	\0食べ物もないし鈴たちもいませんけど、よかったらゆっくりしていってもいいですよ。"
 	--
 	"\2\_q\*\![*]\q[お言葉に甘えて,NewYearBootFirst_4,AcceptOffer]/
-	%(NewYear(2,0))\![*]\q[いいの？,NewYearBootFirst_4,Really]\_q"
+	%(NewLine(2,0))\![*]\q[いいの？,NewYearBootFirst_4,Really]\_q"
 }
 
 NewYearBootFirst_4
@@ -510,15 +680,15 @@ NewYearBootFirst_4
 		}
 		when 'Really'{
 			"\0\tこのまま帰らせるのも悪いですし。\n/
-			と言いつつ、私も話相手が欲しかったところなんですけどね。"
+			………と言いつつ、私も話相手が欲しかったところなんですけどね。"
 		}
 	}
 	--
-	"\n\n[half]……………。\n\n[half]/
-	はい、どうぞ。適当に座ってください。\n/
+	"\x[[999]]……………。\x%(Init)/
+	\h[[0]]はい、どうぞ。適当に座ってください。\n/
 	お話しくらいしかできませんけど、くつろいでいってくれれば。\n\n[half]/
 	せっかくなので、なにか気になっていることがあれば訊いてくれてもいいですよ。\n/
-	ま、ごゆるりと。\e"
+	ま、ごゆるりと。\x\e"
 }
 
 NewYearBootFirst_3_Again
@@ -540,47 +710,30 @@ NewYearBootFirst_3_Again
 			でも、また来てくれるとは思ってなかったですよ。"
 		}
 		when 'IsNotOkay'{
-			"\0\t大丈夫かというとビミョーなんですけど。/
+			"\0\t大丈夫かというとビミョーなんですけど。\n/
 			今年はダメっていうのも申し訳ないですしね。"
 		}
 		when 'ToSeeYou'{
 			"\0\tそうデスか。ありがとうございます。\n/
-			なんだかもう慣れてきましたよ。"
+			………なんだかもう慣れてきましたよ。"
 		}
 	}
 	--
-	"\nま、入ってくださいな。\n何もないところですが。/
-	\n\n[half]……………。\n\n[half]/
+	"%(NewLine(3))………ま、とにかく。入ってもいいですよ。\n何もないところですが。/
+	\x[[999]]……………。\x%(Init)[[0]]/
 	はい、どうぞ。適当に座ってください。\n/
 	今年もテキトーにくつろいでいってくれれば。\n\n[half]/
 	せっかくなので、なにか気になっていることがあれば訊いてくれてもいいですよ。\n/
-	ま、ごゆるりと。\e"
-}
-
-BootOnNewYearsDay
-{
-	dicMode = MODE_YURI
-
-	if lastYearOnNewYear == year {
-		if isFirstBootOnTheDay {
-			NewYearBootInRow
-		}
-		else{
-			NewYearBootAgain
-		}
-	}
-	else{
-		NewYearBootFirst_1
-	}
+	どうぞ、ごゆるりと。\x\e"
 }
 
 NewYearBootInRow
 {
 	Init
 	--
-	"\t\2（昨日に引き続き保護猫カフェを訪ねる）\w9\n\n[half]
+	"\t\h[[999]]\2（昨日に引き続き保護猫カフェを訪ねる）\w9\n\n[half]/
 	（今日もお店は休みのようだが、店内の奥に悠梨の姿が見える。）/
-	\_q%(NewYear(3,0))\*\![*]\q[ノックしてみる,NewYearBootInRow_2]\_q"
+	\_q%(NewLine(3))\*\![*]\q[ノックしてみる,NewYearBootInRow_2]\_q"
 }
 
 NewYearBootInRow_2
@@ -588,12 +741,13 @@ NewYearBootInRow_2
 	Init
 	--
 	"\0\tはーい。\n/
-	すみません、今日はお店お休みなんですー。\n/
-	って、%(username)じゃないですか。あけましておめでとうございます。/
-	昨日言ったでしょう、今日もお休みですよ。/
+	すみません、今日はお店お休みなんですー。/
+	\0[[0]]って、%(username)じゃないですか。\n/
+	………あけましておめでとうございます。/
+	\0というか。\w7昨日言ったでしょう、今日もお休みですよ。/
 	\2\_q\*\![*]\q[新年のあいさつをしたくて,NewYearBootInRow_3,HappyNewYear]/
-	%(NewYear(2,0))\![*]\q[猫と触れ合っちゃダメ？,NewYearBootInRow_3,ToPetCat]/
-	%(NewYear(2,0))\![*]\q[悠梨に会いに来た,NewYearBootInRow_3,ToSeeYou]\_q"
+	%(NewLine(2,0))\![*]\q[猫と触れ合っちゃダメ？,NewYearBootInRow_3,ToPetCat]/
+	%(NewLine(2,0))\![*]\q[悠梨に会いに来た,NewYearBootInRow_3,ToSeeYou]\_q"
 }
 
 NewYearBootInRow_3
@@ -603,27 +757,31 @@ NewYearBootInRow_3
 	Init
 	--
 	case temp_ChoiseExRef {
-		when HappyNewYear{
-			"\0\tん、今年もよろしくお願いします。それじゃ。\n/
-			………そんな目をしないでください。\n/
+		when 'HappyNewYear'{
+			"\0\tん、今年もよろしくお願いします。それじゃ。/
+			\0\w9………そんな目をしないでください。\n/
 			いいですよ。上がってくださいな。"
 		}
-		when ToPetCat{
+		when 'ToPetCat'{
 			"\0\t猫を理由にされると弱りますね………\n/
-			ん、いいですよ。今日もヒマですし。\n/
+			はあ、いいですよ。今日もヒマですし。\n/
 			猫しかいないですが、よかったら上がってください。"
 		}
-		when ToSeeYou{
-			"\0\tはーい。ありがとうございまーす。\n/
-			……そんな冗談繰り返してたら本当に締め出しますよ？\n/
-			反省するのなら入ってもいいですよ。"
+		when 'ToSeeYou'{
+			"\0\tはーい。ありがとうございまーす。/
+			\0\w8……そんな冗談繰り返してたら本当に締め出しますよ？\n/
+			………まあ。反省するのなら、入ってもいいですよ。"
 		}
 	}
 	--
-	"\n\n[half]……………。\n\n[half]/
-	はい、どうぞ。また適当にゆっくりしていってください。\n/
+	"\x[[999]]……………。\n\n[half]\x"
+	--
+	Init
+	--
+	"\0[[6]]はい、どうぞ。\n\w9/
+	[[0]]また適当にゆっくりしていってください。\n/
 	今日もなにか気になっていることがあれば訊いていいですよ。\n/
-	大したことは答えられないですけどね。\e"
+	大したことは答えられないですけどね。\x\e"
 }
 
 NewYearAskingTop
@@ -639,12 +797,75 @@ NewYearAskingTop
 	%(NewLine(2,0))\![*]\q[好きな音楽は？,NewYearAsk,FavoriteMusic]/
 	%(NewLine(2,0))\![*]\q[最近のマイブームは？,NewYearAsk,WhatLikeNow]/
 	%(NewLine(2,0))\![*]\q[今年の抱負,NewYearAsk,WhatYuriGoal]/
-	%(NewLine(2,0))\![*]\q[好きなお餅の食べ方,NewYearAsk,WhatLikeNow]/
-	%(NewLine(2,0))\![*]\q[ジェットコースター乗れる？,NewYearAsk,WhatLikeNow]/
-	%(NewLine(2,0))\![*]\q[チョコと苺どっちが好き？,NewYearAsk,WhatLikeNow]/
+	%(NewLine(2,0))\![*]\q[好きなお餅の食べ方,NewYearAsk,WhatTypeMochi]/
+	%(NewLine(2,0))\![*]\q[ジェットコースター乗れる？,NewYearAsk,RollerCoaster]/
+	%(NewLine(2,0))\![*]\q[チョコと苺どっちが好き？,NewYearAsk,BerryAndChocolate]/
 	"
 }
 
+NewYearAsk
+{
+	case temp_ChoiseExRef{
+		when 'YuriBirthDay'{
+
+		}
+		when 'WhenBecomeHuman'{
+
+		}
+		when 'WantLiveTogether'{
+
+		}
+		when 'AboutOtherWaiters'{
+			
+		}
+		when 'FavoriteMusic'{
+			
+		}
+		when 'WhatLikeNow'{
+			
+		}
+		when 'WhatYuriGoal'{
+			
+		}
+		when 'WhatTypeMochi'{
+			
+		}
+		when 'RollerCoaster'{
+			
+		}
+		when 'BerryAndChocolate'{
+			
+		}
+	}
+}
+
+NewYearEve2330{
+
+}
+
+NewYearEve2355{
+
+}
+
+NewYearEve2356{
+
+}
+
+NewYearEve2357{
+
+}
+
+NewYearEve2358{
+
+}
+
+NewYearEve2359{
+
+}
+
+NewYear0000{
+
+}
 
 //******************************************************************************
 // ゴーストからのプレゼント周り
@@ -656,7 +877,7 @@ NewYearAskingTop
 #define PRESENT_COFFEE_BEANS 'コーヒー豆'
 #define PRESENT_KEY_RING 'キーホルダー'
 
-#define PRESENT_AQUAMARINE 'アクアマリンの原石'
+#define PRESENT_LAPISLAZULI 'ラピスラズリの原石'
 #define PRESENT_STUFFED_CAT '白猫のぬいぐるみ'
 #define PRESENT_BROACH 'ブローチ'
 #define PRESENT_BROWNIE 'ブラウニー'
@@ -673,11 +894,48 @@ PresentTable_Yuri
 
 PresentTable_Suzu
 {
-	PRESENT_AQUAMARINE
+	PRESENT_LAPISLAZULI
 	PRESENT_STUFFED_CAT
 	PRESENT_BROACH
 	PRESENT_BROWNIE
 	PRESENT_PIERCED
+}
+
+// 前のプレゼントとかぶったとき用。プレゼントの名前を渡すとその次のプレゼントの名前を返す。
+GetNextPresent
+{
+	case _argv[0]{
+		when PRESENT_FOUNTAIN{
+			PRESENT_ASSAM
+		}
+		when PRESENT_ASSAM{
+			PRESENT_CHOCOLATE
+		}
+		when PRESENT_CHOCOLATE{
+			PRESENT_COFFEE_BEANS
+		}
+		when PRESENT_COFFEE_BEANS{
+			PRESENT_KEY_RING
+		}
+		when PRESENT_KEY_RING{
+			PRESENT_FOUNTAIN
+		}
+		when PRESENT_LAPISLAZULI{
+			PRESENT_STUFFED_CAT
+		}
+		when PRESENT_STUFFED_CAT{
+			PRESENT_BROACH
+		}
+		when PRESENT_BROACH{
+			PRESENT_BROWNIE
+		}
+		when PRESENT_BROWNIE{
+			PRESENT_PIERCED
+		}
+		when PRESENT_PIERCED{
+			PRESENT_LAPISLAZULI
+		}
+	}
 }
 
 GetPresentComment
@@ -689,34 +947,127 @@ PresentCommentTable
 {
 	case _argv[0]{
 		when PRESENT_FOUNTAIN{
-
+			'\2（横に長い手乗りサイズの箱のようだ。）\n/
+			（簡単なラッピングをほどき、開けてみる。）\n\n[half]/
+			\w9（………万年筆だ）/
+			\0どうですか？\n/
+			綺麗でシンプルな万年筆です。/
+			\1だいぶお高いのではなくて？？/
+			\0大丈夫ですよ、最近はお手頃な万年筆もあるんです。\n/
+			書き心地がいいのでぜひ試してみてくださいね。/
+			\1ところで、こっちの箱はなんなのかしら。/
+			\0インクですよ。私の好きなモスグリーン色のカートリッジです。/
+			\1だいぶ気前がいいわね。それだけ%(username)を沼に引きずり込みたいと。/
+			\0人聞きの悪い言い方を。\n/
+			………まあ、そういうフシもあるんですケド。\x'
 		}
 		when PRESENT_ASSAM{
-
+			'\2（上品なラッピングがされている袋だ。）\n/
+			（丁寧にほどき開封する。）\n\n[half]/
+			\w9（………紅茶の茶葉だ）/
+			\0見ての通り、紅茶のティーバッグです。\n/
+			私の好きなアッサムティーですよ。/
+			\1あら、お洒落で素敵な缶ね。/
+			\0いいでしょ、お気に入りのお店なんです。/
+			ストレートでもミルクティーでも、お好きに楽しんでくれればうれしいです。\x'
 		}
 		when PRESENT_CHOCOLATE{
-
+			'\2（小さいけれどすこしずっしりとした小さな包装だ。）\n/
+			（開けてみる。）\n\n[half]/
+			\w9（………チョコレートだ）/
+			\0世界で一番おいしいチョコレートです。/
+			\1※個人の感想です。/
+			\0本当なんですー。\w6\n/
+			ミルクチョコレートなので多分お口に合うと思いますよ。/
+			\1粒じゃなくて板チョコ（？）なのね。/
+			\0タブレット型ですね。私はこれくらいの気軽さが好きなんですよ。\n/
+			%(username)も、テキトーにポケットに忍ばせてテキトーに食べてみてくださいな。\n/
+			きっとちょっとだけ幸せになれますから。\x'
 		}
 		when PRESENT_COFFEE_BEANS{
-
+			'\2（ラッピングの中からざらざらと音がする。）\n/
+			（簡単な包装をほどくと。）\n/
+			\w9（………コーヒー豆が出てきた。）/
+			\0ウチでも出してるコーヒー焙煎所のコーヒー豆です。\n/
+			でも豆は違うんですよ。これは深入りで、チョコレートみたいな香りがするんです。/
+			\1素敵だと思うけれど。%(username)はコーヒーの一式を持ってるのかしら。/
+			\0あ………。\n/
+			もし必要なら、持ってきてくれれば淹れてあげますので………/
+			\1結局お店でコーヒーを淹れてもらうから、いつも通りってことかしら？/
+			\0豆が違うんです！　豆が違うからちゃんとプレゼントなんです！！！\x'
 		}
 		when PRESENT_KEY_RING{
-
+			'\2（手のひらに収まるような小さな袋だ。）\n/
+			（テープの封を切り開けてみると。）\n\n[half]/
+			\w9（キーホルダー？が出てきた。）/
+			\0雑貨屋さんで見つけたキーホルダーですよ。/
+			\1………。「３」って書いてあるけれど、これは、なんなのかしら。/
+			\0エレベーターの３階のボタンのキーホルダーです。\n/
+			エレベーターからそのままくりぬいてきたみたいで、カワイイでしょう？？/
+			\1カワイイかはわからないけど。\n/
+			確かに見たことあるフォントな気がするわね。/
+			\0よかったら付けたり飾ったりしてください。\n/
+			私も「閉じる」ボタンを付けてるから、お揃いですよ。\x'
 		}
-		when PRESENT_AQUAMARINE{
-
+		when PRESENT_LAPISLAZULI{
+			'\2（高級感が漂う小さな包装だ。）\n/
+			（つられて丁寧になりながら開いてみる。）\n\n[half]/
+			\w9（………青い宝石だ。）/
+			\1ラピスラズリの原石だよ。/
+			\0すごく深い青。\n/
+			磨いてなくても素敵ですね。/
+			\1わたしの瞳と同じ色。\n/
+			わたしだと思って、飾ったり持ち歩いたりしていいよ？/
+			\0なるほど、そういう意図なんですね……\x'
 		}
 		when PRESENT_STUFFED_CAT{
-
+			'\2（ラッピングの中に柔らかな弾力を感じる。）\n/
+			（丁寧に開けてみると。）\n\n[half]/
+			\w9（………小さな白猫のぬいぐるみが出てきた。）/
+			\1ねこちゃん。/
+			\0ねこちゃん。\n/
+			………って、これあなたの鞄に閉じ込められてるやつじゃないですか。/
+			\1失礼ね。外を見せてあげてるの。\n/
+			収納のケースもついてるから、いろんなところに連れていってあげてね。/
+			\0……%(username)がぬいを連れていきますかね。/
+			\1もちろん、飾ってくれてもいいよ。\n/
+			%(username)がこの子のご主人様なんだから。好きにしていいんだよ。\x'
 		}
 		when PRESENT_BROACH{
-
+			'\2（とっても小さな包み紙だ。）\n/
+			（中には緩衝材が入っており、それをさらに開くと。）\n\n[half]/
+			\w9（………小さな蝶のブローチが出てきた。）/
+			\1かわいいでしょう？/
+			青いチョウのピンだよ。ジャケットなんかに付けたらきっと素敵だと思うの。/
+			\0綺麗ですけど、どうしてまた蝶なんですか？/
+			\1なんとなく。%(username)って蝶々みたいじゃない。\n/
+			気まぐれに行ったり来たりしてるから。/
+			\0それは皮肉めいてますけど、たしかに、そうデスね……\x'
 		}
 		when PRESENT_BROWNIE{
-
+			'\2（手作りらしいラッピングだ。）\n/
+			（マスキングテープの封をはがしていく。）\n\n[half]/
+			（………ブラウニーだ。）/
+			\1鈴ちゃんお手製のブラウニーだよ。/
+			\0わざわざ焼いてきたんですか？/
+			\1うん。とっても簡単だもの。でもちゃんと美味しいよ。\n/
+			チョコレートを多めに入れてるから、きっと楽しめると思うな。/
+			\0鈴はクレイジーな甘党ですけど、作るお菓子は誰でも美味しい甘さですからね。/
+			味は私も保証しますよ。\x'
 		}
 		when PRESENT_PIERCED{
-			
+			'\2（袋の中に小さい箱が入っている）\n/
+			（封を切り箱を開ける。）\n\n[half]/
+			\w9（………金色のピアスだ）/
+			\1真鍮のピアスだよ。/
+			わたしとおんなじ、三角形のシンプルなかたち。/
+			\0それはさすがに、親密すぎやしませんか。\n/
+			………あ、%(username)からは見えづらいかもしれないですけど、鈴の左耳には三角のピアスがついてるんです。/
+			\0というか、%(username)にピアスホールがなかったらどうするんですか。/
+			\1そのときはわたしが開けてあげる。/
+			ピアスの穴は誰かに開けてもらうものだものね。/
+			\0………なんか今日のあなた距離が近くないですか？？？/
+			\1特別な日だもの、ね？？\x'
 		}
 	}
 }
