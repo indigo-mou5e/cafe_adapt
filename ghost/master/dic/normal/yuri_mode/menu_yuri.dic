@@ -85,6 +85,8 @@ YuriMenuList
 		AYATEMPLATE.MenuItem('【デバッグ】各種テスト', 'Debug_TopMenu', 150)
 	--
 	AYATEMPLATE.MenuItem('なんでもない', 'YuriMenu_CANCEL', 150)
+	--
+	SpecialEventMenu()
 }
 
 //------------------------------------------------------------------------------

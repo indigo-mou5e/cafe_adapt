@@ -45,16 +45,6 @@ RevertFoodMenu
 
 FoodMenuTop
 {
-    _day = month * 100 + day
-
-    case _day{
-        when 1225{
-            AYATEMPLATE.MenuItem('ブッシュ・ド・ノエル', 'ChooseBushDeNoel', 0)
-            --
-            NewLine(2,0)
-        }
-    }
-
     if month == userBirthMonth && day == userBirthDay && !isReceivedBirthDayParfait{
         AYATEMPLATE.MenuItem('スペシャル猫パフェ', 'ChooseBirthDayParfait', 0)
         --

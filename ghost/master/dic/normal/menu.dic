@@ -207,10 +207,10 @@ SpecialEventMenu
 
 	case _day {
 		when 1225 {
-			if year == lastYearOnMerryChristmasYuri
+			if year != lastYearOnMerryChristmasYuri
 				_events += AYATEMPLATE.MenuItem('悠梨、メリークリスマス！', 'MerryChristmas_Yuri')
 			
-			if year == lastYearOnMerryChristmasSuzu
+			if year != lastYearOnMerryChristmasSuzu
 				_events += AYATEMPLATE.MenuItem('鈴、メリークリスマス！', 'MerryChristmas_Suzu')
 		}
 
@@ -222,11 +222,12 @@ SpecialEventMenu
 			_events += AYATEMPLATE.MenuItem('なにか訊いてみる', 'NewYearAskingTop')
 		}
 	}
+
 	if _events == '' {
 		return
 	}
 
-	"\2%(_events)\0"
+	"\2\_q―― 特別メニュー ――%(_events)\_q\0"
 }
 
 //******************************************************************************

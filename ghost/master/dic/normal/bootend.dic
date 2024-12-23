@@ -95,10 +95,10 @@ InputLater
 
 OnBoot
 {
-	// ToDo: 起動時の処理を行う
+	// 起動時の処理を行う
 	InitializeVariableOnBoot
 	
-	// ToDo: イベントなどの特別な起動があるとき
+	//  イベントなどの特別な起動があるとき
 	if month == userBirthMonth && day == userBirthDay{
 		BootOnUserBirthDay
 		return
@@ -127,6 +127,11 @@ OnBoot
 			BootOnNewYearsDayEve
 			return
 		}
+	}
+
+	if isFirstBootOnTheDay{
+		BootAgain
+		return
 	}
 
 	// 通常の起動
@@ -216,6 +221,14 @@ OnClose
 		when 101 {
 			dicMode = MODE_YURI
 			NewYearClose
+			return
+		}
+		when 1224{
+			CloseOnChristmasEve
+			return
+		}
+		when 1225{
+			CloseOnChristmas
 			return
 		}
 		when 1231 {
