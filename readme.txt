@@ -65,8 +65,8 @@
 
 　７．こういう機能が欲しいです
 　　何らかの手段で作者に連絡していただければ前向きに検討します。
-　　連絡フォームを建設予定ですが、それまではTwitterのDMにてお願いします
-　　https://x.com/prayfortiny
+　　サイトにはメッセージフォームがあるのでそちらなどでどうぞ。
+　　https://prayfortiny.net/message.html
 
 
 　７．ゴーストを再配布してもいい？
@@ -86,7 +86,7 @@
 
 　９．バグや誤字、誤りを見つけた
 　　お手数ですが以下のフォームから報告してくれると幸いです。
-　　https://x.com/prayfortiny
+　　https://prayfortiny.net/message.html
 
 
 
@@ -118,4 +118,4 @@
 ----------------------------------------
 
 Author : 墨鼠
-URL    : https://x.com/prayfortiny
+URL    : https://prayfortiny.net/
