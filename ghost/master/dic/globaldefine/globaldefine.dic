@@ -17,4 +17,11 @@
 #globaldefine   FOOD_GET_FAV_YURI 4004
 #globaldefine   FOOD_GET_FAV_SUZU 4005
 
+#globaldefine   FAQ_HEAD 5000
+#globaldefine   FAQ_QUESTION 5001
+#globaldefine   FAQ_ANSWER 5002
+
+// ユーザーからの質問の個数
+#globaldefine   FAQ_USER_QUESTION_COUNT 2
+
 #globaldefine	\2 \p[2]\s[-1]\b[4]

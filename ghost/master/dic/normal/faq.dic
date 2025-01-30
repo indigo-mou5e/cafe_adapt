@@ -21,6 +21,9 @@
 #define [[ \s[
 #define ]] ]
 
+// 1ページに何個質問を表示するか
+#define QUESTIONS_ON_A_PAGE 2
+
 //******************************************************************************
 // FAQ
 //******************************************************************************
@@ -43,6 +46,8 @@ FAQ_Top
     --
     AYATEMPLATE.MenuItem('他の店員さんについて', 'FAQ_AboutOtherCharacter')
     --
+    AYATEMPLATE.MenuItem('ユーザからの質問', 'FAQ_FromUserTop', 150)
+    --
     AYATEMPLATE.MenuItem('閉じる', 'FAQ_CloseFAQ', 150)
 }
 
@@ -63,6 +68,8 @@ FAQ_TopQuick
     AYATEMPLATE.MenuItem('鈴について', 'FAQ_AboutSuzu')
     --
     AYATEMPLATE.MenuItem('他の店員さんについて', 'FAQ_AboutOtherCharacter')
+    --
+    AYATEMPLATE.MenuItem('ユーザからの質問', 'FAQ_FromUserTop', 150)
     --
     AYATEMPLATE.MenuItem('閉じる', 'FAQ_CloseFAQ', 150)
 }
@@ -130,6 +137,124 @@ FAQ_AboutOtherCharacter
     \0[[86]]あなたもややサボり魔でしょうに。\w5\n[[0]]他の店員さんについては、ここで全部話すと長くなるので、[[5]]またいつかお話ししますね。"
     --
     FAQ_Footer
+}
+
+FAQ_FromUserTop
+{
+    temp_ChoiseExRef = 0
+
+    Init
+    --
+    "\h[[16]]\u[[1020]]お客さんからの質問に答えるコーナーだよ。/
+    \n[[1055]]訊きたいことがあったら気軽に送ってね。"
+    --
+    FAQ_UserFAQList
+}
+
+FAQ_UserFAQList
+{
+    _pageIndex = temp_ChoiseExRef
+    _isLastPage = 0
+    _maxIndex = (_pageIndex + 1) * QUESTIONS_ON_A_PAGE
+    if _maxIndex >= FAQ_USER_QUESTION_COUNT{
+        _maxIndex = FAQ_USER_QUESTION_COUNT
+        _isLastPage = 1
+    }
+
+    _list = "\_q\h【ユーザからの質問】%(NewLine(1,0))\_q"
+    
+    for _i = _pageIndex * QUESTIONS_ON_A_PAGE; _i < (_pageIndex + 1) * QUESTIONS_ON_A_PAGE; _i++{
+        if _i < _maxIndex{
+            _list += AYATEMPLATE.MenuItem(GetFAQData(_i, FAQ_HEAD), 'FAQ_UserFAQAnswer', _i, 100)
+        }
+        else{
+            _list += NewLine(2,0)
+        }
+    }
+
+    if FAQ_USER_QUESTION_COUNT > QUESTIONS_ON_A_PAGE{
+        _list += NewLine(3,0)
+
+        if _pageIndex == 0 {
+            _list += '\_q　　　　　　　　　'
+        }
+        else{
+            _list += "\_q\![*]\q[前のページへ,FAQ_UserFAQList,%(_pageIndex - 1)]　　"
+        }
+
+        if _isLastPage == 0{
+            _list += "\![*]\q[次のページへ,FAQ_UserFAQList,%(_pageIndex + 1)]"
+        }
+    }
+
+    _list
+    --
+    AYATEMPLATE.MenuItem('質問を送る', 'FAQ_AskToGhost', 200)
+    --
+    FAQ_Footer
+}
+
+FAQ_UserFAQAnswer
+{
+    _faqID = _argv[0]
+    _pageIndex = _argv / QUESTIONS_ON_A_PAGE
+
+    Init
+    --
+    "\0【%(GetFAQData(_faqID, FAQ_QUESTION))】\n\n\w5"
+    --
+    GetFAQData(_faqID, FAQ_ANSWER)
+    --
+    '\h'
+    --
+    AYATEMPLATE.MenuItem('ユーザからの質問に戻る', 'FAQ_UserFAQList', _pageIndex, 150)
+    --
+    AYATEMPLATE.MenuItem('質問TOPに戻る', 'FAQ_TopQuick', 150)
+    --
+    AYATEMPLATE.MenuItem('閉じる', 'FAQ_CloseFAQ')
+}
+
+FAQ_AskToGhost
+{
+    Init
+    --
+    "\0[[55]]はいな。/
+    [[25]]なんでも気軽に訊いてくださいね。/
+    \1[[1016]]長い文章を送りたい場合はGoogleフォームから送ると楽だよ。/
+    \0[[0]]あて先は同じなのでお好きなほうをどうぞ。\![open,inputbox,FAQ_OnInputAsk,0,]"
+    --
+    AYATEMPLATE.MenuItem('質問フォームをブラウザで開く','FAQ_OpenGoogleForm', 150)
+    --
+    FAQ_Footer
+}
+
+FAQ_OpenGoogleForm
+{
+    "\C\![open,browser,https://forms.gle/yKZmNFWR2e9nhTKA9]\e"
+}
+
+FAQ_OnInputAsk
+{
+	if (_argv[0] == INPUT_CLOSE) || (_argv[0] == INPUT_TIMEOUT) || (_argv[0] == '') || (_argv[0] == username) {
+		'\e'
+		return
+	}
+
+    Init
+    --
+    "\0[[6]]メッセージ、送信中………\![enter,onlinemode]\![execute,http-post,https://docs.google.com/forms/u/0/d/e/1FAIpQLSfJVBnhpz0uiZCAJHUMDEQpaxvEMxow2gYpXOvdLdN86_Fcrw/formResponse,--async=OnPostedToForm,--header=mode:no-cors,--param=entry.348543169=%(_argv[0])]"
+}
+
+OnPostedToForm
+{
+    "\0[[25]]\![leave,onlinemode]ん！　送信成功です。/
+    \n[[16]]回答までしばらくお待ちくださいね。\e"
+}
+
+OnPostedToFormFailure
+{
+    "\0[[56]]\![leave,onlinemode]送信に失敗しました………/
+    \n[[3]]ネットワークの設定を見直してみてください。\e"
 }
 
 FAQ_Footer
