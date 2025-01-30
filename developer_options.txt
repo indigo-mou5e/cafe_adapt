@@ -2,3 +2,4 @@
 lilies/,noupdate
 nnl/,nonar,noupdate
 developer_options.txt,nonar,noupdate
+var/,nonar,noupdate

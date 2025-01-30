@@ -196,16 +196,14 @@ FAQ_UserFAQList
 
 FAQ_UserFAQAnswer
 {
-    _faqID = _argv[0]
-    _pageIndex = _argv / QUESTIONS_ON_A_PAGE
+    _faqID = temp_ChoiseExRef
+    _pageIndex = _faqID / QUESTIONS_ON_A_PAGE
 
     Init
     --
-    "\0【%(GetFAQData(_faqID, FAQ_QUESTION))】\n\n\w5"
+    "\0\_q【%(GetFAQData(_faqID, FAQ_QUESTION))】\_q\n\n\w5"
     --
     GetFAQData(_faqID, FAQ_ANSWER)
-    --
-    '\h'
     --
     AYATEMPLATE.MenuItem('ユーザからの質問に戻る', 'FAQ_UserFAQList', _pageIndex, 150)
     --
@@ -218,10 +216,10 @@ FAQ_AskToGhost
 {
     Init
     --
-    "\0[[55]]はいな。/
+    "\0[[55]]はいな\![open,inputbox,FAQ_OnInputAsk,0,]。/
     [[25]]なんでも気軽に訊いてくださいね。/
     \1[[1016]]長い文章を送りたい場合はGoogleフォームから送ると楽だよ。/
-    \0[[0]]あて先は同じなのでお好きなほうをどうぞ。\![open,inputbox,FAQ_OnInputAsk,0,]"
+    \0[[0]]あて先は同じなのでお好きなほうをどうぞ。"
     --
     AYATEMPLATE.MenuItem('質問フォームをブラウザで開く','FAQ_OpenGoogleForm', 150)
     --

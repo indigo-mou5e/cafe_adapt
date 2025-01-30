@@ -28,8 +28,6 @@ OnTranslate
 OnTranslateInternal
 {
 	_text = _argv[0]
-   	_text = REPLACE(_text, "。", "。\_w[%(PeriodWait)]")
-	_text = REPLACE(_text, "\_w[%(PeriodWait)]）", '）')
     _text = TextOnlyTranslator(_text,'TextOnlyTranslatorFunc')
 	_text
 }
@@ -67,6 +65,8 @@ TextOnlyTranslatorFunc
 	if ! _argv[1] {
 //    	_text = REPLACE(_text, "。", "。\_w[460]")
 //    	_text = REPLACE(_text, "。\_w[460]\n", "。\n")
+   	_text = REPLACE(_text, "。", "。\_w[%(PeriodWait)]")
+	_text = REPLACE(_text, "\_w[%(PeriodWait)]）", '）')
     	_text = REPLACE(_text, "、", "、\w[%(CommaWait)]")
     	_text = REPLACE(_text, "…", "…\w[%(EllipseWait)]")
   	_text = REPLACE(_text, "！", "！\_w[%(BikkuriHatenaWait)]")
