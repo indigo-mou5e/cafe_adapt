@@ -112,6 +112,11 @@ OnBoot
 			BootOnNewYearsDay
 			return
 		}
+		when 313{
+			// ホワイトデーイベント
+			BootOnWhiteDay
+			return
+		}
 		when 1224 {
 			// クリスマスイブイベント
 			BootOnChristmasEve
