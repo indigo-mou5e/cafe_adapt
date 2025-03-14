@@ -12,6 +12,8 @@ surface0-99
   collisionex1,Ear,region,yuricollider00.png,0,255,0
   collisionex2,Hand,region,yuricollider00.png,0,0,255
   collisionex3,Tail,region,yuricollider00.png,255,255,0
+  //satolist.palette.expand,0.7
+  //satolist.palette.offset,110,65
 }
 
 surface1000-1099
@@ -21,16 +23,20 @@ surface1000-1099
   collisionex1,Ear,region,suzucollider00.png,0,255,0
   collisionex2,Hand,region,suzucollider00.png,0,0,255
   collisionex3,Tail,region,suzucollider00.png,255,255,0
+  //satolist.palette.expand,0.7
+  //satolist.palette.offset,150,110
 }
 
 surface999
 {
   element0,base,yuribase99.png,0,0
+  //satolist.palette.visible,0
 }
 
 surface1999
 {
   element0,base,suzubase99.png,0,0
+  //satolist.palette.visible,0
 }
 
 surface.append0
