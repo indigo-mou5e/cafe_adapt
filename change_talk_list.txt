@@ -19,6 +19,17 @@
 
 　------- 切り替え反応実装中のゴースト一覧 -------
 
+
+　---- 2025/06/08に追加 ----
+　『Arcade game lovers!!』
+　http://colorbox.saloon.jp/
+
+
+　『怠惰な佐野さん』
+　https://github.com/tukinami/taidanaSanoSan
+
+
+
 　---- 2025/03/13に追加 ----
 　『ピンクのでかいメイドさん』
 　http://cherry.narnaloader.ukagaka.net/data/dekai_pink_maid/
