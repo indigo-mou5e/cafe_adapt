@@ -14,6 +14,31 @@ surface0-99
   collisionex3,Tail,region,yuricollider00.png,255,255,0
   //satolist.palette.expand,0.7
   //satolist.palette.offset,110,65
+  // (111, 21)
+}
+
+surface100-199
+{
+  element0,base,yuribase01.png,0,0
+  // (122, 29)
+}
+
+surface200-299
+{
+  element0,base,yuribase02.png,0,0
+  // (93, 36)
+}
+
+surface300-399
+{
+  element0,base,yuribase03.png,0,0
+  // (42, 65)
+}
+
+surface400-499
+{
+  element0,base,yuribase04.png,0,0
+  // (85, 105)
 }
 
 surface1000-1099
@@ -25,6 +50,31 @@ surface1000-1099
   collisionex3,Tail,region,suzucollider00.png,255,255,0
   //satolist.palette.expand,0.7
   //satolist.palette.offset,150,110
+  // (131, 74)
+}
+
+surface1100-1199
+{
+  element0,base,suzubase01.png,0,0
+  // (168, 93)
+}
+
+surface1200-1299
+{
+  element0,base,suzubase02.png,0,0
+  // (132, 63)
+}
+
+surface1300-1399
+{
+  element0,base,suzubase03.png,0,0
+  // (160, 103)
+}
+
+surface1400-1499
+{
+  element0,base,suzubase04.png,0,0
+  // (169, 100)
 }
 
 surface999
