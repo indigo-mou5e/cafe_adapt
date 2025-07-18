@@ -206,6 +206,28 @@ SpecialEventMenu
 	_day = month * 100 + day
 
 	case _day {
+		when 722{
+			_events += '\n\n[half]7/22 : 悠梨お誕生日'
+			_events += AYATEMPLATE.MenuItem('「ハッピーバースデー！」', 'YuriBirthDay_HBD')
+			_events += AYATEMPLATE.MenuItem('「何歳になったの？」', 'YuriBirthDay_HowOld')
+
+			if year != lastYearOnBirthDayGiftForYuri{
+				_events += AYATEMPLATE.MenuItem('「プレゼントをしたい」', 'YuriBirthDay_Gift')
+			}
+		}
+
+		when 723-726{
+			_events += NewLine(3,0)
+			_events += '\n\n[half]7/22 : 悠梨お誕生日（回想）'
+			_events += AYATEMPLATE.MenuItem('起動時トーク再生', 'BootOnYuriBirthDay')
+			_events += AYATEMPLATE.MenuItem('「ハッピーバースデー！」', 'YuriBirthDay_HBD')
+			_events += AYATEMPLATE.MenuItem('「何歳になったの？」', 'YuriBirthDay_HowOld')
+
+			if year != lastYearOnBirthDayGiftForYuri{
+				_events += AYATEMPLATE.MenuItem('「プレゼントをしたい」', 'YuriBirthDay_Gift')
+			}
+		}
+
 		when 1225 {
 			if year != lastYearOnMerryChristmasYuri
 				_events += AYATEMPLATE.MenuItem('悠梨、メリークリスマス！', 'MerryChristmas_Yuri')
@@ -273,7 +295,9 @@ Debug_EventTest
 	--
 	AYATEMPLATE.MenuItem('初回起動', 'FirstBootTalk', 150)
 	--
-	AYATEMPLATE.MenuItem('誕生日イベント', 'Debug_UserBirthDayTest')
+	AYATEMPLATE.MenuItem('ユーザ誕生日イベント', 'Debug_UserBirthDayTest')
+	--
+	AYATEMPLATE.MenuItem('悠梨誕生日イベント', 'Debug_YuriBirthDayTest')
 	--
 	AYATEMPLATE.MenuItem('クリスマスイベント', 'Debug_ChristmasTest')
 	--
@@ -286,7 +310,7 @@ Debug_UserBirthDayTest
 {
 	Init
 	--
-	'\0[[0]]誕生日イベントです。\nどの条件ではじめましょうか？'
+	'\0[[0]]ユーザ誕生日イベントです。\nどの条件ではじめましょうか？'
 	--
 	if isFirstBootOnTheDay == 0 {
 		"\_q%(NewLine(2,0))　その日初回起動かどうか：false\_q"
@@ -304,6 +328,23 @@ Debug_UserBirthDayTest
 	AYATEMPLATE.MenuItem('メニューからスペシャル猫パフェを選択', 'ChooseBirthDayParfait')
 	--
 	AYATEMPLATE.MenuItem('初回起動かどうかを切り替え', 'Debug_SwitchIsFirstBoot', 150)
+	--
+	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
+}
+
+Debug_YuriBirthDayTest
+{
+	Init
+	--
+	'\0[[0]]悠梨の誕生日イベントです。\nどのトークを再生しましょうか？'
+	--
+	AYATEMPLATE.MenuItem('起動トーク', 'BootOnYuriBirthDay',150)
+	--
+	AYATEMPLATE.MenuItem('「ハッピーバースデー！」', 'YuriBirthDay_HBD',150)
+	--
+	AYATEMPLATE.MenuItem('「何歳になったの？」', 'YuriBirthDay_HowOld')
+	--
+	AYATEMPLATE.MenuItem('「プレゼントをしたい」', 'YuriBirthDay_Gift')
 	--
 	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
 }
