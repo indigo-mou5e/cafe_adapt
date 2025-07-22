@@ -86,7 +86,13 @@ YuriMenuList
 	--
 	AYATEMPLATE.MenuItem('なんでもない', 'YuriMenu_CANCEL', 150)
 	--
-	SpecialEventMenu_Yuri()
+	if dicMode == MODE_NORMAL{
+		SpecialEventMenu()
+	}
+	if dicMode == MODE_YURI
+	{
+		SpecialEventMenu_Yuri()
+	}
 }
 
 //------------------------------------------------------------------------------
