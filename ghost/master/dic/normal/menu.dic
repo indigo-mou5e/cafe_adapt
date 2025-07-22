@@ -207,7 +207,7 @@ SpecialEventMenu
 
 	case _day {
 		when 722{
-			_events += '\n\n[half]7/22 : 悠梨お誕生日'
+			_events += '\n\n[half]7/22：悠梨お誕生日'
 			_events += AYATEMPLATE.MenuItem('「ハッピーバースデー！」', 'YuriBirthDay_HBD')
 			_events += AYATEMPLATE.MenuItem('「何歳になったの？」', 'YuriBirthDay_HowOld')
 
@@ -218,7 +218,7 @@ SpecialEventMenu
 
 		when 723-726{
 			_events += NewLine(3,0)
-			_events += '\n\n[half]7/22 : 悠梨お誕生日（回想）'
+			_events += '\n\n[half]7/22：悠梨お誕生日（回想）'
 			_events += AYATEMPLATE.MenuItem('起動時トーク再生', 'BootOnYuriBirthDay')
 			_events += AYATEMPLATE.MenuItem('「ハッピーバースデー！」', 'YuriBirthDay_HBD')
 			_events += AYATEMPLATE.MenuItem('「何歳になったの？」', 'YuriBirthDay_HowOld')
@@ -239,7 +239,22 @@ SpecialEventMenu
 		when 1226-1230{		
 			_events += AYATEMPLATE.MenuItem('年末年始の営業日を聞く', 'AskNewYearSchedule')
 		}
+	}
 
+	if _events == '' {
+		return
+	}
+
+	"\2\_q―― 特別メニュー ――%(_events)\_q\0"
+}
+
+SpecialEventMenu_Yuri
+{
+	_events = ""
+
+	_day = month * 100 + day
+
+	case _day {
 		when 101, 1231 {
 			_events += AYATEMPLATE.MenuItem('なにか訊いてみる', 'NewYearAskingTop')
 		}

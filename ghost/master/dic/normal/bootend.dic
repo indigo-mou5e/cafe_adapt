@@ -117,6 +117,10 @@ OnBoot
 			BootOnWhiteDay
 			return
 		}
+		when 722{
+			// 悠梨誕生日
+			BootOnYuriBirthDay
+		}
 		when 1224 {
 			// クリスマスイブイベント
 			BootOnChristmasEve

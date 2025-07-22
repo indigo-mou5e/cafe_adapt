@@ -86,7 +86,7 @@ YuriMenuList
 	--
 	AYATEMPLATE.MenuItem('なんでもない', 'YuriMenu_CANCEL', 150)
 	--
-	SpecialEventMenu()
+	SpecialEventMenu_Yuri()
 }
 
 //------------------------------------------------------------------------------
