@@ -162,8 +162,8 @@ BootOnYuriBirthDay
 	Init
 	--
 	// 回想時
-	if month != 7 || day != 22{
-		'\u[[1999]]\h[[999]]…\w9…\w9…\w9…\w9…\w9。\x'
+	if temp_ChoiseExRef == 'Re'{
+		'\u[[1999]]\h[[999]]…\w9…\w9…\w9。\x'
 		--
 		"\0[[0]]あら、いらっしゃいませ。/
 		\1\b[2][[1015]%(username)、今日は悠梨の誕生日だよ。/

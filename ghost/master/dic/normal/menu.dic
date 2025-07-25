@@ -208,7 +208,7 @@ SpecialEventMenu
 	case _day {
 		when 722{
 			_events += '\n\n[half]7/22：悠梨お誕生日'
-			_events += AYATEMPLATE.MenuItem('起動時トーク再生', 'BootOnYuriBirthDay')
+			_events += AYATEMPLATE.MenuItem('起動時トーク再生', 'BootOnYuriBirthDay', 'Re')
 			_events += AYATEMPLATE.MenuItem('「ハッピーバースデー！」', 'YuriBirthDay_HBD')
 			_events += AYATEMPLATE.MenuItem('「何歳になったの？」', 'YuriBirthDay_HowOld')
 
@@ -219,7 +219,7 @@ SpecialEventMenu
 
 		when 723-726{
 			_events += '\n\n[half]7/22：悠梨お誕生日（回想）'
-			_events += AYATEMPLATE.MenuItem('起動時トーク再生', 'BootOnYuriBirthDay')
+			_events += AYATEMPLATE.MenuItem('起動時トーク再生', 'BootOnYuriBirthDay', 'Re')
 			_events += AYATEMPLATE.MenuItem('「ハッピーバースデー！」', 'YuriBirthDay_HBD')
 			_events += AYATEMPLATE.MenuItem('「何歳になったの？」', 'YuriBirthDay_HowOld')
 
