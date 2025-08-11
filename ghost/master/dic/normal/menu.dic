@@ -278,13 +278,63 @@ Debug_TopMenu
 	'\0[[0]]はい。デバッグモード、実行中です。/
 	\1[[1006]]もし万が一迷い込んだ場合は、「デバッグモード終了」を選べば元に戻るわよ。\0'
 	--
-	AYATEMPLATE.MenuItem('各種イベント', 'Debug_EventTest', 150)
+	AYATEMPLATE.MenuItem('サーフェステスト', 'Debug_SurfaceTest', 150)
+	--
+	AYATEMPLATE.MenuItem('各種イベント', 'Debug_EventTest')
 	--
 	AYATEMPLATE.MenuItem('スクリーンショット用テキスト', 'Debug_ForPrintScreen')
 	--
 	AYATEMPLATE.MenuItem('デバッグモード終了', 'Debug_SwitchDebugModeOff')
 	--
 	AYATEMPLATE.MenuItem('閉じる', 'Menu_Close', 150)
+}
+
+Debug_SurfaceTest{
+	Init
+	--
+	if temp_ChoiseExRef != ''
+	{
+		_surfaceID = TOINT(temp_ChoiseExRef)
+		if TOINT(_surfaceID) < 1000
+		{
+			"\_q\0\s[%(_surfaceID)]"
+		}
+		else{
+			"\_q\1\s[%(_surfaceID)]"
+		}
+	}
+	--
+	'\0サーフェスのテストですよ。/
+	\1Inputから入れることもできるし、下から選んでもいいよ？/
+	\0\![open,inputbox,SetSurface,0,]\n\n[half]'
+	--
+	'\q[悠梨ポーズ１,Debug_SurfaceTest,50]　/
+	\q[２,Debug_SurfaceTest,106]　/
+	\q[３,Debug_SurfaceTest,288]　/
+	\q[４,Debug_SurfaceTest,385]　/
+	\q[５,Debug_SurfaceTest,464]\n/
+	\q[鈴ポーズ１,Debug_SurfaceTest,1050]　/
+	\q[２,Debug_SurfaceTest,1115]　/
+	\q[３,Debug_SurfaceTest,1216]　/
+	\q[４,Debug_SurfaceTest,1358]　/
+	\q[５,Debug_SurfaceTest,1464]'
+	--
+	if temp_ChoiseExRef != ''{
+		'\_q'
+	}
+	--
+	AYATEMPLATE.MenuItem('もどる', 'Debug_TopMenu', 150)
+}
+
+SetSurface
+{
+	if _argv[0] == INPUT_TIMEOUT || _argv[0] == INPUT_CLOSE || _argv[0] == ''{
+		'\e'
+		return
+	}
+	--
+	temp_ChoiseExRef = _argv[0]
+	Debug_SurfaceTest
 }
 
 Debug_SwitchIsFirstBoot

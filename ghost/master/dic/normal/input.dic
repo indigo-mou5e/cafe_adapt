@@ -24,10 +24,8 @@ OnUserInput
 
 OnUserInputCancel
 {
-	/*
-	"\0Ref[0]の中身は%(reference[0])だよ。/
-	\1Ref[1]には%(reference[1])が入ってるね。\e"
-	*/
+	'\![close,inputbox,ID]'
+	--
 	if ISFUNC(reference[0])
 	{
 		if reference[1] == "timeout"
