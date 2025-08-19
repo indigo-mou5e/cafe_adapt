@@ -1,0 +1,55 @@
+//******************************************************************************
+// トーク辞書
+//******************************************************************************
+
+KyotoTalk_TopMenu
+{
+    Init
+    --
+    if _argv[0]{
+        '\_q'
+    }
+    --
+    "\1保護猫カフェ「アダプト」の周辺にあるお店を%(username)に紹介してあげるコーナーだよ。/
+    \0言ってしまえば、京都のお店案内ですね。/
+    \n私たちがどんな場所で暮らしてるのが好きか、知ってくれるとうれしいです。"
+    --
+    if _argv[0]{
+        '\_q'
+    }
+    --
+    AYATEMPLATE.MenuItem('地元トークを聞く', 'KyotoTalk_RandomTalk', 150)
+    --
+    AYATEMPLATE.MenuItem('トーク一覧', 'KyotoTalk_RandomTalk')
+    --
+    if isKyotoRandomTalk{
+        AYATEMPLATE.MenuItem('ランダムトークに地元トークを混ぜる：現在ON', 'KyotoTalk_SwitchKyotoRandomTalk')
+    }
+    else{
+        AYATEMPLATE.MenuItem('ランダムトークに地元トークを混ぜる：現在OFF', 'KyotoTalk_SwitchKyotoRandomTalk')
+    }
+    --
+    AYATEMPLATE.MenuItem('メニューに戻る', 'YuriMenuList', 150)
+}
+
+KyotoTalk_RandomTalk
+{
+
+}
+
+KyotoTalk_TalkList
+{
+
+}
+
+KyotoTalk_SwitchKyotoRandomTalk
+{
+    if isKyotoRandomTalk{
+        isKyotoRandomTalk = 0
+    }
+    else{
+        isKyotoRandomTalk = 1
+    }
+
+    KyotoTalk_TopMenu(1)
+}
